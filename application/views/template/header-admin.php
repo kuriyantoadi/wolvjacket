@@ -79,8 +79,8 @@
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <!-- item-->
-                                <a class="dropdown-item" href="apps-contacts-profile.php"><i class="mdi mdi-face-profile font-size-16 align-middle me-1"></i> Profil</a>
-                                <a class="dropdown-item" href="auth-lock-screen.php"><i class="mdi mdi-lock font-size-16 align-middle me-1"></i>Password</a>
+                                <!-- <a class="dropdown-item" href="apps-contacts-profile.php"><i class="mdi mdi-face-profile font-size-16 align-middle me-1"></i> Profil</a> -->
+                                <!-- <a class="dropdown-item" href="auth-lock-screen.php"><i class="mdi mdi-lock font-size-16 align-middle me-1"></i>Password</a> -->
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="<?= site_url('index.php/Login/admin_logout') ?>"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout</a>
                             </div>
@@ -108,11 +108,34 @@
                                     <span data-key="t-dashboard">Dashboard</span>
                                 </a>
                             </li>
-                            <li>
+                            
+                            <!-- <li>
                                 <a href="">
                                     <i class="dripicons-user"></i>
-                                    <span data-key="">Data Pengguna</span>
+                                    <span data-key="">Data Barang</span>
                                 </a>
+                            </li> -->
+
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow">
+                                    <i class="bx bx-box"></i>
+                                    <span data-key="t-multi-level">Barang</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="true">
+                                    <li><a href="#" data-key="t-level-1-1">Data Barang</a></li>
+                                </ul>
+                                 <ul class="sub-menu" aria-expanded="true">
+                                    <li><a href="#" data-key="t-level-1-1">Kategori</a></li>
+                                </ul>
+                                 <ul class="sub-menu" aria-expanded="true">
+                                    <li><a href="#" data-key="t-level-1-1">Atur Stok Akhir</a></li>
+                                </ul>
+                                 <ul class="sub-menu" aria-expanded="true">
+                                    <li><a href="#" data-key="t-level-1-1">Tambah Stok</a></li>
+                                </ul>
+                                <ul class="sub-menu" aria-expanded="true">
+                                    <li><a href="#" data-key="t-level-1-1">Daftar Tambah Stok</a></li>
+                                </ul>
                             </li>
                             
 
