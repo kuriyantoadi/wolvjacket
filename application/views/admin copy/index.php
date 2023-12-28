@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">Nominasi</h4>
+                        <h4 class="mb-sm-0 font-size-18">Dashboard</h4>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                         <div class="table-responsive m-t-20">
                             <div class="m-b-40">
                                 <p>
-                                    Terimakasih anda sudah melakukan vote untuk guru terbaik.
+                                    Dashboard Sistem Teacher Award adalah platform inovatif yang dirancang khusus untuk menghargai dan mengakui prestasi luar biasa para guru. Sistem ini dirancang dengan fokus pada keterlibatan, transparansi, dan kemudahan penggunaan.
                                 </p>
                                 
                             </div>

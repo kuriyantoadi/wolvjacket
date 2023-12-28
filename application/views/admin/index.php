@@ -15,24 +15,97 @@
             <!-- end page title -->
 
             <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                    <h2 class="card-title">System Vote Teacher Award</h2>
-                        <div class="table-responsive m-t-20">
-                            <div class="m-b-40">
-                                <p>
-                                    Dashboard Sistem Teacher Award adalah platform inovatif yang dirancang khusus untuk menghargai dan mengakui prestasi luar biasa para guru. Sistem ini dirancang dengan fokus pada keterlibatan, transparansi, dan kemudahan penggunaan.
-                                </p>
-                                
+            <div class="row">
+            
+                <div class="col-xl-3 col-md-6">
+                    <!-- card -->
+                    <div class="card card-h-100">
+                        <!-- card body -->
+                        <a href="">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                 
+                                <div class="col-4">
+                                    <i class="bx bx-shopping-bag" style="font-size: 4em"></i>
+                                </div>
+
+                                <div class="col-6">
+                                    <h5>Transaksi Penjualan</h5>
+                                </div>
+
                             </div>
-                           
-                        </div>
-                    </div>
-                </div>
+                        </div><!-- end card body -->
+                        </a>
+                    </div><!-- end card -->
+                </div><!-- end col -->
+
+                <div class="col-xl-3 col-md-6">
+                    <!-- card -->
+                    <div class="card card-h-100">
+                        <!-- card body -->
+                        <a href="">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                 
+                                <div class="col-4">
+                                    <i class="bx bx-box" style="font-size: 4em"></i>
+                                </div>
+
+                                <div class="col-6">
+                                    <h5>Data Barang</h5>
+                                </div>
+
+                            </div>
+                        </div><!-- end card body -->
+                        </a>
+                    </div><!-- end card -->
+                </div><!-- end col -->
+
+                <div class="col-xl-3 col-md-6">
+                    <!-- card -->
+                    <div class="card card-h-100">
+                        <!-- card body -->
+                        <a href="">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                 
+                                <div class="col-4">
+                                    <i class="bx bx-user" style="font-size: 4em"></i>
+                                </div>
+
+                                <div class="col-6">
+                                    <h5>Data Pengguna</h5>
+                                </div>
+
+                            </div>
+                        </div><!-- end card body -->
+                        </a>
+                    </div><!-- end card -->
+                </div><!-- end col -->
+
+                <div class="col-xl-3 col-md-6">
+                    <!-- card -->
+                    <div class="card card-h-100">
+                        <!-- card body -->
+                        <a href="">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                 
+                                <div class="col-4">
+                                    <i class="bx bx-box" style="font-size: 4em"></i>
+                                </div>
+
+                                <div class="col-6">
+                                    <h5>Tambah Stok</h5>
+                                </div>
+
+                            </div>
+                        </div><!-- end card body -->
+                        </a>
+                    </div><!-- end card -->
+                </div><!-- end col -->
+            
             </div>
-        </div>
     </div>
 
 
