@@ -109,44 +109,12 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="<?= base_url() ?>index.php/Admin/siswa_jur/akl">
+                                <a href="">
                                     <i class="dripicons-user"></i>
-                                    <span data-key="">Data Siswa</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?= base_url() ?>index.php/Admin/kelas">
-                                    <i class="dripicons-swap"></i>
-                                    <span data-key="">Kelas</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?= base_url() ?>index.php/Admin/guru">
-                                    <i class="dripicons-user-group"></i>
-                                    <span data-key="">Guru</span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="<?= base_url() ?>index.php/Admin/mapel">
-                                    <i class="dripicons-pin"></i>
-                                    <span data-key="">Mapel</span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="<?= base_url() ?>index.php/Admin/nominasi/pai">
-                                    <i class="dripicons-flag"></i>
-                                    <span data-key="">Nominasi</span>
+                                    <span data-key="">Data Pengguna</span>
                                 </a>
                             </li>
                             
-                            <!-- <li>
-                                <a href="<?= base_url() ?>index.php/Admin/user_tampil">
-                                    <i class="dripicons-user-group"></i>
-                                    <span data-key="">User Operator PPDB</span>
-                                </a>
-                            </li> -->
 
                         </ul>
                         <!-- Left Menu End -->

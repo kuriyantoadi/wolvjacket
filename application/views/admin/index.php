@@ -92,7 +92,7 @@
                             <div class="row align-items-center">
                                  
                                 <div class="col-4">
-                                    <i class="bx bx-box" style="font-size: 4em"></i>
+                                    <i class="bx bxs-inbox" style="font-size: 4em"></i>
                                 </div>
 
                                 <div class="col-6">
