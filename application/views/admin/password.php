@@ -13,7 +13,7 @@
                     <div class="card">  
                         
                         <div class="card-header">
-                            <h4 class="card-title">Password Siswa</h4>
+                            <h4 class="card-title">Password User</h4>
                         </div>
                         <div class="card-body">
                         
