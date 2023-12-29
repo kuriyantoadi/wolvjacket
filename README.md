@@ -1,1 +1,0 @@
-# vote-teacher-2023
