@@ -80,7 +80,7 @@
                             <div class="dropdown-menu dropdown-menu-end">
                                 <!-- item-->
                                 <!-- <a class="dropdown-item" href="apps-contacts-profile.php"><i class="mdi mdi-face-profile font-size-16 align-middle me-1"></i> Profil</a> -->
-                                <!-- <a class="dropdown-item" href="auth-lock-screen.php"><i class="mdi mdi-lock font-size-16 align-middle me-1"></i>Password</a> -->
+                                <a class="dropdown-item" href="<?= site_url('index.php/Admin/password') ?>"><i class="mdi mdi-lock font-size-16 align-middle me-1"></i>Password</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="<?= site_url('index.php/Login/admin_logout') ?>"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout</a>
                             </div>

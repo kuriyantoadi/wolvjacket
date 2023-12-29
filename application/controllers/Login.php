@@ -37,8 +37,8 @@ class Login extends CI_Controller
 
             if ($data['status'] == 'admin') {
                 $this->session->set_userdata('admin', true);
-                $this->session->set_userdata('ses_id', $data['id_admin']);
-                $this->session->set_userdata('ses_user', $data['username']);
+                $this->session->set_userdata('ses_id', $data['id_user']);
+                $this->session->set_userdata('ses_username', $data['username']);
                 redirect('Admin/index');
             // } elseif ($data['status'] == 'walas') {
             //     $this->session->set_userdata('walas', true);
