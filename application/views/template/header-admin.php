@@ -28,6 +28,10 @@
         <!-- Responsive datatable examples -->
         <link href="<?= base_url() ?>assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
+
+        <!-- Datatables ajax -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
         
     </head>
 
@@ -109,40 +113,23 @@
                                 </a>
                             </li>
                             
-                            <!-- <li>
-                                <a href="">
-                                    <i class="dripicons-user"></i>
-                                    <span data-key="">Data Barang</span>
-                                </a>
-                            </li> -->
-
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow">
                                     <i class="bx bx-box"></i>
                                     <span data-key="t-multi-level">Barang</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="true">
-                                    <li><a href="#" data-key="t-level-1-1">Data Barang</a></li>
-                                </ul>
-                                 <ul class="sub-menu" aria-expanded="true">
-                                    <li><a href="#" data-key="t-level-1-1">Kategori</a></li>
-                                </ul>
-                                 <ul class="sub-menu" aria-expanded="true">
-                                    <li><a href="#" data-key="t-level-1-1">Atur Stok Akhir</a></li>
-                                </ul>
-                                 <ul class="sub-menu" aria-expanded="true">
-                                    <li><a href="#" data-key="t-level-1-1">Tambah Stok</a></li>
-                                </ul>
-                                <ul class="sub-menu" aria-expanded="true">
-                                    <li><a href="#" data-key="t-level-1-1">Daftar Tambah Stok</a></li>
+                                    <li><a href="<?= base_url() ?>Admin/barang" data-key="t-level-1-1">Data Barang</a></li>
+                                    <li><a href="2" data-key="t-level-1-2">Kategori</a></li>
+                                    <li><a href="3" data-key="t-level-1-3">Atur Stok Akhir</a></li>
+                                    <li><a href="4" data-key="t-level-1-4">Tambah Stok</a></li>
+                                    <li><a href="5" data-key="t-level-1-5">Daftar Tambah Stok</a></li>
                                 </ul>
                             </li>
                             
 
                         </ul>
                         <!-- Left Menu End -->
-
-
 
                     </div>
                     <!-- Sidebar -->

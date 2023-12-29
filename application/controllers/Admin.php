@@ -44,11 +44,6 @@ class Admin extends CI_Controller
         $password_baru = $this->input->post('password_baru');
         $password_konfirmasi = $this->input->post('password_konfirmasi');
 
-        // var_dump($data_edit_status);
-        // var_dump($id_user);
-        // var_dump($password_baru);
-        // var_dump($password_konfirmasi);
-
         if ($password_baru != $password_konfirmasi) {
             $this->session->set_flashdata('msg', '
 						<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -72,4 +67,17 @@ class Admin extends CI_Controller
             redirect('Admin/password/');
     }
 
+
+    // awal barang
+
+    public function barang()
+    {
+        $header['title']='WolvJacket';
+
+        $this->load->view('template/header-admin', $header);
+        $this->load->view('admin/barang_tampil');
+        $this->load->view('template/footer-admin');
+    }
+
+    // akhir barang
 }
