@@ -74,9 +74,52 @@ class Admin extends CI_Controller
     {
         $header['title']='WolvJacket';
 
+        $data['tampil_kategori'] = $this->M_admin->tampil_kategori_barang();
+
         $this->load->view('template/header-admin', $header);
-        $this->load->view('admin/barang_tampil');
+        $this->load->view('admin/barang_tampil', $data);
         $this->load->view('template/footer-admin');
+    }
+
+    public function barang_tambah_up()
+    {
+        $nama_barang = $this->input->post('nama_barang');
+        $id_kategori_barang = $this->input->post('id_kategori_barang');
+        $harga_produk = $this->input->post('harga_produk');
+        $harga_jual = $this->input->post('harga_jual');
+        $stok = $this->input->post('stok');
+        $status = $this->input->post('status');
+
+        $data_tambah = array(
+            'nama_barang' => $nama_barang,
+            'id_kategori_barang' => $id_kategori_barang,
+            'harga_produk' => $harga_produk,
+            'harga_jual' => $harga_jual,
+            'stok' => $stok,
+            'status' => $status
+        );
+
+        $this->M_admin->barang_tambah_up($data_tambah);
+
+        $this->session->set_flashdata('msg', '
+			<div class="alert alert-info alert-dismissible fade show" role="alert">
+                Tambah Data Barang Berhasil
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>');
+        redirect('Admin/barang/');
+    }
+
+    public function barang_hapus($id_barang){
+        $id_barang = array('id_barang' => $id_barang);
+
+        $success = $this->M_admin->barang_hapus($id_barang);
+        $this->session->set_flashdata('msg', '
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Hapus Barang Berhasil
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        ');
+        redirect('Admin/barang/');
     }
 
     // akhir barang

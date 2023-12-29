@@ -29,10 +29,13 @@
         <link href="<?= base_url() ?>assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
 
-        <!-- Datatables ajax -->
+        <!-- Datatables ajax Server Side -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-        
+
+        <!-- select search -->
+        <script src="<?= base_url() ?>assets/library_box/dselect.js"></script>
+
     </head>
 
     <body>
