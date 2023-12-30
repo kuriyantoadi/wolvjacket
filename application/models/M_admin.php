@@ -20,6 +20,44 @@ class M_admin extends CI_Model
 
   // awal kategori barang
 
+
+  function barang_tambah_up($data_tambah)
+  {
+    $this->db->insert('tb_barang', $data_tambah);
+  }
+
+  function barang_hapus($id_barang)
+  {
+    $this->db->where($id_barang);
+    $this->db->delete('tb_barang');
+  }
+
+  function barang_detail($id_barang)
+  {
+    $this->db->select('*');
+    $this->db->from('tb_barang');
+    $this->db->join('tb_kategori_barang', 'tb_barang.id_kategori_barang = tb_kategori_barang.id_kategori_barang');
+    $this->db->where('id_barang', $id_barang);
+    $query = $this->db->get()->result();
+    return $query;
+  }
+
+  function barang_edit($id_barang)
+  {
+    $this->db->select('*');
+    $this->db->from('tb_barang');
+    $this->db->join('tb_kategori_barang', 'tb_barang.id_kategori_barang = tb_kategori_barang.id_kategori_barang');
+    $this->db->join('tb_brand', 'tb_barang.id_brand = tb_brand.id_brand');
+    $this->db->where('tb_barang.id_barang', $id_barang);
+    $query = $this->db->get()->result();
+    return $query;
+  }
+
+  // akhir kategori barang
+
+
+  // awal kategori barang
+
   function tampil_kategori_barang()
   {
     $this->db->order_by('tb_kategori_barang.nama_kategori_barang', 'ASC');
@@ -27,17 +65,24 @@ class M_admin extends CI_Model
     return $tampil;
   }
 
-  function barang_tambah_up($data_tambah)
+  function barang_edit_up($data_edit, $id_barang)
   {
-    $this->db->insert('tb_barang', $data_tambah);
-  }
-
-  public function barang_hapus($id_barang)
-  {
-    $this->db->where($id_barang);
-    $this->db->delete('tb_barang');
+    $this->db->where('id_barang', $id_barang);
+    $this->db->update('tb_barang', $data_edit);
   }
 
   // akhir kategori barang
+
+
+  // awal brand
+
+  function tampil_brand()
+  {
+    $this->db->order_by('tb_brand.nama_brand', 'ASC');
+    $tampil = $this->db->get('tb_brand')->result();
+    return $tampil;
+  }
+
+  // akhir brand
 
 }

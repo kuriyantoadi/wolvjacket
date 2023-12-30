@@ -26,10 +26,11 @@ class Ajax extends CI_Controller
             $row = array();
             $row[] = $no;
             $row[] = $item->nama_barang;
-            $row[] = $item->harga_produk;
+            $row[] = $item->nama_brand;
+            $row[] = $item->nama_kategori_barang;
+            $row[] = $item->harga_pokok;
             $row[] = $item->harga_jual;
             $row[] = $item->stok;
-            $row[] = $item->nama_kategori_barang;
             $row[] = $item->status;
 
             // add html for action

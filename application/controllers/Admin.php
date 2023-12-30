@@ -75,6 +75,7 @@ class Admin extends CI_Controller
         $header['title']='WolvJacket';
 
         $data['tampil_kategori'] = $this->M_admin->tampil_kategori_barang();
+        $data['tampil_brand'] = $this->M_admin->tampil_brand();
 
         $this->load->view('template/header-admin', $header);
         $this->load->view('admin/barang_tampil', $data);
@@ -85,7 +86,8 @@ class Admin extends CI_Controller
     {
         $nama_barang = $this->input->post('nama_barang');
         $id_kategori_barang = $this->input->post('id_kategori_barang');
-        $harga_produk = $this->input->post('harga_produk');
+        $id_brand = $this->input->post('id_brand');
+        $harga_pokok = $this->input->post('harga_pokok');
         $harga_jual = $this->input->post('harga_jual');
         $stok = $this->input->post('stok');
         $status = $this->input->post('status');
@@ -93,7 +95,8 @@ class Admin extends CI_Controller
         $data_tambah = array(
             'nama_barang' => $nama_barang,
             'id_kategori_barang' => $id_kategori_barang,
-            'harga_produk' => $harga_produk,
+            'id_brand' => $id_brand,
+            'harga_pokok' => $harga_pokok,
             'harga_jual' => $harga_jual,
             'stok' => $stok,
             'status' => $status
@@ -121,6 +124,50 @@ class Admin extends CI_Controller
         ');
         redirect('Admin/barang/');
     }
+
+    public function barang_edit($id_barang)
+    {
+        $header['title']='WolvJacket';
+        $data['tampil'] = $this->M_admin->barang_edit($id_barang);
+        $data['tampil_kategori'] = $this->M_admin->tampil_kategori_barang();
+        $data['tampil_brand'] = $this->M_admin->tampil_brand();
+
+        $this->load->view('template/header-admin', $header);
+        $this->load->view('admin/barang_edit', $data);
+        $this->load->view('template/footer-admin');
+    }
+
+    public function barang_edit_up()
+    {
+        $id_barang = $this->input->post('id_barang');
+        $nama_barang = $this->input->post('nama_barang');
+        $id_brand = $this->input->post('id_brand');
+        $id_kategori_barang = $this->input->post('id_kategori_barang');
+        $harga_pokok = $this->input->post('harga_pokok');
+        $harga_jual = $this->input->post('harga_jual');
+        $stok = $this->input->post('stok');
+        $status = $this->input->post('status');
+     
+        $data_edit = array(
+            'nama_barang' => $nama_barang,
+            'id_brand' => $id_brand,
+            'id_kategori_barang' => $id_kategori_barang,
+            'harga_pokok' => $harga_pokok,
+            'harga_jual' => $harga_jual,
+            'stok' => $stok,
+            'status' => $status,
+        );
+
+        $this->M_admin->barang_edit_up($data_edit, $id_barang);
+
+        $this->session->set_flashdata('msg', '
+		    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                Update Data Barang Berhasil
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+           ');
+        redirect('Admin/barang');
+    } 
 
     // akhir barang
 }

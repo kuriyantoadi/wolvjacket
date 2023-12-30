@@ -180,7 +180,8 @@
                             <div class="row align-items-center">
                                  
                                 <div class="col-4">
-                                    <i class="bx bxs-cog" style="font-size: 4em"></i>
+                                    <!-- <i class="bx bxs-cog" style="font-size: 4em"></i> -->
+                                    <i class="bx bx-joystick" style="font-size: 4em"></i>
                                 </div>
 
                                 <div class="col-6">

@@ -80,7 +80,7 @@
                                     <div class="mt-4 mt-md-5 text-center">
                                         <p class="mb-0">© <script>
                                                 document.write(new Date().getFullYear())
-                                            </script> Wolv Jacket</p>
+                                            </script> Wolv Jacket</p> Page rendered in <strong>{elapsed_time}</strong> seconds.
                                     </div>
                                 </div>
                             </div>

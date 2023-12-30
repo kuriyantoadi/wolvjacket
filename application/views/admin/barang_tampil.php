@@ -46,6 +46,18 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="control-label mt-3" for="email">Brand :</label>
+                                   <select name="id_brand" id="" class="form-control" required>
+                                     <option value="">Pilihan </option>
+                               
+                                        <?php foreach ($tampil_brand as $row_brand) { ?>
+                                        <option value="<?= $row_brand->id_brand ?>"><?= $row_brand->nama_brand ?></option>
+                                        
+                                         <?php } ?>
+                                    </select>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="control-label mt-3" for="email">Kategori Barang :</label>
                                    <select name="id_kategori_barang" id="" class="form-control" required>
                                      <option value="">Pilihan </option>
@@ -58,8 +70,8 @@
                             </div>
 
                              <div class="form-group">
-                                <label class="control-label mt-3" for="email">Harga Produk :</label>
-                                <input type="number" class="form-control" placeholder="" name="harga_produk" value="" required>
+                                <label class="control-label mt-3" for="email">Harga Pokok :</label>
+                                <input type="number" class="form-control" placeholder="" name="harga_pokok" value="" required>
                             </div>
 
                              <div class="form-group">
@@ -110,10 +122,11 @@
                                 <tr>
                                     <th><center>No</th>
                                     <th><center>Nama Barang</th> 
+                                    <th><center>Brand</th>
+                                    <th><center>Kategori</th>
                                     <th><center>Harga Pokok</th>
                                     <th><center>Harga Jual</th>
                                     <th><center>Stok</th>
-                                    <th><center>Kategori</th>
                                     <th><center>Status</th>
                                     <th><center>Pilihan</th>
                                 </tr>

@@ -5,8 +5,8 @@ class M_ajax extends CI_Model
 
   // awal ajax tb_barang
 
-    var $column_order = array(null, 'nama_barang','tb.kategori_barang.nama_kategori_barang','harga_produk', 'harga_jual', 'stok','status'); //set column field database for datatable orderable
-    var $column_search = array('nama_barang', 'tb_kategori_barang.nama_kategori_barang', 'harga_produk'); //set column field database for datatable searchable
+    var $column_order = array(null, 'nama_barang','tb_brand.nama_brand','tb.kategori_barang.nama_kategori_barang','harga_produk', 'harga_jual', 'stok','status'); //set column field database for datatable orderable
+    var $column_search = array('nama_barang', 'tb_brand.nama_brand'); //set column field database for datatable searchable
     var $order = array('nama_barang' => 'asc'); // default order 
  
     private function _get_datatables_query() {
@@ -14,6 +14,7 @@ class M_ajax extends CI_Model
         $this->db->select('*');
         $this->db->from('tb_barang');
         $this->db->join('tb_kategori_barang', 'tb_barang.id_kategori_barang = tb_kategori_barang.id_kategori_barang');
+        $this->db->join('tb_brand', 'tb_barang.id_brand = tb_brand.id_brand');
 
         $i = 0;
         foreach ($this->column_search as $item) { // loop column 
