@@ -71,6 +71,11 @@ class M_admin extends CI_Model
     $this->db->update('tb_barang', $data_edit);
   }
 
+  function kategori_barang_tambah_up($data_tambah)
+  {
+    $this->db->insert('tb_kategori_barang', $data_tambah);
+  }
+
   // akhir kategori barang
 
 

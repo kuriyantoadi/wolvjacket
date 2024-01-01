@@ -183,5 +183,23 @@ class Admin extends CI_Controller
         $this->load->view('admin/kategori_barang');
         $this->load->view('template/footer-admin');
     }
+
+    public function kategori_barang_tambah_up()
+    {
+        $nama_kategori_barang = $this->input->post('nama_kategori_barang');
+    
+        $data_tambah = array(
+            'nama_kategori_barang' => $nama_kategori_barang,
+        );
+
+        $this->M_admin->kategori_barang_tambah_up($data_tambah);
+
+        $this->session->set_flashdata('msg', '
+			<div class="alert alert-info alert-dismissible fade show" role="alert">
+                Tambah Data Kategori Barang Berhasil
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>');
+        redirect('Admin/kategori_barang/');
+    }
     // akhir kategori barang
 }
