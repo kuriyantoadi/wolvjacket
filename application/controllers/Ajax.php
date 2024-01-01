@@ -8,6 +8,8 @@ class Ajax extends CI_Controller
     {
         parent::__construct();
         $this->load->model('M_ajax');
+        $this->load->model('M_ajax_kategori_barang');
+
         // $this->load->library('upload');
 
         // session login
@@ -17,7 +19,7 @@ class Ajax extends CI_Controller
         }
     }
 
-     function ajax_barang() {
+    function ajax_barang() {
         $list = $this->M_ajax->get_datatables();
         $data = array();
         $no = @$_POST['start'];
@@ -42,6 +44,31 @@ class Ajax extends CI_Controller
                     "draw" => @$_POST['draw'],
                     "recordsTotal" => $this->M_ajax->count_all(),
                     "recordsFiltered" => $this->M_ajax->count_filtered(),
+                    "data" => $data,
+                );
+        // output to json format
+        echo json_encode($output);
+    }
+
+    function ajax_kategori_barang() {
+        $list = $this->M_ajax_kategori_barang->get_datatables();
+        $data = array();
+        $no = @$_POST['start'];
+        foreach ($list as $item) {
+            $no++;
+            $row = array();
+            $row[] = $no;
+            $row[] = $item->nama_kategori_barang;
+
+            // add html for action
+            $row[] = '<a href="'.site_url('Admin/kategori_barang_edit/'.$item->id_kategori_barang).'" class="btn btn-primary btn-sm"><i class="bx bxs-pencil"></i> Edit</a>
+                    <a href="'.site_url('Admin/kategori_barang_hapus/'.$item->id_kategori_barang).'" onclick="return confirm(\'Yakin hapus data kategori barang'. $item->nama_kategori_barang .' ?\')"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i> Hapus</a>';
+            $data[] = $row;
+        }
+        $output = array(
+                    "draw" => @$_POST['draw'],
+                    "recordsTotal" => $this->M_ajax_kategori_barang->count_all(),
+                    "recordsFiltered" => $this->M_ajax_kategori_barang->count_filtered(),
                     "data" => $data,
                 );
         // output to json format

@@ -170,4 +170,18 @@ class Admin extends CI_Controller
     } 
 
     // akhir barang
+
+
+
+    // awal kategori barang
+
+    public function kategori_barang()
+    {
+        $header['title']='WolvJacket';
+
+        $this->load->view('template/header-admin', $header);
+        $this->load->view('admin/kategori_barang');
+        $this->load->view('template/footer-admin');
+    }
+    // akhir kategori barang
 }
