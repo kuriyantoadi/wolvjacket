@@ -53,6 +53,12 @@ class M_admin extends CI_Model
     return $query;
   }
 
+  function barang_edit_up($data_edit, $id_barang)
+  {
+    $this->db->where('id_barang', $id_barang);
+    $this->db->update('tb_barang', $data_edit);
+  }
+
   // akhir kategori barang
 
 
@@ -65,15 +71,24 @@ class M_admin extends CI_Model
     return $tampil;
   }
 
-  function barang_edit_up($data_edit, $id_barang)
-  {
-    $this->db->where('id_barang', $id_barang);
-    $this->db->update('tb_barang', $data_edit);
-  }
-
   function kategori_barang_tambah_up($data_tambah)
   {
     $this->db->insert('tb_kategori_barang', $data_tambah);
+  }
+
+  function kategori_barang_detail($id_kategori_barang)
+  {
+    $this->db->select('*');
+    $this->db->from('tb_kategori_barang');
+    $this->db->where('id_kategori_barang', $id_kategori_barang);
+    $query = $this->db->get()->result();
+    return $query;
+  }
+
+  function kategori_barang_edit_up($data_edit, $id_kategori_barang)
+  {
+    $this->db->where('id_kategori_barang', $id_kategori_barang);
+    $this->db->update('tb_kategori_barang', $data_edit);
   }
 
   // akhir kategori barang
