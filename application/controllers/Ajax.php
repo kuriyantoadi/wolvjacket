@@ -9,6 +9,7 @@ class Ajax extends CI_Controller
         parent::__construct();
         $this->load->model('M_ajax');
         $this->load->model('M_ajax_kategori_barang');
+        $this->load->model('M_ajax_brand');
 
         // $this->load->library('upload');
 
@@ -69,6 +70,31 @@ class Ajax extends CI_Controller
                     "draw" => @$_POST['draw'],
                     "recordsTotal" => $this->M_ajax_kategori_barang->count_all(),
                     "recordsFiltered" => $this->M_ajax_kategori_barang->count_filtered(),
+                    "data" => $data,
+                );
+        // output to json format
+        echo json_encode($output);
+    }
+
+    function ajax_brand() {
+        $list = $this->M_ajax_brand->get_datatables();
+        $data = array();
+        $no = @$_POST['start'];
+        foreach ($list as $item) {
+            $no++;
+            $row = array();
+            $row[] = $no;
+            $row[] = $item->nama_brand;
+
+            // add html for action
+            $row[] = '<a href="'.site_url('Admin/brand_edit/'.$item->id_brand).'" class="btn btn-primary btn-sm"><i class="bx bxs-pencil"></i> Edit</a>
+                    <a href="'.site_url('Admin/brand_hapus/'.$item->id_brand).'" onclick="return confirm(\'Yakin hapus data kategori barang '. $item->nama_brand .' ?\')"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i> Hapus</a>';
+            $data[] = $row;
+        }
+        $output = array(
+                    "draw" => @$_POST['draw'],
+                    "recordsTotal" => $this->M_ajax_brand->count_all(),
+                    "recordsFiltered" => $this->M_ajax_brand->count_filtered(),
                     "data" => $data,
                 );
         // output to json format

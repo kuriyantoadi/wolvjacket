@@ -109,6 +109,32 @@ class M_admin extends CI_Model
     return $tampil;
   }
 
+  function brand_tambah_up($data_tambah)
+  {
+    $this->db->insert('tb_brand', $data_tambah);
+  }
+
+  function brand_hapus($id_brand)
+  {
+    $this->db->where($id_brand);
+    $this->db->delete('tb_brand');
+  }
+
+  function brand_detail($id_brand)
+  {
+    $this->db->select('*');
+    $this->db->from('tb_brand');
+    $this->db->where('id_brand', $id_brand);
+    $query = $this->db->get()->result();
+    return $query;
+  }
+
+   function brand_edit_up($data_edit, $id_brand)
+  {
+    $this->db->where('id_brand', $id_brand);
+    $this->db->update('tb_brand', $data_edit);
+  }
+
   // akhir brand
 
 }

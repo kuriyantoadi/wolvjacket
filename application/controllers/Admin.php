@@ -245,4 +245,78 @@ class Admin extends CI_Controller
         redirect('Admin/kategori_barang/');
     }
     // akhir kategori barang
+
+    // awal brand
+
+    public function brand()
+    {
+        $header['title']='WolvJacket';
+
+        $this->load->view('template/header-admin', $header);
+        $this->load->view('admin/brand');
+        $this->load->view('template/footer-admin');
+    }
+
+    public function brand_tambah_up()
+    {
+        $nama_brand = $this->input->post('nama_brand');
+    
+        $data_tambah = array(
+            'nama_brand' => $nama_brand,
+        );
+
+        $this->M_admin->brand_tambah_up($data_tambah);
+
+        $this->session->set_flashdata('msg', '
+			<div class="alert alert-info alert-dismissible fade show" role="alert">
+                Tambah Data Brand Berhasil
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>');
+        redirect('Admin/brand/');
+    }
+
+    public function brand_edit($id_brand)
+    {
+        $header['title']='WolvJacket';
+        $data['tampil'] = $this->M_admin->brand_detail($id_brand);
+
+        $this->load->view('template/header-admin', $header);
+        $this->load->view('admin/brand_edit', $data);
+        $this->load->view('template/footer-admin');
+    }
+
+    public function brand_edit_up()
+    {
+        $id_brand = $this->input->post('id_brand');
+        $nama_brand = $this->input->post('nama_brand');
+     
+        $data_edit = array(
+            'nama_brand' => $nama_brand,
+        );
+
+        $this->M_admin->brand_edit_up($data_edit, $id_brand);
+
+        $this->session->set_flashdata('msg', '
+		    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                Update Data Brand Berhasil
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+           ');
+        redirect('Admin/brand');
+    } 
+
+    public function brand_hapus($id_brand){
+        $id_brand = array('id_brand' => $id_brand);
+
+        $success = $this->M_admin->brand_hapus($id_brand);
+        $this->session->set_flashdata('msg', '
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Hapus Brand Berhasil
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        ');
+        redirect('Admin/brand/');
+    }
+
+    // akhir brand
 }
