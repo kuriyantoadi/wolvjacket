@@ -231,5 +231,18 @@ class Admin extends CI_Controller
            ');
         redirect('Admin/kategori_barang');
     } 
+
+    public function kategori_barang_hapus($id_kategori_barang){
+        $id_kategori_barang = array('id_kategori_barang' => $id_kategori_barang);
+
+        $success = $this->M_admin->kategori_barang_hapus($id_kategori_barang);
+        $this->session->set_flashdata('msg', '
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Hapus Kategori barang Berhasil
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        ');
+        redirect('Admin/kategori_barang/');
+    }
     // akhir kategori barang
 }

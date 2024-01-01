@@ -91,6 +91,12 @@ class M_admin extends CI_Model
     $this->db->update('tb_kategori_barang', $data_edit);
   }
 
+  function kategori_barang_hapus($id_kategori_barang)
+  {
+    $this->db->where($id_kategori_barang);
+    $this->db->delete('tb_kategori_barang');
+  }
+
   // akhir kategori barang
 
 
