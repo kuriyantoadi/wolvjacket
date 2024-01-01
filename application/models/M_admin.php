@@ -137,4 +137,47 @@ class M_admin extends CI_Model
 
   // akhir brand
 
+
+  // awal pengguna
+  function tampil_pengguna()
+  {
+    $this->db->order_by('tb_user.nama_pengguna', 'ASC');
+    $tampil = $this->db->get('tb_user')->result();
+    return $tampil;
+  }
+
+  function pengguna_tambah_up($data_tambah)
+  {
+    $this->db->insert('tb_user', $data_tambah);
+  }
+
+  function pengguna_hapus($id_user)
+  {
+    $this->db->where($id_user);
+    $this->db->delete('tb_user');
+  }
+
+  function pengguna_detail($id_user)
+  {
+    $this->db->select('*');
+    $this->db->from('tb_user');
+    $this->db->where('id_user', $id_user);
+    $query = $this->db->get()->result();
+    return $query;
+  }
+
+  function user_edit_up($data_edit, $id_user)
+  {
+    $this->db->where('id_user', $id_user);
+    $this->db->update('tb_user', $data_edit);
+  }
+
+  public function cek_username($username)
+  {
+    $this->db->where('username', $username);
+    $hasil = $this->db->get('tb_user')->result();
+    return $hasil;
+  }
+  // akhir pengguna
+
 }

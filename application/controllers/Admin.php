@@ -26,6 +26,8 @@ class Admin extends CI_Controller
         $this->load->view('template/footer-admin');
     }
 
+
+    // awal pengguna 
     public function password()
     {
         $header['title']='WolvJacket';
@@ -66,6 +68,120 @@ class Admin extends CI_Controller
                         </div>');
             redirect('Admin/password/');
     }
+
+
+    public function pengguna()
+    {
+        $header['title']='WolvJacket';
+
+        $this->load->view('template/header-admin', $header);
+        $this->load->view('admin/pengguna');
+        $this->load->view('template/footer-admin');
+    }
+
+    public function pengguna_tambah_up()
+    {
+        $nama_pengguna = htmlspecialchars($this->input->post('nama_pengguna'));
+        $username = htmlspecialchars($this->input->post('username'));
+        $password = htmlspecialchars($this->input->post('password'));
+        $status = htmlspecialchars($this->input->post('status'));
+        $status_user = htmlspecialchars($this->input->post('status_user'));
+
+        $cek_pengguna = $this->M_admin->cek_username($username);
+
+        foreach ($cek_pengguna as $row)
+        {
+            $cek_pengguna = $row->username;
+        }
+
+    //    var_dump($cek_pengguna);
+
+        if($username == $cek_pengguna){
+
+            // Jika username sama dengan database
+            $this->session->set_flashdata('msg', '
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Tambah Pengguna Gagal, Username Sudah Terpakai
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>');
+            redirect('Admin/pengguna/');
+
+        }else{
+
+            // Jika username tidak sama dengan database
+            $data_tambah = array(
+                'nama_pengguna' => $nama_pengguna,
+                'username' => $username,
+                'password' => $password,
+                'status' => $status,
+                'status_user' => $status_user,
+            );
+
+            $this->M_admin->pengguna_tambah_up($data_tambah);
+
+            $this->session->set_flashdata('msg', '
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    Tambah Pengguna Berhasil
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>');
+            redirect('Admin/pengguna/');
+        }
+    
+        
+    }
+
+    public function pengguna_edit($id_user)
+    {
+        $header['title']='WolvJacket';
+        $data['tampil'] = $this->M_admin->pengguna_detail($id_user);
+
+        $this->load->view('template/header-admin', $header);
+        $this->load->view('admin/pengguna_edit', $data);
+        $this->load->view('template/footer-admin');
+    }
+
+    public function pengguna_edit_up()
+    {
+        $id_user = htmlspecialchars($this->input->post('id_user'));
+        $nama_pengguna = htmlspecialchars($this->input->post('nama_pengguna'));
+        $username = htmlspecialchars($this->input->post('nama_pengguna'));
+        $password = htmlspecialchars($this->input->post('password'));
+        $status = htmlspecialchars($this->input->post('status'));
+        $status_user = htmlspecialchars($this->input->post('status_user'));
+     
+        $data_edit = array(
+            'nama_pengguna' => $nama_pengguna,
+            'username' => $username,
+            'password' => $password,
+            'status' => $status,
+            'status_user' => $status_user,
+        );
+
+        $this->M_admin->pengguna_edit_up($data_edit, $id_user);
+
+        $this->session->set_flashdata('msg', '
+		    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                Update Data Pengguna Berhasil
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+           ');
+        redirect('Admin/pengguna');
+    } 
+
+    public function pengguna_hapus($id_user){
+        $id_user = array('id_user' => $id_user);
+
+        $success = $this->M_admin->pengguna_hapus($id_user);
+        $this->session->set_flashdata('msg', '
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Hapus Pengguna Berhasil
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        ');
+        redirect('Admin/pengguna/');
+    }
+   
+    // akhir pengguna 
 
 
     // awal barang
@@ -394,4 +510,9 @@ class Admin extends CI_Controller
         redirect('Admin/brand/');
     }
     // akhir data pelanggan
+
+
+    
+
+
 }

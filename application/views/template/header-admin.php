@@ -130,6 +130,13 @@
                                     <li><a href="5" data-key="t-level-1-6">Daftar Tambah Stok</a></li>
                                 </ul>
                             </li>
+
+                             <li>
+                                <a href="<?= base_url() ?>index.php/Admin/pengguna">
+                                    <i class="dripicons-user"></i>
+                                    <span data-key="t-pengguna">Pengguna</span>
+                                </a>
+                            </li>
                             
 
                         </ul>
