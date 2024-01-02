@@ -94,8 +94,6 @@ class Admin extends CI_Controller
             $cek_pengguna = $row->username;
         }
 
-    //    var_dump($cek_pengguna);
-
         if($username == $cek_pengguna){
 
             // Jika username sama dengan database
@@ -112,7 +110,7 @@ class Admin extends CI_Controller
             $data_tambah = array(
                 'nama_pengguna' => $nama_pengguna,
                 'username' => $username,
-                'password' => $password,
+                'password' => sha1($password),
                 'status' => $status,
                 'status_user' => $status_user,
             );
@@ -145,14 +143,12 @@ class Admin extends CI_Controller
         $id_user = htmlspecialchars($this->input->post('id_user'));
         $nama_pengguna = htmlspecialchars($this->input->post('nama_pengguna'));
         $username = htmlspecialchars($this->input->post('nama_pengguna'));
-        $password = htmlspecialchars($this->input->post('password'));
         $status = htmlspecialchars($this->input->post('status'));
         $status_user = htmlspecialchars($this->input->post('status_user'));
      
         $data_edit = array(
             'nama_pengguna' => $nama_pengguna,
             'username' => $username,
-            'password' => $password,
             'status' => $status,
             'status_user' => $status_user,
         );

@@ -59,7 +59,7 @@
                                 <label class="control-label mt-3" for="email">Status :</label>
                                     <select name="status" id="" class="form-control" required>
                                         <option value="">Pilihan</option>
-                                        <option value="Admin">Admin </option>
+                                        <option value="admin">admin </option>
                                         <!-- <option value="Kasir">Kasir </option> -->
                                     </select>
                             </div>

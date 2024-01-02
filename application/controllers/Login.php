@@ -35,7 +35,7 @@ class Login extends CI_Controller
         if ($cek_login->num_rows() > 0) {
             $data = $cek_login->row_array();
 
-            if ($data['status'] == 'admin') {
+            if ($data['status'] == 'admin' && $data['status_user'] == 'aktif') {
                 $this->session->set_userdata('admin', true);
                 $this->session->set_userdata('ses_id', $data['id_user']);
                 $this->session->set_userdata('ses_username', $data['username']);

@@ -166,7 +166,7 @@ class M_admin extends CI_Model
     return $query;
   }
 
-  function user_edit_up($data_edit, $id_user)
+  function pengguna_edit_up($data_edit, $id_user)
   {
     $this->db->where('id_user', $id_user);
     $this->db->update('tb_user', $data_edit);
