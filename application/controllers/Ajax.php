@@ -11,6 +11,7 @@ class Ajax extends CI_Controller
         $this->load->model('M_ajax_kategori_barang');
         $this->load->model('M_ajax_brand');
         $this->load->model('M_ajax_pengguna');
+        $this->load->model('M_ajax_pelanggan');
 
         // $this->load->library('upload');
 
@@ -124,6 +125,35 @@ class Ajax extends CI_Controller
                     "draw" => @$_POST['draw'],
                     "recordsTotal" => $this->M_ajax_pengguna->count_all(),
                     "recordsFiltered" => $this->M_ajax_pengguna->count_filtered(),
+                    "data" => $data,
+                );
+        // output to json format
+        echo json_encode($output);
+    }
+
+    function ajax_pelanggan() {
+        $list = $this->M_ajax_pelanggan->get_datatables();
+        $data = array();
+        $no = @$_POST['start'];
+        foreach ($list as $item) {
+            $no++;
+            $row = array();
+            $row[] = $no;
+            $row[] = $item->nama_pelanggan;
+            $row[] = $item->no_hp_pelanggan;
+            $row[] = $item->alamat_pelanggan;
+            $row[] = $item->kota_pelanggan;
+            $row[] = $item->level;
+            
+            // add html for action
+            $row[] = '<a href="'.site_url('Admin/pelanggan_edit/'.$item->id_pelanggan).'" class="btn btn-primary btn-sm"><i class="bx bxs-pencil"></i> Edit</a>
+                    <a href="'.site_url('Admin/pelanggan_hapus/'.$item->id_pelanggan).'" onclick="return confirm(\'Yakin hapus data Pelanggan '. $item->nama_pelanggan .' ?\')"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i> Hapus</a>';
+            $data[] = $row;
+        }
+        $output = array(
+                    "draw" => @$_POST['draw'],
+                    "recordsTotal" => $this->M_ajax_pelanggan->count_all(),
+                    "recordsFiltered" => $this->M_ajax_pelanggan->count_filtered(),
                     "data" => $data,
                 );
         // output to json format

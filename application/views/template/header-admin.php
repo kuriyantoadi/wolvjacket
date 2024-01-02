@@ -118,7 +118,7 @@
                             
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow">
-                                    <i class="bx bx-box"></i>
+                                    <i class="dripicons-box"></i>
                                     <span data-key="t-multi-level">Barang</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="true">
@@ -131,7 +131,14 @@
                                 </ul>
                             </li>
 
-                             <li>
+                            <li>
+                                <a href="<?= base_url() ?>index.php/Admin/pelanggan">
+                                    <i class="dripicons-user-group"></i>
+                                    <span data-key="t-pelanggan">Pelanggan</span>
+                                </a>
+                            </li>
+
+                            <li>
                                 <a href="<?= base_url() ?>index.php/Admin/pengguna">
                                     <i class="dripicons-user"></i>
                                     <span data-key="t-pengguna">Pengguna</span>

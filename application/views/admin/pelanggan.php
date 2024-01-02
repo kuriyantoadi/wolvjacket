@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">Data Pengguna</h4>
+                        <h4 class="mb-sm-0 font-size-18">Data Pelanggan</h4>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
 
                         <div class="d-flex gap-2 flex-wrap mb-1">
                             <a class="btn btn-info btn-sm" data-bs-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                Tambah Pengguna
+                                Tambah Pelanggan
                             </a>
                         </div>
 
@@ -35,41 +35,34 @@
                             <div class="card border shadow-none card-body text-muted mb-0">
 
                             <?=
-                            form_open('Admin/pengguna_tambah_up');
+                            form_open('Admin/pelanggan_tambah_up');
 
                             ?>
                             <form class="m-t-40" novalidate>
 
                             <div class="form-group">
-                                <label class="control-label mt-3" for="email">Nama Pengguna :</label>
-                                <input type="text" class="form-control" placeholder="" name="nama_pengguna" value="" required>
+                                <label class="control-label mt-3" for="email">Nama Pelanggan :</label>
+                                <input type="text" class="form-control" placeholder="" name="nama_pelanggan" value="" required>
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label mt-3" for="email">Username :</label>
-                                <input type="text" class="form-control" placeholder="" name="username" value="" required>
+                                <label class="control-label mt-3" for="email">No Hp Pelanggan :</label>
+                                <input type="text" class="form-control" placeholder="" name="no_hp_pelanggan" value="" required>
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label mt-3" for="email">Password :</label>
-                                <input type="text" class="form-control" placeholder="" name="password" value="" required>
+                                <label class="control-label mt-3" for="email">Alamat Pelanggan:</label>
+                                <input type="text" class="form-control" placeholder="" name="alamat_pelanggan" value="" required>
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label mt-3" for="email">Status :</label>
-                                    <select name="status" id="" class="form-control" required>
-                                        <option value="">Pilihan</option>
-                                        <option value="admin">admin </option>
-                                        <!-- <option value="Kasir">Kasir </option> -->
-                                    </select>
+                                <label class="control-label mt-3" for="email">Kota Pelanggan :</label>
+                                <input type="text" class="form-control" placeholder="" name="kota_pelanggan" value="" required>
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label mt-3" for="email">Status User :</label>
-                                    <select name="status_user" id="" class="form-control" required>
-                                        <option value="Aktif">Aktif </option>
-                                        <option value="Tidak Aktif">Tidak Aktif </option>
-                                    </select>
+                                <label class="control-label mt-3" for="email">Level :</label>
+                                <input type="text" class="form-control" placeholder="" name="level" value="" required>
                             </div>
 
                                 <input type="submit" name="submit" class="btn btn-primary btn-sm mb-lg-4 mt-lg-4"></input>
@@ -80,7 +73,7 @@
                             
                             ?>
                             </form>
-
+                        
                            </div>
                         </div>
                     </div><!-- end card-body -->
@@ -99,13 +92,15 @@
                             <thead>
                                 <tr>
                                     <th><center>No</th>
-                                    <th><center>Nama Pengguna</th>
-                                    <th><center>Username</th> 
-                                    <th><center>Status</th> 
-                                    <th><center>Status User</th>  
+                                    <th><center>Nama Pelanggan</th> 
+                                    <th><center>No Hp Pelanggan</th> 
+                                    <th><center>Alamat Pelanggan</th> 
+                                    <th><center>Kota Pelanggan</th> 
+                                    <th><center>Level</th> 
                                     <th><center>Pilihan</th>
                                 </tr>
                             </thead>
+
                         
                             </table>
                                                 
@@ -123,20 +118,20 @@
   <script>
         //setting datatables
         $('#tableAjax').DataTable({
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Indonesian.json"
-            },
+            // "language": {
+            //     "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Indonesian.json"
+            // },
             "processing": true,
             "serverSide": true,
             "order": [],
             "ajax": {
                 //panggil method ajax list dengan ajax
-                "url": "<?= site_url('Ajax/ajax_pengguna') ?>",
+                "url": "<?= site_url('Ajax/ajax_pelanggan') ?>",
                 "type": "POST"
             },
             "columnDefs": [
                 {
-                    "targets": [0, 1,2,3,4,5],
+                    "targets": [0, 1,2,3,4,5,6],
                     "className" : 'text-center'
                 }
             ]

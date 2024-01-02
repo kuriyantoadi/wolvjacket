@@ -441,48 +441,64 @@ class Admin extends CI_Controller
         $header['title']='WolvJacket';
 
         $this->load->view('template/header-admin', $header);
-        $this->load->view('admin/brand');
+        $this->load->view('admin/pelanggan');
         $this->load->view('template/footer-admin');
     }
 
     public function pelanggan_tambah_up()
     {
-        $nama_brand = $this->input->post('nama_brand');
-    
+        $nama_pelanggan = htmlspecialchars($this->input->post('nama_pelanggan'));
+        $no_hp_pelanggan = htmlspecialchars($this->input->post('no_hp_pelanggan'));
+        $alamat_pelanggan = htmlspecialchars($this->input->post('alamat_pelanggan'));
+        $kota_pelanggan = htmlspecialchars($this->input->post('kota_pelanggan'));
+        $level = htmlspecialchars($this->input->post('level'));
+
         $data_tambah = array(
-            'nama_brand' => $nama_brand,
+            'nama_pelanggan' => $nama_pelanggan,
+            'no_hp_pelanggan' => $no_hp_pelanggan,
+            'alamat_pelanggan' => $alamat_pelanggan,
+            'kota_pelanggan' => $kota_pelanggan,
+            'level' => $level,
         );
 
-        $this->M_admin->brand_tambah_up($data_tambah);
+        $this->M_admin->pelanggan_tambah_up($data_tambah);
 
         $this->session->set_flashdata('msg', '
 			<div class="alert alert-info alert-dismissible fade show" role="alert">
-                Tambah Data Brand Berhasil
+                Tambah Data Pelanggan Berhasil
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>');
-        redirect('Admin/brand/');
+        redirect('Admin/pelanggan/');
     }
 
-    public function pelanggan_edit($id_brand)
+    public function pelanggan_edit($id_pelanggan)
     {
         $header['title']='WolvJacket';
-        $data['tampil'] = $this->M_admin->brand_detail($id_brand);
+        $data['tampil'] = $this->M_admin->pelanggan_detail($id_pelanggan);
 
         $this->load->view('template/header-admin', $header);
-        $this->load->view('admin/brand_edit', $data);
+        $this->load->view('admin/pelanggan_edit', $data);
         $this->load->view('template/footer-admin');
     }
 
     public function pelanggan_edit_up()
     {
-        $id_brand = $this->input->post('id_brand');
-        $nama_brand = $this->input->post('nama_brand');
+        $id_pelanggan = htmlspecialchars($this->input->post('id_pelanggan'));
+        $nama_pelanggan = htmlspecialchars($this->input->post('nama_pelanggan'));
+        $no_hp_pelanggan = htmlspecialchars($this->input->post('no_hp_pelanggan'));
+        $alamat_pelanggan = htmlspecialchars($this->input->post('alamat_pelanggan'));
+        $kota_pelanggan = htmlspecialchars($this->input->post('kota_pelanggan'));
+        $level = htmlspecialchars($this->input->post('level'));
      
         $data_edit = array(
-            'nama_brand' => $nama_brand,
+            'nama_pelanggan' => $nama_pelanggan,
+            'no_hp_pelanggan' => $no_hp_pelanggan,
+            'alamat_pelanggan' => $alamat_pelanggan,
+            'kota_pelanggan' => $kota_pelanggan,
+            'level' => $level,
         );
 
-        $this->M_admin->brand_edit_up($data_edit, $id_brand);
+        $this->M_admin->pelanggan_edit_up($data_edit, $id_pelanggan);
 
         $this->session->set_flashdata('msg', '
 		    <div class="alert alert-info alert-dismissible fade show" role="alert">
@@ -490,20 +506,20 @@ class Admin extends CI_Controller
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
            ');
-        redirect('Admin/brand');
+        redirect('Admin/pelanggan');
     } 
 
-    public function pelanggan_hapus($id_brand){
-        $id_brand = array('id_brand' => $id_brand);
+    public function pelanggan_hapus($id_pelanggan){
+        $id_pelanggan = array('id_pelanggan' => $id_pelanggan);
 
-        $success = $this->M_admin->brand_hapus($id_brand);
+        $success = $this->M_admin->pelanggan_hapus($id_pelanggan);
         $this->session->set_flashdata('msg', '
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Hapus Brand Berhasil
+                    Hapus Pelanggan Berhasil
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         ');
-        redirect('Admin/brand/');
+        redirect('Admin/pelanggan/');
     }
     // akhir data pelanggan
 

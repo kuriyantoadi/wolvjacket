@@ -180,4 +180,43 @@ class M_admin extends CI_Model
   }
   // akhir pengguna
 
+
+
+  // awal pelanggan
+
+  function tampil_pelanggan()
+  {
+    $this->db->order_by('tb_pelanggan.nama_pelanggan', 'ASC');
+    $tampil = $this->db->get('tb_pelanggan')->result();
+    return $tampil;
+  }
+
+  function pelanggan_tambah_up($data_tambah)
+  {
+    $this->db->insert('tb_pelanggan', $data_tambah);
+  }
+
+  function pelanggan_hapus($id_pelanggan)
+  {
+    $this->db->where($id_pelanggan);
+    $this->db->delete('tb_pelanggan');
+  }
+
+  function pelanggan_detail($id_pelanggan)
+  {
+    $this->db->select('*');
+    $this->db->from('tb_pelanggan');
+    $this->db->where('id_pelanggan', $id_pelanggan);
+    $query = $this->db->get()->result();
+    return $query;
+  }
+
+  function pelanggan_edit_up($data_edit, $id_pelanggan)
+  {
+    $this->db->where('id_pelanggan', $id_pelanggan);
+    $this->db->update('tb_pelanggan', $data_edit);
+  }
+
+  // akhir pelanggan
+
 }
