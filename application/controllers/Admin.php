@@ -188,11 +188,13 @@ class Admin extends CI_Controller
 
         $data['tampil_kategori'] = $this->M_admin->tampil_kategori_barang();
         $data['tampil_brand'] = $this->M_admin->tampil_brand();
+        $data['tampil'] = $this->M_admin->barang_edit();
 
         $this->load->view('template/header-admin', $header);
         $this->load->view('admin/barang_tampil', $data);
         $this->load->view('template/footer-admin');
     }
+
 
     public function barang_tambah_up()
     {
