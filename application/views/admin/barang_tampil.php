@@ -217,9 +217,7 @@
                                     <th><center>Status</th>
                                     <th><center>Pilihan</th>
                                 </tr>
-                            </thead>
-
-                        
+                                 
                             </table>
                                                 
 
@@ -230,8 +228,6 @@
         </div> <!-- container-fluid -->
     </div>
     <!-- End Page-content -->
-
-
 
 
 
@@ -256,4 +252,6 @@
                 }
             ]
         });
+
+         
     </script>
