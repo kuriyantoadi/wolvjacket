@@ -42,11 +42,7 @@ class Ajax extends CI_Controller
             $row[] = '
         
                     <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editModal'.$item->id_barang.'"><i class="bx bxs-pencil"></i>Edit</button>
-                    <a href="'.site_url('Admin/barang_hapus/'.$item->id_barang).'" onclick="return confirm(\'Yakin hapus data barang'. $item->nama_barang .' ?\')"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i> Hapus</a>';
-
-            // $row[] = '<a href="'.site_url('Admin/barang_edit/'.$item->id_barang).'" class="btn btn-primary btn-sm"><i class="bx bxs-pencil"></i> Edit</a>
-            //         <a href="'.site_url('Admin/barang_hapus/'.$item->id_barang).'" onclick="return confirm(\'Yakin hapus data barang'. $item->nama_barang .' ?\')"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i> Hapus</a>';
-            
+                    <a href="'.site_url('Admin/barang_hapus/'.$item->id_barang).'" onclick="return confirm(\'Yakin hapus data barang'. $item->nama_barang .' ?\')"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i> Hapus</a>';            
             
             $data[] = $row;
         }
@@ -71,7 +67,8 @@ class Ajax extends CI_Controller
             $row[] = $item->nama_kategori_barang;
 
             // add html for action
-            $row[] = '<a href="'.site_url('Admin/kategori_barang_edit/'.$item->id_kategori_barang).'" class="btn btn-primary btn-sm"><i class="bx bxs-pencil"></i> Edit</a>
+            $row[] = '
+                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editModal'.$item->id_kategori_barang.'"><i class="bx bxs-pencil"></i>Edit</button>
                     <a href="'.site_url('Admin/kategori_barang_hapus/'.$item->id_kategori_barang).'" onclick="return confirm(\'Yakin hapus data kategori barang '. $item->nama_kategori_barang .' ?\')"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i> Hapus</a>';
             $data[] = $row;
         }
@@ -96,7 +93,8 @@ class Ajax extends CI_Controller
             $row[] = $item->nama_brand;
 
             // add html for action
-            $row[] = '<a href="'.site_url('Admin/brand_edit/'.$item->id_brand).'" class="btn btn-primary btn-sm"><i class="bx bxs-pencil"></i> Edit</a>
+            $row[] = '
+                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editModal'.$item->id_brand.'"><i class="bx bxs-pencil"></i>Edit</button>
                     <a href="'.site_url('Admin/brand_hapus/'.$item->id_brand).'" onclick="return confirm(\'Yakin hapus data kategori barang '. $item->nama_brand .' ?\')"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i> Hapus</a>';
             $data[] = $row;
         }

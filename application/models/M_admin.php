@@ -87,11 +87,11 @@ class M_admin extends CI_Model
     $this->db->insert('tb_kategori_barang', $data_tambah);
   }
 
-  function kategori_barang_detail($id_kategori_barang)
+  function kategori_barang_detail()
   {
     $this->db->select('*');
     $this->db->from('tb_kategori_barang');
-    $this->db->where('id_kategori_barang', $id_kategori_barang);
+    // $this->db->where('id_kategori_barang', $id_kategori_barang);
     $query = $this->db->get()->result();
     return $query;
   }
@@ -131,11 +131,11 @@ class M_admin extends CI_Model
     $this->db->delete('tb_brand');
   }
 
-  function brand_detail($id_brand)
+  function brand_detail()
   {
     $this->db->select('*');
     $this->db->from('tb_brand');
-    $this->db->where('id_brand', $id_brand);
+    // $this->db->where('id_brand', $id_brand);
     $query = $this->db->get()->result();
     return $query;
   }

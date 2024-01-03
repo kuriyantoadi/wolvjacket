@@ -239,18 +239,6 @@ class Admin extends CI_Controller
         redirect('Admin/barang/');
     }
 
-    public function barang_edit($id_barang)
-    {
-        $header['title']='WolvJacket';
-        $data['tampil'] = $this->M_admin->barang_edit($id_barang);
-        $data['tampil_kategori'] = $this->M_admin->tampil_kategori_barang();
-        $data['tampil_brand'] = $this->M_admin->tampil_brand();
-
-        $this->load->view('template/header-admin', $header);
-        $this->load->view('admin/barang_edit', $data);
-        $this->load->view('template/footer-admin');
-    }
-
     public function barang_edit_up()
     {
         $id_barang = $this->input->post('id_barang');
@@ -292,9 +280,10 @@ class Admin extends CI_Controller
     public function kategori_barang()
     {
         $header['title']='WolvJacket';
+        $data['tampil'] = $this->M_admin->kategori_barang_detail();
 
         $this->load->view('template/header-admin', $header);
-        $this->load->view('admin/kategori_barang');
+        $this->load->view('admin/kategori_barang',$data);
         $this->load->view('template/footer-admin');
     }
 
@@ -314,16 +303,6 @@ class Admin extends CI_Controller
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>');
         redirect('Admin/kategori_barang/');
-    }
-
-    public function kategori_barang_edit($id_kategori_barang)
-    {
-        $header['title']='WolvJacket';
-        $data['tampil'] = $this->M_admin->kategori_barang_detail($id_kategori_barang);
-
-        $this->load->view('template/header-admin', $header);
-        $this->load->view('admin/kategori_barang_edit', $data);
-        $this->load->view('template/footer-admin');
     }
 
     public function kategori_barang_edit_up()
@@ -365,9 +344,10 @@ class Admin extends CI_Controller
     public function brand()
     {
         $header['title']='WolvJacket';
+        $data['tampil'] = $this->M_admin->brand_detail();
 
         $this->load->view('template/header-admin', $header);
-        $this->load->view('admin/brand');
+        $this->load->view('admin/brand',$data);
         $this->load->view('template/footer-admin');
     }
 

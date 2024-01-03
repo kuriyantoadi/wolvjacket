@@ -203,7 +203,7 @@
                 <div class="col-12">
                     <div class="card">  
                         <div class="card-body">
-
+                                            
                         <table id="tableBarang" class="table table-bordered dt-responsive table-hover table-striped  nowrap w-100">
                             <thead>
                                 <tr>
