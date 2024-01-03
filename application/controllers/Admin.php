@@ -73,9 +73,10 @@ class Admin extends CI_Controller
     public function pengguna()
     {
         $header['title']='WolvJacket';
+        $data['tampil'] = $this->M_admin->pengguna_detail();
 
         $this->load->view('template/header-admin', $header);
-        $this->load->view('admin/pengguna');
+        $this->load->view('admin/pengguna',$data);
         $this->load->view('template/footer-admin');
     }
 

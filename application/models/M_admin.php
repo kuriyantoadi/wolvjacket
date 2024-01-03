@@ -168,11 +168,11 @@ class M_admin extends CI_Model
     $this->db->delete('tb_user');
   }
 
-  function pengguna_detail($id_user)
+  function pengguna_detail()
   {
     $this->db->select('*');
     $this->db->from('tb_user');
-    $this->db->where('id_user', $id_user);
+    // $this->db->where('id_user', $id_user);
     $query = $this->db->get()->result();
     return $query;
   }
