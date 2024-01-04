@@ -422,9 +422,10 @@ class Admin extends CI_Controller
     public function pelanggan()
     {
         $header['title']='WolvJacket';
+        $data['tampil'] = $this->M_admin->pelanggan_detail();
 
         $this->load->view('template/header-admin', $header);
-        $this->load->view('admin/pelanggan');
+        $this->load->view('admin/pelanggan',$data);
         $this->load->view('template/footer-admin');
     }
 

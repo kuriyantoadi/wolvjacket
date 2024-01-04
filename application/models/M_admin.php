@@ -172,7 +172,6 @@ class M_admin extends CI_Model
   {
     $this->db->select('*');
     $this->db->from('tb_user');
-    // $this->db->where('id_user', $id_user);
     $query = $this->db->get()->result();
     return $query;
   }
@@ -213,11 +212,11 @@ class M_admin extends CI_Model
     $this->db->delete('tb_pelanggan');
   }
 
-  function pelanggan_detail($id_pelanggan)
+  function pelanggan_detail()
   {
     $this->db->select('*');
     $this->db->from('tb_pelanggan');
-    $this->db->where('id_pelanggan', $id_pelanggan);
+    // $this->db->where('id_pelanggan', $id_pelanggan);
     $query = $this->db->get()->result();
     return $query;
   }
