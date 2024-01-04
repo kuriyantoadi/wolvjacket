@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label mt-3" for="email">Ototoritas :</label>
+                    <label class="control-label mt-3" for="email">Otoritas :</label>
                         <select name="status" id="" class="form-control" required>
                             <option value="">Pilihan</option>
                             <option value="admin">admin </option>
@@ -162,7 +162,7 @@
                                     <th><center>No</th>
                                     <th><center>Nama Pengguna</th>
                                     <th><center>Username</th> 
-                                    <th><center>Ototoritas</th> 
+                                    <th><center>Otoritas</th> 
                                     <th><center>Status User</th>  
                                     <th><center>Pilihan</th>
                                 </tr>

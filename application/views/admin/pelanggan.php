@@ -69,7 +69,7 @@
                 <div class="modal-body">
                     
                 <!-- awal isi modal -->
-                <?= form_open('Admin/pelanggan_tambah_up'); ?>
+                <?= form_open('Admin/pelanggan_edit_up'); ?>
                 <form class="m-t-40" novalidate>
 
                 <div class="form-group">
@@ -89,7 +89,7 @@
 
                 <div class="form-group">
                     <label class="control-label mt-3" for="email">Kota Pelanggan :</label>
-                    <input type="text" class="form-control" placeholder="" name="kota_pelanggan" value="<?= $row->nama_pelanggan ?>" required>
+                    <input type="text" class="form-control" placeholder="" name="kota_pelanggan" value="<?= $row->kota_pelanggan ?>" required>
                 </div>
 
                 <div class="form-group">
@@ -97,7 +97,7 @@
                     <input type="text" class="form-control" placeholder="" name="level" value="" required>
                 </div>
 
-                    <input type="submit" name="submit" class="btn btn-primary btn-sm mb-lg-4 mt-lg-4"></input>
+                    <input type="submit" name="submit" class="btn btn-sm btn-primary btn-sm mb-lg-4 mt-lg-4" value="Update"></input>
                     </div>
                 </center>
                 <?=  form_close(); ?>

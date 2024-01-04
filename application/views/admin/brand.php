@@ -57,7 +57,7 @@
                     <input type="hidden" class="form-control" placeholder="" name="id_brand" value="<?= $row->id_brand ?>" >
                 </div>
 
-                    <button type="submit" name="submit" value="Update" class="btn btn-sm btn-primary mb-lg-4 mt-lg-4">Submit</button>
+                    <button type="submit" name="submit" value="Update" class="btn btn-sm btn-primary mb-lg-4 mt-lg-4"></button>
                     </div>
                 </center>
                 <?= form_close(); ?>

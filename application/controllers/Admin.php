@@ -455,16 +455,6 @@ class Admin extends CI_Controller
         redirect('Admin/pelanggan/');
     }
 
-    public function pelanggan_edit($id_pelanggan)
-    {
-        $header['title']='WolvJacket';
-        $data['tampil'] = $this->M_admin->pelanggan_detail($id_pelanggan);
-
-        $this->load->view('template/header-admin', $header);
-        $this->load->view('admin/pelanggan_edit', $data);
-        $this->load->view('template/footer-admin');
-    }
-
     public function pelanggan_edit_up()
     {
         $id_pelanggan = htmlspecialchars($this->input->post('id_pelanggan'));
