@@ -74,6 +74,7 @@
 
                 <div class="form-group">
                     <label class="control-label mt-3" for="email">Nama Pelanggan :</label>
+                    <input type="hidden" name="id_pelanggan" value="<?= $row->id_pelanggan ?>">
                     <input type="text" class="form-control" placeholder="" name="nama_pelanggan" value="<?= $row->nama_pelanggan ?>" required>
                 </div>
 
@@ -94,7 +95,7 @@
 
                 <div class="form-group">
                     <label class="control-label mt-3" for="email">Level :</label>
-                    <input type="text" class="form-control" placeholder="" name="level" value="" >
+                    <input type="text" class="form-control" placeholder="" name="level" value="<?= $row->level ?>" >
                 </div>
 
                     <input type="submit" name="submit" class="btn btn-sm btn-primary btn-sm mb-lg-4 mt-lg-4" value="Update"></input>

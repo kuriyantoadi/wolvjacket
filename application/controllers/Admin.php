@@ -474,13 +474,13 @@ class Admin extends CI_Controller
 
         $this->M_admin->pelanggan_edit_up($data_edit, $id_pelanggan);
 
-        $this->session->set_flashdata('msg', '
-		    <div class="alert alert-info alert-dismissible fade show" role="alert">
-                Update Data Brand Berhasil
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-           ');
-        redirect('Admin/pelanggan');
+        // $this->session->set_flashdata('msg', '
+		//     <div class="alert alert-info alert-dismissible fade show" role="alert">
+        //         Update Data Brand Berhasil
+        //         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        //     </div>
+        //    ');
+        // redirect('Admin/pelanggan');
     } 
 
     public function pelanggan_hapus($id_pelanggan){
