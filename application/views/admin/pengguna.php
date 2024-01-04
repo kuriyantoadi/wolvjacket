@@ -48,7 +48,7 @@
                         </select>
                 </div>
 
-                    <input type="submit" name="submit" class="btn btn-primary btn-sm mb-lg-4 mt-lg-4"></input>
+                    <input type="submit" name="submit" class="btn btn-primary btn-sm mb-lg-4 mt-lg-4" value="Tambah"></input>
                     </div>
                 </center>
                 <?=  form_close(); ?>
@@ -108,7 +108,7 @@
                         </select>
                 </div>
 
-                    <button type="submit" name="submit" value="submit" class="btn btn-primary mb-lg-4 mt-lg-4">Submit</button>
+                    <button type="submit" name="submit" value="Update" class="btn btn-sm btn-primary mb-lg-4 mt-lg-4">Update</button>
                     </div>
                 </center>
                 <?=  form_close(); ?>
