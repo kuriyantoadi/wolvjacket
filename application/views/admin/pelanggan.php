@@ -37,7 +37,7 @@
 
                 <div class="form-group">
                     <label class="control-label mt-3" for="email">Level :</label>
-                    <input type="text" class="form-control" placeholder="" name="level" value="" required>
+                    <input type="text" class="form-control" placeholder="" name="level" value="" >
                 </div>
 
                     <input type="submit" name="submit" class="btn btn-primary btn-sm mb-lg-4 mt-lg-4" value="Tambah"></input>
@@ -94,7 +94,7 @@
 
                 <div class="form-group">
                     <label class="control-label mt-3" for="email">Level :</label>
-                    <input type="text" class="form-control" placeholder="" name="level" value="" required>
+                    <input type="text" class="form-control" placeholder="" name="level" value="" >
                 </div>
 
                     <input type="submit" name="submit" class="btn btn-sm btn-primary btn-sm mb-lg-4 mt-lg-4" value="Update"></input>
