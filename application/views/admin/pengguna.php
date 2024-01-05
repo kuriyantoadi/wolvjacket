@@ -95,7 +95,7 @@
                         <select name="status" id="" class="form-control" required>
                             <option value="<?= $row->status ?>">Pilihan Awal ( <?= $row->status ?> )</option>
                             <option value="admin">admin </option>
-                            <option value="Kasir">Kasir </option>
+                            <option value="kasir">Kasir </option>
                         </select>
                 </div>
 
@@ -103,8 +103,8 @@
                     <label class="control-label mt-3" for="email">Status User :</label>
                         <select name="status_user" id="" class="form-control" required>
                             <option value="<?= $row->status_user ?>">Pilihan Awal ( <?= $row->status_user ?> )</option>
-                            <option value="Aktif">Aktif </option>
-                            <option value="Tidak Aktif">Tidak Aktif </option>
+                            <option value="aktif">Aktif </option>
+                            <option value="tidak aktif">Tidak Aktif </option>
                         </select>
                 </div>
 
