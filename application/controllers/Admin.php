@@ -480,7 +480,7 @@ class Admin extends CI_Controller
         //         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         //     </div>
         //    ');
-        // redirect('Admin/pelanggan');
+        redirect('Admin/pelanggan');
     } 
 
     public function pelanggan_hapus($id_pelanggan){
