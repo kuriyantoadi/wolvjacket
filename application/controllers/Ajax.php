@@ -124,6 +124,7 @@ class Ajax extends CI_Controller
             // add html for action
             $row[] = '
                     <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editModal'.$item->id_user.'"><i class="bx bxs-pencil"></i>Edit</button>
+                    <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#resetPasswordModal'.$item->id_user.'"><i class="bx bxs-key"></i>Password</button>
                     <a href="'.site_url('Admin/pengguna_hapus/'.$item->id_user).'" onclick="return confirm(\'Yakin hapus data Pengguna '. $item->nama_pengguna .' ?\')"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i> Hapus</a>';
             $data[] = $row;
         }

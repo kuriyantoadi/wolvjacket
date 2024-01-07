@@ -187,7 +187,7 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
     public function pengguna_edit($id_user)
     {
         $header['title']='WolvJacket';
-$header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
+        $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $data['tampil'] = $this->M_admin->pengguna_detail($id_user);
 
         $this->load->view('template/header-admin', $header);
@@ -219,6 +219,42 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
             </div>
            ');
         redirect('Admin/pengguna');
+    } 
+
+    public function pengguna_password_up()
+    {
+        $id_user = htmlspecialchars($this->input->post('id_user'));
+        $password = htmlspecialchars($this->input->post('password'));
+        $password_konfirmasi = htmlspecialchars($this->input->post('password_konfirmasi'));
+     
+        if($password === $password_konfirmasi){
+            $data_edit = array(
+                'password' => sha1($password),
+            );
+
+            $this->M_admin->pengguna_edit_up($data_edit, $id_user);
+
+            $this->session->set_flashdata('msg', '
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    Reset Password Pengguna Berhasil
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            ');
+            redirect('Admin/pengguna');
+
+        }else{
+
+             $this->session->set_flashdata('msg', '
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Reset Password Pengguna Gagal, Password Baru dan Password Konfirmasi Tidak Sama
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            ');
+            redirect('Admin/pengguna');
+
+        }
+
+        
     } 
 
     public function pengguna_hapus($id_user){

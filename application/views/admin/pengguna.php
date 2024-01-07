@@ -124,6 +124,61 @@
 <!-- Akhir modal Edit Barang ============================================================== -->
 
 
+<!-- Awal modal Password ============================================================== -->
+<?php foreach ($tampil as $row): ?>
+
+    <div class="modal fade bs-example-modal-lg" id="resetPasswordModal<?= $row->id_user ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myLargeModalLabel">Reset Password Pengguna</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                <!-- awal isi modal -->
+                <?= form_open('index.php/Admin/pengguna_password_up'); ?>
+                <form class="m-t-40" novalidate>
+
+                <div class="form-group">
+                    <label class="control-label mt-3" for="email">Nama Pengguna :</label>
+                    <input type="text" class="form-control" placeholder="" name="nama_pengguna" value="<?= $row->nama_pengguna ?>" required readonly>
+                    <input type="hidden" class="form-control" placeholder="" name="id_user" value="<?= $row->id_user ?>" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label mt-3" for="email">Username :</label>
+                    <input type="text" class="form-control" placeholder="" name="username" value="<?= $row->username ?>" required readonly>
+                </div>
+
+                 <div class="form-group">
+                    <label class="control-label mt-3" for="email">Password Baru :</label>
+                    <input type="text" class="form-control" placeholder="" name="password" value="" required>
+                </div>
+
+                 <div class="form-group">
+                    <label class="control-label mt-3" for="email">Password Konfirmasi :</label>
+                    <input type="text" class="form-control" placeholder="" name="password_konfirmasi" value="" required>                
+                </div>
+
+                
+
+                    <button type="submit" name="submit" value="Update" class="btn btn-sm btn-primary mb-lg-4 mt-lg-4">Update</button>
+                    </div>
+                </center>
+                <?=  form_close(); ?>
+                </form>
+                    
+                <!-- akhir isi modal -->
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->  
+<?php endforeach; ?>
+<!-- Akhir modal Password ============================================================== -->
+
+
 
 <div class="main-content">
 
