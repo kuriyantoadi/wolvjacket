@@ -49,7 +49,8 @@
 
                     <div class="form-group">
                         <label class="control-label mt-3" for="email">Harga Jual :</label>
-                        <input type="number" class="form-control" placeholder="" name="harga_jual" value="" required>
+                        <input type="text" class="form-control" id="currency-mask">
+                        <input type="text" class="form-control" placeholder="" name="harga_jual" value="" id="currency-mask" required>
                     </div>
 
                     <div class="form-group">
@@ -204,7 +205,9 @@
                     <div class="card">  
                         <div class="card-body">
                                             
-                        <table id="tableBarang" class="table table-bordered dt-responsive table-hover table-striped  nowrap w-100">
+
+                        <!-- <table id="tableBarang" id="datatable" class="table table-bordered dt-responsive table-hover table-striped  nowrap w-100"> -->
+                        <table id="datatable" class="table table-bordered dt-responsive table-hover table-striped  nowrap w-100">
                             <thead>
                                 <tr>
                                     <th><center>No</th>
@@ -217,10 +220,8 @@
                                     <th><center>Status</th>
                                     <th><center>Pilihan</th>
                                 </tr>
-                                 
+            
                             </table>
-                                                
-
                         </div>
                     </div>
                 </div> <!-- end col -->
@@ -233,10 +234,8 @@
 
   <script>
         //setting datatables
-        $('#tableBarang').DataTable({
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Indonesian.json"
-            },
+        $('#datatable').DataTable({
+            
             "processing": true,
             "serverSide": true,
             "order": [],
@@ -255,3 +254,11 @@
 
          
     </script>
+
+<!-- form mask -->
+<script src="<?= base_url() ?>assets/libs/imask/imask.min.js"></script>
+
+<!-- form mask init -->
+<script src="<?= base_url() ?>assets/js/pages/form-mask.init.js"></script>
+
+<script src="<?= base_url() ?>assets/js/app.js"></script>
