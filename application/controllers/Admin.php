@@ -20,6 +20,7 @@ class Admin extends CI_Controller
     public function index()
     {
         $header['title']='WolvJacket';
+        $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
 
         $this->load->view('template/header-admin', $header);
         $this->load->view('admin/index');
@@ -28,12 +29,65 @@ class Admin extends CI_Controller
 
 
     // awal pengguna 
+    public function profil()
+    {
+        $header['title']='WolvJacket';
+        $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
+        $ses_id = $this->session->userdata('ses_id');
+
+        $data['tampil'] = $this->M_admin->user_detail($ses_id);
+
+        $this->load->view('template/header-admin', $header);
+        $this->load->view('admin/profil', $data);
+        $this->load->view('template/footer-admin');
+    }
+
+    public function profil_up()
+    {
+        $id_user = $this->input->post('id_user');
+        $username = $this->input->post('username');
+        $nama_pengguna = $this->input->post('nama_pengguna');
+
+        $cek_username = $this->M_admin->cek_username($username);
+
+        if(empty($cek_username)){
+            // echo "username tidak ada";
+            $data_edit = array(
+                'username' => $username,
+                'nama_pengguna' => $nama_pengguna,
+            );
+
+            $data_edit_status = $this->M_admin->user_edit_up($data_edit, $id_user);
+
+            $this->session->set_flashdata('msg', '
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    Edit Username atau Nama Pengguna Berhasil
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>');
+            redirect('Admin/profil/');
+
+        }else{
+            // echo "username ada";
+
+            $this->session->set_flashdata('msg', '
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Edit Username atau Nama Pengguna Gagal, username sudah digunakan
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>');
+            redirect('Admin/profil/');
+            
+        }   
+        
+    }
+
+
     public function password()
     {
         $header['title']='WolvJacket';
+$header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $ses_id = $this->session->userdata('ses_id');
 
-        $data['tampil'] = $this->M_admin->password($ses_id);
+        $data['tampil'] = $this->M_admin->user_detail($ses_id);
 
         $this->load->view('template/header-admin', $header);
         $this->load->view('admin/password', $data);
@@ -59,7 +113,7 @@ class Admin extends CI_Controller
             'password' => sha1($password_baru),
         );
 
-        $data_edit_status = $this->M_admin->password_up($data_edit, $id_user);
+        $data_edit_status = $this->M_admin->user_edit_up($data_edit, $id_user);
 
         $this->session->set_flashdata('msg', '
 						<div class="alert alert-info alert-dismissible fade show" role="alert">
@@ -73,6 +127,7 @@ class Admin extends CI_Controller
     public function pengguna()
     {
         $header['title']='WolvJacket';
+$header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $data['tampil'] = $this->M_admin->pengguna_detail();
 
         $this->load->view('template/header-admin', $header);
@@ -132,6 +187,7 @@ class Admin extends CI_Controller
     public function pengguna_edit($id_user)
     {
         $header['title']='WolvJacket';
+$header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $data['tampil'] = $this->M_admin->pengguna_detail($id_user);
 
         $this->load->view('template/header-admin', $header);
@@ -186,6 +242,7 @@ class Admin extends CI_Controller
     public function barang()
     {
         $header['title']='WolvJacket';
+$header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
 
         $data['tampil_kategori'] = $this->M_admin->tampil_kategori_barang();
         $data['tampil_brand'] = $this->M_admin->tampil_brand();
@@ -308,6 +365,7 @@ class Admin extends CI_Controller
     public function kategori_barang()
     {
         $header['title']='WolvJacket';
+$header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $data['tampil'] = $this->M_admin->kategori_barang_detail();
 
         $this->load->view('template/header-admin', $header);
@@ -372,6 +430,7 @@ class Admin extends CI_Controller
     public function brand()
     {
         $header['title']='WolvJacket';
+$header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $data['tampil'] = $this->M_admin->brand_detail();
 
         $this->load->view('template/header-admin', $header);
@@ -400,6 +459,7 @@ class Admin extends CI_Controller
     public function brand_edit($id_brand)
     {
         $header['title']='WolvJacket';
+$header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $data['tampil'] = $this->M_admin->brand_detail($id_brand);
 
         $this->load->view('template/header-admin', $header);
@@ -449,6 +509,7 @@ class Admin extends CI_Controller
     public function pelanggan()
     {
         $header['title']='WolvJacket';
+$header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $data['tampil'] = $this->M_admin->pelanggan_detail();
 
         $this->load->view('template/header-admin', $header);
