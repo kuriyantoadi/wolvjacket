@@ -123,7 +123,6 @@
                                     <li><a href="<?= base_url() ?>Admin/barang" data-key="t-level-1-1">Data Barang</a></li>
                                     <li><a href="<?= base_url() ?>Admin/kategori_barang" data-key="t-level-1-2">Kategori Barang</a></li>
                                     <li><a href="<?= base_url() ?>Admin/brand" data-key="t-level-1-3">Brand</a></li>
-                                    <li><a href="<?= base_url() ?>Admin/brand_side" data-key="t-level-1-3">Brand Side</a></li>
                                     <li><a href="3" data-key="t-level-1-4">Atur Stok Akhir</a></li>
                                     <li><a href="4" data-key="t-level-1-5">Tambah Stok</a></li>
                                     <li><a href="5" data-key="t-level-1-6">Daftar Tambah Stok</a></li>

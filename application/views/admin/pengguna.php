@@ -156,7 +156,7 @@
                     <div class="card">  
                         <div class="card-body">
 
-                        <table id="tableAjax" class="table table-bordered dt-responsive table-hover table-striped  nowrap w-100">
+                        <table id="datatable" class="table table-bordered dt-responsive table-hover table-striped  nowrap w-100">
                             <thead>
                                 <tr>
                                     <th><center>No</th>
@@ -183,10 +183,10 @@
 
   <script>
         //setting datatables
-        $('#tableAjax').DataTable({
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Indonesian.json"
-            },
+        $('#datatable').DataTable({
+            "paging": false,  // Matikan paginasi
+            "searching": false,  // Matikan fitur pencarian
+            "info": false,  // Matikan informasi
             "processing": true,
             "serverSide": true,
             "order": [],
@@ -199,6 +199,11 @@
                 {
                     "targets": [0, 1,2,3,4,5],
                     "className" : 'text-center'
+                },
+                 // mematikan sort kolom pilihan
+                {
+                    "targets": [5], 
+                    "orderable": false
                 }
             ]
         });

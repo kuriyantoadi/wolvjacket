@@ -379,17 +379,6 @@ class Admin extends CI_Controller
         $this->load->view('template/footer-admin');
     }
 
-     public function brand_side()
-    {
-        $header['title']='WolvJacket';
-        $data['tampil'] = $this->M_admin->brand_detail();
-        $data['tampil_brand'] = $this->M_admin->tampil_brand();
-
-        $this->load->view('template/header-admin', $header);
-        $this->load->view('admin/brand_side',$data);
-        $this->load->view('template/footer-admin');
-    }
-
     public function brand_tambah_up()
     {
         $nama_brand = $this->input->post('nama_brand');

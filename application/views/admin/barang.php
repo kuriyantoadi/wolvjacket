@@ -251,6 +251,12 @@
                 {
                     "targets": [0, 2,3,4,5,6,7],
                     "className" : 'text-center'
+                },
+
+                // mematikan sort kolom pilihan
+                {
+                "targets": [8], 
+                "orderable": false
                 }
             ]
         });
