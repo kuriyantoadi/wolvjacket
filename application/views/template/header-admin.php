@@ -31,10 +31,11 @@
 
         <!-- Datatables ajax Server Side -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
 
-        <!-- select search -->
-        <script src="<?= base_url() ?>assets/library_box/dselect.js"></script>
+        <!-- css choices -->
+        <link href="<?= base_url() ?>assets/libs/choices.js/public/assets/styles/choices.min.css" rel="stylesheet" type="text/css" />
+
 
     </head>
 

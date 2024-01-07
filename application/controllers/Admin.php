@@ -192,7 +192,7 @@ class Admin extends CI_Controller
         $data['tampil'] = $this->M_admin->barang_edit();
 
         $this->load->view('template/header-admin', $header);
-        $this->load->view('admin/barang_tampil', $data);
+        $this->load->view('admin/barang', $data);
         $this->load->view('template/footer-admin');
     }
 
@@ -207,24 +207,40 @@ class Admin extends CI_Controller
         $stok = $this->input->post('stok');
         $status = $this->input->post('status');
 
-        $data_tambah = array(
-            'nama_barang' => $nama_barang,
-            'id_kategori_barang' => $id_kategori_barang,
-            'id_brand' => $id_brand,
-            'harga_pokok' => $harga_pokok,
-            'harga_jual' => $harga_jual,
-            'stok' => $stok,
-            'status' => $status
-        );
+        if($harga_jual < $harga_pokok){
+            // echo "di ijinkan";
 
-        $this->M_admin->barang_tambah_up($data_tambah);
+            $data_tambah = array(
+                'nama_barang' => $nama_barang,
+                'id_kategori_barang' => $id_kategori_barang,
+                'id_brand' => $id_brand,
+                'harga_pokok' => $harga_pokok,
+                'harga_jual' => $harga_jual,
+                'stok' => $stok,
+                'status' => $status
+            );
 
-        $this->session->set_flashdata('msg', '
-			<div class="alert alert-info alert-dismissible fade show" role="alert">
-                Tambah Data Barang Berhasil
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>');
-        redirect('Admin/barang/');
+            $this->M_admin->barang_tambah_up($data_tambah);
+
+            $this->session->set_flashdata('msg', '
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    Tambah Data Barang Berhasil
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>');
+            redirect('Admin/barang/');
+
+        }else{
+            // echo "tidak di ijinkan";
+
+            $this->session->set_flashdata('msg', '
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Tambah Data Barang Gagal, Harga jual harus lebih mahal dari harga pokok
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>');
+            redirect('Admin/barang/');
+
+        }
+
     }
 
     public function barang_hapus($id_barang){
@@ -250,26 +266,37 @@ class Admin extends CI_Controller
         $harga_jual = $this->input->post('harga_jual');
         $stok = $this->input->post('stok');
         $status = $this->input->post('status');
+
+        if($harga_jual < $harga_pokok){
+            $data_edit = array(
+                'nama_barang' => $nama_barang,
+                'id_brand' => $id_brand,
+                'id_kategori_barang' => $id_kategori_barang,
+                'harga_pokok' => $harga_pokok,
+                'harga_jual' => $harga_jual,
+                'stok' => $stok,
+                'status' => $status,
+            );
+
+            $this->M_admin->barang_edit_up($data_edit, $id_barang);
+
+            $this->session->set_flashdata('msg', '
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    Update Data Barang Berhasil
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            ');
+            redirect('Admin/barang');
+        }else{
+
+            $this->session->set_flashdata('msg', '
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Tambah Data Barang Gagal, Harga jual harus lebih mahal dari harga pokok
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>');
+            redirect('Admin/barang/');
+        }
      
-        $data_edit = array(
-            'nama_barang' => $nama_barang,
-            'id_brand' => $id_brand,
-            'id_kategori_barang' => $id_kategori_barang,
-            'harga_pokok' => $harga_pokok,
-            'harga_jual' => $harga_jual,
-            'stok' => $stok,
-            'status' => $status,
-        );
-
-        $this->M_admin->barang_edit_up($data_edit, $id_barang);
-
-        $this->session->set_flashdata('msg', '
-		    <div class="alert alert-info alert-dismissible fade show" role="alert">
-                Update Data Barang Berhasil
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-           ');
-        redirect('Admin/barang');
     } 
 
     // akhir barang
@@ -507,9 +534,6 @@ class Admin extends CI_Controller
         redirect('Admin/pelanggan/');
     }
     // akhir data pelanggan
-
-
-    
 
 
 }

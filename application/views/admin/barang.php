@@ -20,8 +20,8 @@
 
                     <div class="form-group">
                         <label class="control-label mt-3" for="email">Brand :</label>
-                        <select name="id_brand" id="" class="form-control" required>
-                            <option value="">Pilihan </option>
+                            
+                            <select class="form-control" name="id_brand" data-trigger name="choices-single-default" id="choices-single-default" placeholder="" required>
                     
                                 <?php foreach ($tampil_brand as $row_brand) { ?>
                                 <option value="<?= $row_brand->id_brand ?>"><?= $row_brand->nama_brand ?></option>
@@ -32,8 +32,7 @@
 
                     <div class="form-group">
                         <label class="control-label mt-3" for="email">Kategori Barang :</label>
-                        <select name="id_kategori_barang" id="" class="form-control" required>
-                            <option value="">Pilihan </option>
+                        <select class="form-control" name="id_kategori_barang" data-trigger name="choices-single-default" id="choices-single-default" placeholder="" required>
                     
                                 <?php foreach ($tampil_kategori as $row_kategori) { ?>
                                 <option value="<?= $row_kategori->id_kategori_barang ?>"><?= $row_kategori->nama_kategori_barang ?></option>
@@ -44,13 +43,14 @@
 
                     <div class="form-group">
                         <label class="control-label mt-3" for="email">Harga Pokok :</label>
-                        <input type="number" class="form-control" placeholder="" name="harga_pokok" value="" required>
+                        <input type="text" class="form-control" placeholder="" name="harga_pokok" value="" id="uang" oninput="formatUang(this)" required>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label mt-3" for="email">Harga Jual :</label>
-                        <input type="text" class="form-control" id="currency-mask">
-                        <input type="text" class="form-control" placeholder="" name="harga_jual" value="" id="currency-mask" required>
+                        <input type="text" class="form-control" placeholder="" name="harga_jual" value="" id="uang" oninput="formatUang(this)" required>
+                        <!-- <input type="text" id="uang" oninput="formatUang(this)"> -->
+
                     </div>
 
                     <div class="form-group">
@@ -106,7 +106,7 @@
 
                             <div class="form-group">
                                 <label class="control-label mt-3" for="email">Brand :</label>
-                                   <select name="id_brand" id="" class="form-control" required>
+                            <select class="form-control" name="id_brand" data-trigger name="choices-single-default" id="choices-single-default" placeholder="" required>
                                         
                                         <option value="<?= $row->id_brand ?>">Pilihan Awal ( <?= $row->nama_brand ?> )</option>
 
@@ -115,11 +115,12 @@
                                         
                                          <?php } ?>
                                     </select>
+                                    
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label mt-3" for="email">Kategori Barang :</label>
-                                   <select name="id_kategori_barang" id="" class="form-control" required>
+                                <select class="form-control" name="id_kategori_barang" data-trigger name="choices-single-default" id="choices-single-default" placeholder="" required>
                                         <option value="<?= $row->id_kategori_barang ?>">Pilihan Awal ( <?= $row->nama_kategori_barang ?> )</option>
                                
                                         <?php foreach ($tampil_kategori as $row_kategori) { ?>
@@ -131,12 +132,12 @@
 
                             <div class="form-group">
                                 <label class="control-label mt-3" for="email">Harga Pokok :</label>
-                                <input type="number" class="form-control" placeholder="" value="<?= $row->harga_pokok ?>" name="harga_pokok" required>
+                                <input type="text" class="form-control" placeholder="" name="harga_pokok" value="<?= $row->harga_pokok ?>" id="uang" oninput="formatUang(this)" required>
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label mt-3" for="email">Harga Jual :</label>
-                                <input type="number" class="form-control" placeholder="" value="<?= $row->harga_jual ?>" name="harga_jual" required>
+                                <input type="text" class="form-control" placeholder="" name="harga_jual" value="<?= $row->harga_jual ?>" id="uang" oninput="formatUang(this)" required>
                             </div>
 
                             <div class="form-group">
@@ -206,7 +207,6 @@
                         <div class="card-body">
                                             
 
-                        <!-- <table id="tableBarang" id="datatable" class="table table-bordered dt-responsive table-hover table-striped  nowrap w-100"> -->
                         <table id="datatable" class="table table-bordered dt-responsive table-hover table-striped  nowrap w-100">
                             <thead>
                                 <tr>
@@ -238,6 +238,9 @@
             
             "processing": true,
             "serverSide": true,
+            "paging": false,  // Matikan paginasi
+            "searching": false,  // Matikan fitur pencarian
+            "info": false,  // Matikan informasi
             "order": [],
             "ajax": {
                 //panggil method ajax list dengan ajax
@@ -255,10 +258,10 @@
          
     </script>
 
-<!-- form mask -->
-<script src="<?= base_url() ?>assets/libs/imask/imask.min.js"></script>
+<!-- format uang -->
+<script src="<?= base_url() ?>assets/js/format-uang.js"></script>
 
-<!-- form mask init -->
-<script src="<?= base_url() ?>assets/js/pages/form-mask.init.js"></script>
+<!-- choices -->
+<script src="<?= base_url() ?>assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
+<script src="<?= base_url() ?>assets/js/pages/form-advanced.init.js"></script>
 
-<script src="<?= base_url() ?>assets/js/app.js"></script>

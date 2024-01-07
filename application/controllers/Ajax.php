@@ -33,8 +33,8 @@ class Ajax extends CI_Controller
             $row[] = $item->nama_barang;
             $row[] = $item->nama_brand;
             $row[] = $item->nama_kategori_barang;
-            $row[] = $item->harga_pokok;
-            $row[] = $item->harga_jual;
+            $row[] = 'Rp '. $item->harga_pokok;
+            $row[] = 'Rp '. $item->harga_jual;
             $row[] = $item->stok;
             $row[] = $item->status;
 
