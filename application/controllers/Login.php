@@ -41,11 +41,15 @@ class Login extends CI_Controller
                 $this->session->set_userdata('ses_username', $data['username']);
                 $this->session->set_userdata('ses_nama_pengguna', $data['nama_pengguna']);
                 redirect('Admin/index');
-            // } elseif ($data['status'] == 'walas') {
-            //     $this->session->set_userdata('walas', true);
-            //     $this->session->set_userdata('ses_id', $data['id_admin']);
-            //     $this->session->set_userdata('ses_user', $data['username']);
-            //     redirect('Walas/index');
+
+            } elseif ($data['status'] == 'kasir' && $data['status_user'] == 'aktif') {
+                $this->session->set_userdata('kasir', true);
+                $this->session->set_userdata('ses_id', $data['id_user']);
+                $this->session->set_userdata('ses_username', $data['username']);
+                $this->session->set_userdata('ses_nama_pengguna', $data['nama_pengguna']);
+                redirect('Kasir/index');
+
+                // echo "test";
             } else {
                 $url = base_url('Admin/index');
                 echo $this->session->set_flashdata('msg', '
@@ -54,7 +58,7 @@ class Login extends CI_Controller
                 Username atau Password Salah<br> Silahkan Login Kembali
                 </div>
                 ');
-                redirect($url);
+                // redirect($url);
             }
         }
 
@@ -64,7 +68,7 @@ class Login extends CI_Controller
     </div>
     ');
         $url = base_url('Admin/index');
-        redirect($url);
+        // redirect($url);
     }
 
     public function admin_logout()

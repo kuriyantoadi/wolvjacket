@@ -49,6 +49,13 @@
                     <div class="form-group">
                         <label class="control-label mt-3" for="email">Harga Jual :</label>
                         <input type="text" class="form-control" placeholder="" name="harga_jual" value="" id="uang" oninput="formatUang(this)" required>
+                        <!-- <input type="text" id="uang" oninput="formatUang(this)"> -->
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label mt-3" for="email">Stok :</label>
+                        <input type="number" class="form-control" placeholder="" name="stok" value="" required>
                     </div>
 
                     <div class="form-group">
@@ -131,6 +138,11 @@
                             <div class="form-group">
                                 <label class="control-label mt-3" for="email">Harga Jual :</label>
                                 <input type="text" class="form-control" placeholder="" name="harga_jual" value="<?= $row->harga_jual ?>" id="uang" oninput="formatUang(this)" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label mt-3" for="email">Stok :</label>
+                                <input type="number" class="form-control" value="<?= $row->stok ?>" placeholder="" name="stok" required>
                             </div>
 
                             <div class="form-group">
@@ -237,7 +249,7 @@
             },
             "columnDefs": [
                 {
-                    "targets": [0, 2,3,4,5,6,7,8],
+                    "targets": [0, 2,3,4,5,6,7],
                     "className" : 'text-center'
                 },
 

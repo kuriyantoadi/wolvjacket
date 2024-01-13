@@ -84,7 +84,7 @@ class Admin extends CI_Controller
     public function password()
     {
         $header['title']='WolvJacket';
-$header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
+        $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $ses_id = $this->session->userdata('ses_id');
 
         $data['tampil'] = $this->M_admin->user_detail($ses_id);
@@ -127,7 +127,7 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
     public function pengguna()
     {
         $header['title']='WolvJacket';
-$header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
+        $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $data['tampil'] = $this->M_admin->pengguna_detail();
 
         $this->load->view('template/header-admin', $header);
@@ -297,11 +297,9 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $id_brand = $this->input->post('id_brand');
         $harga_pokok = $this->input->post('harga_pokok');
         $harga_jual = $this->input->post('harga_jual');
-        $stok = $this->input->post('stok');
         $status = $this->input->post('status');
 
-        if($harga_jual < $harga_pokok){
-            // echo "di ijinkan";
+        // if($harga_jual >= $harga_pokok){
 
             $data_tambah = array(
                 'nama_barang' => $nama_barang,
@@ -309,7 +307,6 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
                 'id_brand' => $id_brand,
                 'harga_pokok' => $harga_pokok,
                 'harga_jual' => $harga_jual,
-                'stok' => $stok,
                 'status' => $status
             );
 
@@ -322,17 +319,17 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
                 </div>');
             redirect('Admin/barang/');
 
-        }else{
-            // echo "tidak di ijinkan";
+        // }else{
+        //     // echo "tidak di ijinkan";
 
-            $this->session->set_flashdata('msg', '
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Tambah Data Barang Gagal, Harga jual harus lebih mahal dari harga pokok
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>');
-            redirect('Admin/barang/');
+        //     $this->session->set_flashdata('msg', '
+        //         <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        //             Tambah Data Barang Gagal, Harga jual harus lebih mahal dari harga pokok
+        //             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        //         </div>');
+        //     redirect('Admin/barang/');
 
-        }
+        // }
 
     }
 
@@ -357,17 +354,15 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $id_kategori_barang = $this->input->post('id_kategori_barang');
         $harga_pokok = $this->input->post('harga_pokok');
         $harga_jual = $this->input->post('harga_jual');
-        $stok = $this->input->post('stok');
         $status = $this->input->post('status');
 
-        if($harga_jual < $harga_pokok){
+        // if($harga_jual >= $harga_pokok){
             $data_edit = array(
                 'nama_barang' => $nama_barang,
                 'id_brand' => $id_brand,
                 'id_kategori_barang' => $id_kategori_barang,
                 'harga_pokok' => $harga_pokok,
                 'harga_jual' => $harga_jual,
-                'stok' => $stok,
                 'status' => $status,
             );
 
@@ -380,15 +375,16 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
                 </div>
             ');
             redirect('Admin/barang');
-        }else{
 
-            $this->session->set_flashdata('msg', '
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Tambah Data Barang Gagal, Harga jual harus lebih mahal dari harga pokok
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>');
-            redirect('Admin/barang/');
-        }
+        // }else{
+
+        //     $this->session->set_flashdata('msg', '
+        //         <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        //             Tambah Data Barang Gagal, Harga jual harus lebih mahal dari harga pokok
+        //             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        //         </div>');
+        //     redirect('Admin/barang/');
+        // }
      
     } 
 
@@ -401,7 +397,7 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
     public function kategori_barang()
     {
         $header['title']='WolvJacket';
-$header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
+        $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $data['tampil'] = $this->M_admin->kategori_barang_detail();
 
         $this->load->view('template/header-admin', $header);

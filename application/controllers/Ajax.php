@@ -35,7 +35,7 @@ class Ajax extends CI_Controller
             $row[] = $item->nama_kategori_barang;
             $row[] = 'Rp '. $item->harga_pokok;
             $row[] = 'Rp '. $item->harga_jual;
-            $row[] = $item->stok;
+            $row[] = 'perbaikan';
             $row[] = $item->status;
 
             // add html for action
