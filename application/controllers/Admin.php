@@ -541,7 +541,7 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
     public function pelanggan()
     {
         $header['title']='WolvJacket';
-$header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
+        $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $data['tampil'] = $this->M_admin->pelanggan_detail();
 
         $this->load->view('template/header-admin', $header);
@@ -616,6 +616,22 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         redirect('Admin/pelanggan/');
     }
     // akhir data pelanggan
+
+
+    // awal tambah stok
+
+    public function tambah_stok()
+    {
+        $header['title']='WolvJacket';
+        $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
+        // $data['tampil'] = $this->M_admin->pelanggan_detail();
+
+        $this->load->view('template/header-admin', $header);
+        $this->load->view('admin/tambah_stok');
+        $this->load->view('template/footer-admin');
+    }
+
+    // akhir tambah stok
 
 
 }
