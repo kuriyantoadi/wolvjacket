@@ -67,7 +67,7 @@ class Login extends CI_Controller
     </div>
     ');
         $url = base_url('Admin/index');
-        // redirect($url);
+        redirect($url);
     }
 
     public function admin_logout()
