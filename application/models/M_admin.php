@@ -229,4 +229,22 @@ class M_admin extends CI_Model
 
   // akhir pelanggan
 
+  // awal keranjang
+
+  function tampil_keranjang()
+  {
+    $this->db->order_by('tb_keranjang_masuk.nama_barang', 'ASC');
+    $tampil = $this->db->get('tb_keranjang_masuk')->result();
+    return $tampil;
+  }
+
+  public function cek_id_barang($id_barang) {
+      $this->db->where('id_barang', $id_barang);
+      $query = $this->db->get('tb_keranjang');
+
+      return $query->num_rows() > 0;
+  }
+
+  // akhir keranjang
+
 }

@@ -631,6 +631,51 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $this->load->view('template/footer-admin');
     }
 
+
+    public function tampil_keranjang() {
+        // Mengambil data barang dari model
+        $data_keranjang= $this->M_admin->tampil_keranjang();
+
+        // Mengirim data sebagai respons JSON
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($data_keranjang));
+    }
+
+    public function tambah_ke_keranjang() {
+        $namaBarang = $this->input->post('nama_barang');
+        $harga = $this->input->post('harga');
+        $jumlah = $this->input->post('jumlah');
+        $idBarang = $this->input->post('id_barang');
+
+        // Pengecekan apakah id_barang sudah ada dalam keranjang
+        if ($this->M_admin->cek_id_barang($idBarang)) {
+            echo json_encode(['message' => 'Barang sudah ada dalam keranjang.']);
+            return;
+        }
+
+        $data = array(
+            'nama_barang' => $namaBarang,
+            'harga' => $harga,
+            'jumlah' => $jumlah,
+            'id_barang' => $idBarang,
+        );
+
+        $result = $this->Keranjang_model->tambah_ke_keranjang($data);
+
+        if ($result) {
+            echo json_encode(['message' => 'Barang berhasil ditambahkan ke keranjang.']);
+        } else {
+            echo json_encode(['message' => 'Gagal menambahkan barang ke keranjang.']);
+        }
+    }
+
+    public function keranjang_hapus($id_barang)
+    {
+        $test = $this->Keranjang_model->keranjang_hapus($id_barang);
+        redirect('Barang');
+    }
+
     // akhir tambah stok
 
 
