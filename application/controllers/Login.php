@@ -49,7 +49,6 @@ class Login extends CI_Controller
                 $this->session->set_userdata('ses_nama_pengguna', $data['nama_pengguna']);
                 redirect('Kasir/index');
 
-                // echo "test";
             } else {
                 $url = base_url('Admin/index');
                 echo $this->session->set_flashdata('msg', '
@@ -58,7 +57,7 @@ class Login extends CI_Controller
                 Username atau Password Salah<br> Silahkan Login Kembali
                 </div>
                 ');
-                // redirect($url);
+                redirect($url);
             }
         }
 

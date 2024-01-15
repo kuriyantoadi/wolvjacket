@@ -43,8 +43,8 @@
                 <div class="form-group">
                     <label class="control-label mt-3" for="email">Status User :</label>
                         <select name="status_user" id="" class="form-control" required>
-                            <option value="Aktif">Aktif </option>
-                            <option value="Tidak Aktif">Tidak Aktif </option>
+                            <option value="aktif">Aktif </option>
+                            <option value="tidak aktif">Tidak Aktif </option>
                         </select>
                 </div>
 
