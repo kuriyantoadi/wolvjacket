@@ -42,16 +42,12 @@ class M_admin extends CI_Model
     return $query;
   }
 
-  // function barang_edit($id_barang)
-  // {
-  //   $this->db->select('*');
-  //   $this->db->from('tb_barang');
-  //   $this->db->join('tb_kategori_barang', 'tb_barang.id_kategori_barang = tb_kategori_barang.id_kategori_barang');
-  //   $this->db->join('tb_brand', 'tb_barang.id_brand = tb_brand.id_brand');
-  //   $this->db->where('tb_barang.id_barang', $id_barang);
-  //   $query = $this->db->get()->result();
-  //   return $query;
-  // }
+  function tampil_barang()
+  {
+    $tampil = $this->db->get('tb_barang')->result();
+    return $tampil;
+  }
+
 
   function barang_edit()
   {
@@ -233,7 +229,7 @@ class M_admin extends CI_Model
 
   function tampil_keranjang()
   {
-    $this->db->order_by('tb_keranjang_masuk.nama_barang', 'ASC');
+    // $this->db->order_by('tb_keranjang_masuk.nama_barang', 'ASC');
     $tampil = $this->db->get('tb_keranjang_masuk')->result();
     return $tampil;
   }

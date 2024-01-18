@@ -278,7 +278,7 @@ class Admin extends CI_Controller
     public function barang()
     {
         $header['title']='WolvJacket';
-$header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
+        $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
 
         $data['tampil_kategori'] = $this->M_admin->tampil_kategori_barang();
         $data['tampil_brand'] = $this->M_admin->tampil_brand();
@@ -624,10 +624,10 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
     {
         $header['title']='WolvJacket';
         $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
-        // $data['tampil'] = $this->M_admin->pelanggan_detail();
+        $data['tampil'] = $this->M_admin->tampil_barang();
 
         $this->load->view('template/header-admin', $header);
-        $this->load->view('admin/tambah_stok');
+        $this->load->view('admin/tambah_stok', $data);
         $this->load->view('template/footer-admin');
     }
 
@@ -643,10 +643,9 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
     }
 
     public function tambah_ke_keranjang() {
-        $namaBarang = $this->input->post('nama_barang');
-        $harga = $this->input->post('harga');
-        $jumlah = $this->input->post('jumlah');
-        $idBarang = $this->input->post('id_barang');
+        $IdBarang = $this->input->post('IdBarang');
+        $QtyKeranjangMasuk = $this->input->post('QtyKeranjangMasuk');
+        $HargaBarangMasuk = $this->input->post('HargaBarangMasuk');
 
         // Pengecekan apakah id_barang sudah ada dalam keranjang
         if ($this->M_admin->cek_id_barang($idBarang)) {
@@ -655,10 +654,9 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         }
 
         $data = array(
-            'nama_barang' => $namaBarang,
-            'harga' => $harga,
-            'jumlah' => $jumlah,
-            'id_barang' => $idBarang,
+            'id_barang' => $IdBarang,
+            'qty_keranjang_masuk' => $QtyKeranjangMasuk,
+            'harga_barang_masuk' => $HargaBarangMasuk,
         );
 
         $result = $this->Keranjang_model->tambah_ke_keranjang($data);

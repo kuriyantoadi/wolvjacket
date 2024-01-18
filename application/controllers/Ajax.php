@@ -169,32 +169,31 @@ class Ajax extends CI_Controller
     }
     
 
-    function ajax_tambah_stok() {
-        $list = $this->M_ajax->get_datatables();
-        $data = array();
-        $no = @$_POST['start'];
-        foreach ($list as $item) {
-            $no++;
-            $row = array();
-            $row[] = $no;
-            $row[] = $item->nama_barang;
-            $row[] = 'Rp '. $item->harga_pokok;
-            $row[] = '
-                    <a href="'.site_url('Admin/tambah_stok_up/'.$item->id_barang).'" class="btn btn-success btn-sm"><i class="bx bx-plus"></i> Tambah</a>
-            ';
-            
-            $data[] = $row;
-        }
-        $output = array(
-                    "draw" => @$_POST['draw'],
-                    "recordsTotal" => $this->M_ajax->count_all(),
-                    "recordsFiltered" => $this->M_ajax->count_filtered(),
-                    "data" => $data,
-                );
-        // output to json format
-        echo json_encode($output);
-    }
+    // function ajax_tambah_stok() {
+    //     $list = $this->M_ajax->get_datatables();
+    //     $data = array();
+    //     $no = @$_POST['start'];
+    //     foreach ($list as $item) {
+    //         $no++;
+    //         $row = array();
+    //         $row[] = $no;
+    //         $row[] = $item->nama_barang;
+    //         $row[] = 'Rp '. $item->harga_pokok;
+    //         // $row[] = '<input type="number" id="jumlahBarang' . $item['id_barang'] . '" value="1" min="1">';
+    //         $row[] = '<a class="tambahBarang" onclick="tambahKeKeranjang(\'' . $item['nama_barang'] . '\', ' . $item['harga'] . ', \'jumlahBarang' . $item['id_barang'] . '\', ' . $item['id_barang'] . ')">Tambah</a>';
+    //         $data[] = $row;
+    //     }
+    //     $output = array(
+    //                 "draw" => @$_POST['draw'],
+    //                 "recordsTotal" => $this->M_ajax->count_all(),
+    //                 "recordsFiltered" => $this->M_ajax->count_filtered(),
+    //                 "data" => $data,
+    //             );
+    //     // output to json format
+    //     echo json_encode($output);
+    // }
 
+    
 
 
 }

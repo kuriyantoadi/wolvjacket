@@ -13,7 +13,7 @@
 
                         <h4 class="mb-sm-4 font-size-18 ">Data Barang</h4>
 
-                        <table id="tableBarang" class="table table-bordered dt-responsive table-hover table-striped  nowrap w-100">
+                        <table id="datatable" class="table table-bordered dt-responsive table-hover table-striped  nowrap w-100">
                             <thead>
                                 <tr>
                                     <th><center>No</th>
@@ -23,6 +23,21 @@
                                     <th><center>Pilihan</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                 <?php $no=1; ?>
+                                <?php foreach ($tampil as $row): ?>
+                               
+                                <tr>
+                                    
+                                    <td><center><?= $no++; ?></td>
+                                    <td><center><?= $row->nama_barang?></td>
+                                    <td><center><?= $row->harga_pokok?></td>
+                                    <td><input class="form-control" type="number" id="jumlahBarang<?= $row->id_barang; ?>" value="1" min="1"></td>
+                                    <td><button class="btn btn-sm btn-primary" onclick="console.log('inputId:', 'jumlahBarang<?= $row->id_barang; ?>'); tambahKeKeranjang(<?= $row->harga_pokok ?>, 'jumlahBarang<?= $row->id_barang; ?>', '<?= $row->id_barang; ?>')">Tambah</button></td>
+                                </tr>
+                            
+                                <?php endforeach; ?>                            
+                            </tbody>
                         
                             </table>
                                                 
@@ -63,9 +78,43 @@
 
 <script>
 
+    // awal tampil barang
+
+        // $('#datatable').DataTable({
+        //     "paging": false,  // Matikan paginasi
+        //     "searching": false,  // Matikan fitur pencarian
+        //     "info": false,  // Matikan informasi
+        //     "processing": true,
+        //     "serverSide": true,
+        //     "order": [],
+        //     "ajax": {
+        //        panggil method ajax list dengan ajax
+        //         "url": "<?= site_url('Ajax/ajax_tambah_stok') ?>",
+        //         "type": "POST"
+        //     },
+        //     "columnDefs": [
+        //         {
+        //             "targets": [0,3],
+        //             "className" : 'text-center'
+        //         },
+        //          // mematikan sort kolom pilihan
+        //         {
+        //             // "targets": [5], 
+        //             "orderable": false
+        //         }
+        //     ]
+        // });
+
+
+    // akhir tampil barang
+
      // Fungsi untuk menambahkan barang ke keranjang
-    function tambahKeKeranjang(namaBarang, harga, inputId, idBarang) {
-        var jumlah = document.getElementById(inputId).value;
+    function tambahKeKeranjang(HargaBarangMasuk,input_jml,IdBarang) {        
+    var inputElement = document.getElementById(input_jml);
+
+    // Periksa apakah elemen yang diidentifikasi dengan ID ada
+    if (inputElement) {
+        var jumlah = inputElement.value;
 
         // Kirim data ke server PHP untuk disimpan di database
         const xhr = new XMLHttpRequest();
@@ -80,59 +129,63 @@
                 fetchData();
             }
         };
-        xhr.send('nama_barang=' + encodeURIComponent(namaBarang) + '&harga=' + harga + '&jumlah=' + jumlah + '&id_barang=' + idBarang);
+        xhr.send('IdBarang=' + encodeURIComponent(IdBarang) + '&HargaBarangMasuk=' + HargaBarangMasuk + '&QtyKeranjangMasuk=' + jumlah);
+    } else {
+        console.error('Elemen dengan ID ' + input_jml + ' tidak ditemukan.');
     }
+}
 
 
-    // Fungsi untuk mendapatkan data barang dari server
-    async function fetchData() {
-        const response = await fetch('<?= base_url('Admin/tampil_keranjang'); ?>');
-        const data = await response.json();
 
-        const tabelKeranjang = document.getElementById('tabelKeranjang').getElementsByTagName('tbody')[0];
-        tabelKeranjang.innerHTML = '';
+    // // Fungsi untuk mendapatkan data barang dari server
+    // async function fetchData() {
+    //     const response = await fetch('<?= base_url('Admin/tampil_keranjang'); ?>');
+    //     const data = await response.json();
 
-        data.forEach((tampil_kolom) => {
-            const row = tabelKeranjang.insertRow();
-            row.insertCell(0).textContent = tampil_kolom.id_barang;
-            row.insertCell(1).textContent = tampil_kolom.nama_barang;
-            row.insertCell(2).textContent = tampil_kolom.harga;
-            row.insertCell(3).textContent = tampil_kolom.jumlah; // Ganti indeks ke-1 dengan ke-2
+    //     const tabelKeranjang = document.getElementById('tabelKeranjang').getElementsByTagName('tbody')[0];
+    //     tabelKeranjang.innerHTML = '';
+
+    //     data.forEach((tampil_kolom) => {
+    //         const row = tabelKeranjang.insertRow();
+    //         row.insertCell(0).textContent = tampil_kolom.id_barang;
+    //         row.insertCell(1).textContent = tampil_kolom.nama_barang;
+    //         row.insertCell(2).textContent = tampil_kolom.harga;
+    //         row.insertCell(3).textContent = tampil_kolom.jumlah; // Ganti indeks ke-1 dengan ke-2
             
-            // awal mode hapus 
-            // Mendapatkan nilai id_barang dari PHP
-            var id_barang = tampil_kolom.id_barang;
+    //         // awal mode hapus 
+    //         // Mendapatkan nilai id_barang dari PHP
+    //         var id_barang = tampil_kolom.id_barang;
 
-            // Mendapatkan nilai base_url dari PHP
-            var base_url = '<?= base_url(); ?>';
+    //         // Mendapatkan nilai base_url dari PHP
+    //         var base_url = '<?= base_url(); ?>';
 
-            // Membuat link untuk tombol hapus
-            var deleteLink = base_url + 'Barang/keranjang_hapus/' + id_barang;
+    //         // Membuat link untuk tombol hapus
+    //         var deleteLink = base_url + 'Barang/keranjang_hapus/' + id_barang;
 
-            // Membuat elemen tombol hapus dengan Bootstrap styling
-            var deleteButton = document.createElement('button');
-            deleteButton.className = 'btn btn-danger'; // Menambahkan kelas Bootstrap untuk warna merah (danger)
-            deleteButton.textContent = 'Hapus Barang';
+    //         // Membuat elemen tombol hapus dengan Bootstrap styling
+    //         var deleteButton = document.createElement('button');
+    //         deleteButton.className = 'btn btn-danger'; // Menambahkan kelas Bootstrap untuk warna merah (danger)
+    //         deleteButton.textContent = 'Hapus Barang';
 
-            // Menambahkan tombol ke dalam sel ke-4 di baris tabel
-            var cell = row.insertCell(4);
-            cell.appendChild(deleteButton);
+    //         // Menambahkan tombol ke dalam sel ke-4 di baris tabel
+    //         var cell = row.insertCell(4);
+    //         cell.appendChild(deleteButton);
 
-            // Menambahkan event listener untuk menampilkan konfirmasi sebelum menghapus
-            deleteButton.addEventListener('click', function(event) {
-                // Tampilkan alert konfirmasi
-                if (!confirm('Apakah Anda yakin ingin menghapus barang ini?')) {
-                    event.preventDefault(); // Mencegah tindakan default tombol jika pembatalan diklik
-                } else {
-                    // Jika konfirmasi diterima, navigasi ke tautan penghapusan
-                    window.location.href = deleteLink;
-                }
-            });
+    //         // Menambahkan event listener untuk menampilkan konfirmasi sebelum menghapus
+    //         deleteButton.addEventListener('click', function(event) {
+    //             // Tampilkan alert konfirmasi
+    //             if (!confirm('Apakah Anda yakin ingin menghapus barang ini?')) {
+    //                 event.preventDefault(); // Mencegah tindakan default tombol jika pembatalan diklik
+    //             } else {
+    //                 // Jika konfirmasi diterima, navigasi ke tautan penghapusan
+    //                 window.location.href = deleteLink;
+    //             }
+    //         });
 
-            // akhir mode hapus
+    //         // akhir mode hapus
 
-        });
-    }
-    fetchData(); 
+    //     });
+    // }
+    // fetchData(); 
         
 </script>
