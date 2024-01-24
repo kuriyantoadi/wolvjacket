@@ -624,17 +624,24 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
     {
         $header['title']='WolvJacket';
         $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
+        $id_user = $this->session->userdata('ses_id');
+
         $data['tampil'] = $this->M_admin->tampil_barang();
+        $data['tampil_keranjang'] = $this->M_admin->tampil_keranjang_pengguna($id_user);
 
         $this->load->view('template/header-admin', $header);
         $this->load->view('admin/tambah_stok', $data);
         $this->load->view('template/footer-admin');
     }
 
+    // public function index() {
+    //     $data['barang'] = $this->Barang_model->get_barang();
+    //     $this->load->view('daftar_barang', $data);
+    // }
 
     public function tampil_keranjang() {
         // Mengambil data barang dari model
-        $data_keranjang= $this->M_admin->tampil_keranjang();
+        $data_keranjang= $this->Keranjang_model->get_keranjang();
 
         // Mengirim data sebagai respons JSON
         $this->output
@@ -643,20 +650,22 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
     }
 
     public function tambah_ke_keranjang() {
-        $IdBarang = $this->input->post('IdBarang');
-        $QtyKeranjangMasuk = $this->input->post('QtyKeranjangMasuk');
-        $HargaBarangMasuk = $this->input->post('HargaBarangMasuk');
+        $namaBarang = $this->input->post('nama_barang');
+        $harga = $this->input->post('harga');
+        $jumlah = $this->input->post('jumlah');
+        $idBarang = $this->input->post('id_barang');
 
         // Pengecekan apakah id_barang sudah ada dalam keranjang
-        if ($this->M_admin->cek_id_barang($idBarang)) {
+        if ($this->Keranjang_model->cek_id_barang($idBarang)) {
             echo json_encode(['message' => 'Barang sudah ada dalam keranjang.']);
             return;
         }
 
         $data = array(
-            'id_barang' => $IdBarang,
-            'qty_keranjang_masuk' => $QtyKeranjangMasuk,
-            'harga_barang_masuk' => $HargaBarangMasuk,
+            'nama_barang' => $namaBarang,
+            'harga' => $harga,
+            'jumlah' => $jumlah,
+            'id_barang' => $idBarang,
         );
 
         $result = $this->Keranjang_model->tambah_ke_keranjang($data);
@@ -673,6 +682,8 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $test = $this->Keranjang_model->keranjang_hapus($id_barang);
         redirect('Barang');
     }
+
+   
 
     // akhir tambah stok
 

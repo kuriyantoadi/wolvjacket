@@ -31,16 +31,6 @@
         <script src="<?= base_url() ?>assets/libs/pace-js/pace.min.js"></script>
         <script src="<?= base_url() ?>assets/js/app.js"></script>
 
-
-        <script>
-            // select search
-            var select_box_element = document.querySelector('#select_box');
-
-            dselect(select_box_element, {
-                search: true
-            });
-        </script>
-
         
         <!-- Required datatable js -->
         <script src="<?= base_url() ?>assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>

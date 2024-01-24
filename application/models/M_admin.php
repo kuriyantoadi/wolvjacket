@@ -234,6 +234,13 @@ class M_admin extends CI_Model
     return $tampil;
   }
 
+  function tampil_keranjang_pengguna($id_user)
+  {
+      $this->db->where('id_user', $id_user);
+    $tampil = $this->db->get('tb_keranjang_masuk')->result();
+    return $tampil;
+  }
+
   public function cek_id_barang($id_barang) {
       $this->db->where('id_barang', $id_barang);
       $query = $this->db->get('tb_keranjang');
