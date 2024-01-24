@@ -234,19 +234,47 @@ class M_admin extends CI_Model
     return $tampil;
   }
 
+  // function tampil_keranjang_pengguna($id_user)
+  // {
+  //   $this->db->where('id_user', $id_user);
+  //   $tampil = $this->db->get('tb_keranjang_masuk')->result();
+  //   return $tampil;
+  // }
+
   function tampil_keranjang_pengguna($id_user)
   {
-      $this->db->where('id_user', $id_user);
-    $tampil = $this->db->get('tb_keranjang_masuk')->result();
-    return $tampil;
+    $this->db->select('*');
+    $this->db->from('tb_keranjang_masuk');
+    $this->db->join('tb_barang', 'tb_keranjang_masuk.id_barang = tb_barang.id_barang');
+    $this->db->where('tb_keranjang_masuk.id_user', $id_user);
+    $query = $this->db->get()->result();
+    return $query;
   }
 
   public function cek_id_barang($id_barang) {
       $this->db->where('id_barang', $id_barang);
-      $query = $this->db->get('tb_keranjang');
+      $query = $this->db->get('tb_keranjang_masuk');
 
       return $query->num_rows() > 0;
   }
+
+  public function tambah_ke_keranjang($data) {
+        return $this->db->insert('tb_keranjang_masuk', $data);
+    }
+
+    public function get_keranjang() {
+        return $this->db->get('tb_keranjang_masuk')->result_array();
+    }
+
+    public function keranjang_hapus($id_barang)
+    {
+        $this->db->where('id_barang',$id_barang);
+        $this->db->delete('tb_keranjang_masuk');
+    }
+
+    public function get_barang() {
+        return $this->db->get('tb_keranjang_masuk')->result_array();
+    }
 
   // akhir keranjang
 
