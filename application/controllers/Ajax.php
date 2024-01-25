@@ -27,14 +27,15 @@ class Ajax extends CI_Controller
         $data = array();
         $no = @$_POST['start'];
         foreach ($list as $item) {
+
             $no++;
             $row = array();
             $row[] = $no;
             $row[] = $item->nama_barang;
             $row[] = $item->nama_brand;
             $row[] = $item->nama_kategori_barang;
-            $row[] = 'Rp '. $item->harga_pokok;
-            $row[] = 'Rp '. $item->harga_jual;
+            $row[] = 'Rp '. number_format($item->harga_pokok);
+            $row[] = 'Rp '. number_format($item->harga_jual);;
             $row[] = 'perbaikan';
             $row[] = $item->status;
 
