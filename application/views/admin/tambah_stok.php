@@ -31,7 +31,7 @@
                                     
                                     <td><center><?= $no++; ?></td>
                                     <td><center><?= $row->nama_barang?></td>
-                                    <td><center><?= number_format($row->harga_pokok) ?></td>
+                                    <td><center>Rp <?= number_format($row->harga_pokok) ?></td>
                                     <td><input type="number" class="form-control" id="jumlahBarang<?= $row->id_barang; ?>" value="1" min="1"></td>
                                     <td><center><button class="btn btn-sm btn-primary" onclick="tambahKeKeranjang('<?= $row->nama_barang; ?>', <?= $row->harga_pokok; ?>, 'jumlahBarang<?= $row->id_barang; ?>', <?= $row->id_barang; ?>)"><i class="fas fa-shopping-cart"></i></button></td>
                                 </tr>
@@ -99,6 +99,12 @@
     }
 
 
+    //format uang
+    function formatCurrency(amount) {
+         return 'Rp ' + new Intl.NumberFormat('id-ID').format(amount);
+    }
+
+
     // Fungsi untuk mendapatkan data barang dari server
     async function fetchData() {
         const response = await fetch('<?= base_url('admin/tampil_keranjang'); ?>');
@@ -116,9 +122,8 @@
             cell0.style.textAlign = 'center';
 
             row.insertCell(1).textContent = tampil_kolom.nama_barang;
-            row.insertCell(2).textContent = tampil_kolom.harga_pokok;
-
-
+            var hargaPokokCell = row.insertCell(2);
+            hargaPokokCell.textContent = formatCurrency(tampil_kolom.harga_pokok);
 
             //  tampil jumlah
             var kolom_jumlah = row.insertCell(3);
