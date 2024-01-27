@@ -372,6 +372,23 @@ class M_admin extends CI_Model
     return $query->result();
   }
 
+  public function detail_daftar_stok()
+  {
+    $this->db->select('tb_tambah_stok.no_faktur, tb_tambah_stok.tgl_tambah_stok, SUM(tb_tambah_stok.harga_pokok * tb_tambah_stok.jumlah) as total_harga_pokok, SUM(tb_tambah_stok.jumlah) as total_barang, tb_tambah_stok.keterangan, tb_tambah_stok.id_user');
+    $this->db->from('tb_tambah_stok');
+    $this->db->join('tb_barang', 'tb_barang.id_barang = tb_tambah_stok.id_barang', 'left');
+    $this->db->group_by('tb_tambah_stok.no_faktur');
+
+    // Tambahkan kondisi where untuk filter no_faktur
+    $this->db->where('tb_tambah_stok.no_faktur', $no_faktur);
+
+    $query = $this->db->get();
+
+    return $query->result();
+
+
+  }
+
   function tambah_stok_hapus($no_faktur)
   {
     $this->db->where('no_faktur', $no_faktur);

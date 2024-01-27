@@ -1,5 +1,66 @@
 
+<?php foreach ($tampil_daftar_stok as $row): ?>
+
+<div class="modal fade bs-example-modal-lg" id="editModal<?= $row->no_faktur ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myLargeModalLabel">Transaksi Detail</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                <!-- awal isi modal -->
+
+                <?php 
+                    $cek_no_faktur = $row->no_faktur;
+                    // $cek_no_faktur = array($row->no_faktur);
+
+                    // var_dump($cek_no_faktur);
+                    
+                    ?>
+
+                <table class="table table-bordered dt-responsive table-hover table-striped  nowrap w-100">
+                    <thead>
+                        <tr>
+                            <th><center>No</th>
+                            <th><center>No Faktur</th> 
+                            <th><center>Tanggal</th> 
+                            <th><center>Nama Barang</th>
+                            <th><center>Jumlah</th>
+                            <th><center>Harga Pokok</th>
+                            <th><center>Total</th>
+                        </tr>
+                        
+                    </thead>
+
+                    <?php $no=1; ?>
+                    
+                    <?php foreach ($detail_daftar_stok as $row_faktur): ?>
+
+                    <tbody>
+                        <tr>
+                            <td><?= $no++ ?></td>
+                            <td><?= $row_faktur->no_faktur ?></td>
+                            <td><?= $row_faktur->tgl_tambah_stok ?></td>
+                            <td><?= $row_faktur->nama_barang ?></td>
+                        </tr>
+                    </tbody>
+                    <?php endforeach; ?>
+
+
+                
+                </table>
+                    
+                <!-- akhir isi modal -->
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 <div class="main-content">
+<?php endforeach; ?>
+
 
     <div class="page-content">
         <div class="container-fluid">

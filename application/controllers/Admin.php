@@ -702,8 +702,6 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $cek_seri_no_faktur = $this->M_admin->cek_seri_no_faktur();
         $tgl_skrg = date('dmy');
 
-
-
         if($no_faktur_awal == NULL){
             $no_faktur = $tgl_skrg.'000001';
         }else{
@@ -735,10 +733,11 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $header['title']='WolvJacket';
         $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
 
-        // $data['tampil_keranjang'] = $this->M_admin->daftar_tambah_stok();
+        $data['tampil_daftar_stok'] = $this->M_admin->daftar_tambah_stok();
+        $data['detail_daftar_stok'] = $this->M_admin->detail_daftar_stok($no_faktur);
 
         $this->load->view('template/header-admin', $header);
-        $this->load->view('admin/tambah_stok_daftar');
+        $this->load->view('admin/tambah_stok_daftar', $data);
         $this->load->view('template/footer-admin');
     }
 
