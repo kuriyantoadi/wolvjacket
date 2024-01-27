@@ -680,7 +680,80 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         redirect('Admin/tambah_stok');
     }
 
-   
+
+   public function tambah_stok_up()
+    {
+        $id_user = $this->session->userdata('ses_id');
+        $cek_keranjang_masuk = $this->M_admin->cek_keranjang_masuk($id_user);
+
+        var_dump($cek_keranjang_masuk);
+
+        if($cek_keranjang_masuk == NULL){
+            $this->session->set_flashdata('msg', '
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Proses Gagal, Keranjang Kosong.    
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            ');
+            redirect('Admin/tambah_stok/');
+        }
+
+        $no_faktur_awal = $this->M_admin->get_last_no_faktur();
+        $cek_seri_no_faktur = $this->M_admin->cek_seri_no_faktur();
+        $tgl_skrg = date('dmy');
+
+
+
+        if($no_faktur_awal == NULL){
+            $no_faktur = $tgl_skrg.'000001';
+        }else{
+
+            $akhir_faktur = $cek_seri_no_faktur+1;
+            $no_faktur = $tgl_skrg.sprintf("%06d", $akhir_faktur);
+        }
+
+        $keterangan = $this->input->post('keterangan');
+        $tgl_tambah_stok = date('Y-m-d H:i:s'); // Tanggal dan waktu saat ini
+        $nama_barang = "Nama Barang Anda"; // Ganti dengan nama barang yang sesuai
+
+        // Melakukan transfer dari tb_keranjang_masuk ke tb_stok untuk id_user tertentu
+        $status = $this->M_admin->transfer_keranjang_ke_stok($id_user, $no_faktur, $keterangan, $tgl_tambah_stok, $nama_barang);
+
+
+        $this->session->set_flashdata('msg', '
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    Tambah Stok Berhasil
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        ');
+        redirect('Admin/tambah_stok/');
+
+    }
+
+    public function daftar_tambah_stok()
+    {
+        $header['title']='WolvJacket';
+        $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
+
+        // $data['tampil_keranjang'] = $this->M_admin->daftar_tambah_stok();
+
+        $this->load->view('template/header-admin', $header);
+        $this->load->view('admin/tambah_stok_daftar');
+        $this->load->view('template/footer-admin');
+    }
+
+    public function tambah_stok_hapus($no_faktur){
+        // $no_faktur = array('no_faktur' => $no_faktur);
+
+        $success = $this->M_admin->tambah_stok_hapus($no_faktur);
+        $this->session->set_flashdata('msg', '
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Hapus Daftar Tambah Stok Berhasil
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        ');
+        redirect('Admin/daftar_tambah_stok/');
+    }
 
     // akhir tambah stok
 

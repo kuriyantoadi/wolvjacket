@@ -12,6 +12,7 @@ class Ajax extends CI_Controller
         $this->load->model('M_ajax_brand');
         $this->load->model('M_ajax_pengguna');
         $this->load->model('M_ajax_pelanggan');
+        $this->load->model('M_ajax_tambah_stok');
 
         // $this->load->library('upload');
 
@@ -195,6 +196,36 @@ class Ajax extends CI_Controller
     // }
 
     
+    function ajax_tambah_stok_daftar() {
+        $list = $this->M_ajax_tambah_stok->get_datatables();
+        $data = array();
+        $no = @$_POST['start'];
+        foreach ($list as $item) {
 
+            $no++;
+            $row = array();
+            $row[] = $item->no_faktur;
+            $row[] = $item->tgl_tambah_stok;
+            $row[] = 'Rp '. number_format($item->total_harga_pokok);
+            $row[] = $item->total_barang;
+            $row[] = $item->id_user;
+            $row[] = $item->keterangan;
+
+            // add html for action
+            $row[] = '
+                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editModal'.$item->no_faktur.'"><i class="bx bxs-pencil"></i>Edit</button>
+                    <a href="'.site_url('Admin/tambah_stok_hapus/'.$item->no_faktur).'" onclick="return confirm(\'Yakin hapus data tambah stok dengan faktur '. $item->no_faktur .' ?\')"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i> Hapus</a>';            
+                    
+            $data[] = $row;
+            }
+        $output = array(
+                    "draw" => @$_POST['draw'],
+                    "recordsTotal" => $this->M_ajax->count_all(),
+                    "recordsFiltered" => $this->M_ajax->count_filtered(),
+                    "data" => $data,
+                );
+        // output to json format
+        echo json_encode($output);
+    }
 
 }

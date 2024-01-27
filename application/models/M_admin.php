@@ -278,4 +278,107 @@ class M_admin extends CI_Model
 
   // akhir keranjang
 
+  // awal tambah stok
+
+  public function transfer_keranjang_ke_stok($id_user, $no_faktur, $keterangan, $tgl_tambah_stok, $nama_barang)
+  {
+    // Memindahkan data dari tb_keranjang_masuk ke tb_stok untuk id_user tertentu
+    $this->db->trans_start(); // Memulai transaksi
+
+    // Memasukkan data ke tb_stok
+    $this->db->select('id_barang, jumlah, harga_pokok');
+    $this->db->where('id_user', $id_user);
+    $query = $this->db->get('tb_keranjang_masuk');
+    $data_keranjang = $query->result_array();
+
+    foreach ($data_keranjang as $row) {
+        // Tambahkan kolom lain
+        $row['keterangan'] = $keterangan;
+        $row['tgl_tambah_stok'] = $tgl_tambah_stok;
+        $row['nama_barang'] = $nama_barang;
+        $row['no_faktur'] = $no_faktur;
+        $row['keterangan'] = $keterangan;
+        $row['id_user'] = $id_user;
+
+        $this->db->insert('tb_tambah_stok', $row);
+    }
+
+    // menghapus keranjang masuk
+    $this->db->where('id_user', $id_user);
+    $this->db->delete('tb_keranjang_masuk');
+
+    $this->db->trans_complete(); // Menyelesaikan transaksi
+
+    return $this->db->trans_status(); // Mengembalikan status transaksi
+  
+  }
+
+  public function get_last_no_faktur()
+  {
+    // Menentukan kolom yang ingin ditampilkan
+    $this->db->select("LEFT(no_faktur, 6) as no_faktur_awal", false); // Menggunakan LEFT() untuk mengambil 6 karakter pertama
+    
+    // Mengurutkan data berdasarkan id_stok secara descending (dari yang terbaru)
+    $this->db->order_by('id_stok', 'DESC');
+    
+    // Mengambil hanya satu baris data teratas
+    $this->db->limit(1);
+    
+    // Melakukan kueri untuk mendapatkan data terakhir
+    $query = $this->db->get('tb_tambah_stok');
+    
+    // Mengembalikan hasil kueri
+    return $query->row()->no_faktur_awal;
+  }
+
+  public function cek_seri_no_faktur()
+  {
+    // Menentukan kolom yang ingin ditampilkan
+    $this->db->select("RIGHT(no_faktur, 6) as no_faktur_akhir", false); // Menggunakan RIGHT() untuk mengambil 7 karakter terakhir
+    
+    // Mengurutkan data berdasarkan id_stok secara descending (dari yang terbaru)
+    $this->db->order_by('id_stok', 'DESC');
+    
+    // Mengambil hanya satu baris data teratas
+    $this->db->limit(1);
+    
+    // Melakukan kueri untuk mendapatkan data terakhir
+    $query = $this->db->get('tb_tambah_stok');
+    
+    // Mengembalikan hasil kueri
+    return $query->row()->no_faktur_akhir;
+  }
+
+  function cek_keranjang_masuk($id_user)
+  {
+    $this->db->select('*');
+    $this->db->from('tb_keranjang_masuk');
+    $this->db->where('id_user', $id_user);
+    $query = $this->db->get()->result();
+    return $query;
+  }
+
+  // akhir keranjang
+
+  // awal daftar tambah stok
+
+  public function daftar_tambah_stok()
+  {
+    $this->db->select('no_faktur, tgl_tambah_stok, SUM(harga_pokok * jumlah) as total_harga_pokok, SUM(jumlah) as total_barang, keterangan, id_user');
+    $this->db->from('tb_tambah_stok');
+    $this->db->group_by('no_faktur');
+    $query = $this->db->get();
+
+    return $query->result();
+  }
+
+  function tambah_stok_hapus($no_faktur)
+  {
+    $this->db->where('no_faktur', $no_faktur);
+    $this->db->delete('tb_tambah_stok');
+  }
+
+
+  // akhir daftar tambah stok
+
 }

@@ -7,7 +7,12 @@
 
             <h4 class="mb-sm-4 font-size-18 ">Tambah Stok</h4>
 
+            <div class="col-xl-7">
+                 <?= $this->session->flashdata('msg') ?>
+            </div>
+
                 <div class="col-xl-7">
+
                     <div class="card">  
                         <div class="card-body">
 
@@ -32,7 +37,7 @@
                                     <td><center><?= $no++; ?></td>
                                     <td><center><?= $row->nama_barang?></td>
                                     <td><center>Rp <?= number_format($row->harga_pokok) ?></td>
-                                    <td><input type="number" class="form-control" id="jumlahBarang<?= $row->id_barang; ?>" value="1" min="1"></td>
+                                    <td><input type="number" class="form-control" id="jumlahBarang<?= $row->id_barang; ?>" value="1" min="1" maxlength="5"></td>
                                     <td><center><button class="btn btn-sm btn-primary" onclick="tambahKeKeranjang('<?= $row->nama_barang; ?>', <?= $row->harga_pokok; ?>, 'jumlahBarang<?= $row->id_barang; ?>', <?= $row->id_barang; ?>)"><i class="fas fa-shopping-cart"></i></button></td>
                                 </tr>
                             
@@ -66,7 +71,14 @@
                                 <!-- Baris-baris keranjang -->
                             </tbody>
                         
-                            </table>
+                        </table>
+                            
+                            <strong>Keterangan</strong>
+                            <?= form_open('Admin/tambah_stok_up') ?>
+                            <input type="text" class="form-control" name="keterangan">
+                            <input type="submit" name="submit" value="Proses" onclick="return confirm('Data Sudah Sesuai?')" class="btn mt-2 btn-md btn-success">
+                            <?= form_close() ?>
+
                         </div>
                     </div>
                 </div> <!-- end col -->
