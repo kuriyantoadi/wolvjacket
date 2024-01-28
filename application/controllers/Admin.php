@@ -733,11 +733,11 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $header['title']='WolvJacket';
         $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
 
-        $data['tampil_daftar_stok'] = $this->M_admin->daftar_tambah_stok();
-        $data['detail_daftar_stok'] = $this->M_admin->detail_daftar_stok($no_faktur);
+        // $data['tampil_daftar_stok'] = $this->M_admin->daftar_tambah_stok();
+        // $data['detail_daftar_stok'] = $this->M_admin->detail_daftar_stok($no_faktur);
 
         $this->load->view('template/header-admin', $header);
-        $this->load->view('admin/tambah_stok_daftar', $data);
+        $this->load->view('admin/tambah_stok_daftar');
         $this->load->view('template/footer-admin');
     }
 
@@ -752,6 +752,21 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
             </div>
         ');
         redirect('Admin/daftar_tambah_stok/');
+    }
+
+    public function tambah_stok_detail($no_faktur)
+    {
+        $header['title']='WolvJacket';
+        $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
+        $data['tampil'] = $this->M_admin->tambah_stok_detail($no_faktur);
+        $data['no_faktur'] = $no_faktur;
+        $data['tgl_faktur'] = $this->M_admin->tambah_stok_tgl($no_faktur);
+
+        // var_dump($data['tgl_faktur']);
+
+        $this->load->view('template/header-admin', $header);
+        $this->load->view('admin/tambah_stok_detail',$data);
+        $this->load->view('template/footer-admin');
     }
 
     // akhir tambah stok

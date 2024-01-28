@@ -372,21 +372,25 @@ class M_admin extends CI_Model
     return $query->result();
   }
 
-  public function detail_daftar_stok()
+  public function tambah_stok_detail($no_faktur)
   {
-    $this->db->select('tb_tambah_stok.no_faktur, tb_tambah_stok.tgl_tambah_stok, SUM(tb_tambah_stok.harga_pokok * tb_tambah_stok.jumlah) as total_harga_pokok, SUM(tb_tambah_stok.jumlah) as total_barang, tb_tambah_stok.keterangan, tb_tambah_stok.id_user');
+    $this->db->select('*');
     $this->db->from('tb_tambah_stok');
-    $this->db->join('tb_barang', 'tb_barang.id_barang = tb_tambah_stok.id_barang', 'left');
-    $this->db->group_by('tb_tambah_stok.no_faktur');
+    $this->db->where('no_faktur', $no_faktur);
+    $query = $this->db->get()->result();
+    return $query;
+  }
 
-    // Tambahkan kondisi where untuk filter no_faktur
-    $this->db->where('tb_tambah_stok.no_faktur', $no_faktur);
+  public function tambah_stok_tgl($no_faktur)
+  {
+      $this->db->select('*');
+      $this->db->from('tb_tambah_stok');
+      $this->db->where('no_faktur', $no_faktur);
+      $this->db->limit(1); // Mengambil hanya satu baris
 
-    $query = $this->db->get();
-
-    return $query->result();
-
-
+      // Menjalankan query dan mengembalikan hasilnya
+      $query = $this->db->get();
+      return $query->row(); // Mengembalikan baris terakhir sebagai objek tunggal
   }
 
   function tambah_stok_hapus($no_faktur)

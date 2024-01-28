@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">Daftar Tambah Stok</h4>
+                        <h4 class="mb-sm-0 font-size-18">Detail Tambah Stok</h4>
 
                         <?= $this->session->flashdata('msg') ?>
                     </div>
@@ -17,9 +17,9 @@
             <div class="row">
                 <div class="col-12 mb-2">
                     
-                    <!-- <div class="d-flex gap-2 flex-wrap mb-1">
-                        <button type="button" class="btn btn-info btn-sm waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg">Tambah</button>
-                    </div>   -->
+                    <div class="d-flex gap-2 flex-wrap mb-1">
+                        <a type="button" href="<?= base_url() ?>Admin/daftar_tambah_stok" class="btn btn-secondary btn-sm waves-effect waves-light" >Kembali</a>
+                    </div>  
 
                 </div>
             </div>
@@ -29,20 +29,39 @@
                 <div class="col-12">
                     <div class="card">  
                         <div class="card-body">
-                                            
 
-                        <table id="datatable" class="table table-bordered dt-responsive table-hover table-striped  nowrap w-100">
+                        <strong>Faktur : <?= $no_faktur ?></strong>
+                        <br><strong>Tanggal Faktur : <?= $tgl_faktur->tgl_tambah_stok ?></strong>
+                        
+                        <table id='datatable' class="table table-bordered dt-responsive table-hover table-striped  nowrap w-100">
                             <thead>
                                 <tr>
-                                    <!-- <th><center>No</th> -->
+                                    <th><center>No</th>
                                     <th><center>No Faktur</th> 
                                     <th><center>Tanggal</th>
                                     <th><center>Total Harga</th>
                                     <th><center>Jumlah</th>
                                     <th><center>Id User</th>
                                     <th><center>Keterangan</th>
-                                    <th><center>Pilihan</th>
+                                   
                                 </tr>
+                            </thead>
+
+                            <tbody>
+                                <?php $no=1; ?>
+                                <?php foreach ($tampil as $row) { ?>
+                                    <tr>
+                                        <td><?= $no++ ?></td>
+                                        <td><?= $row->no_faktur ?></td>
+                                        <td><?= $row->tgl_tambah_stok ?></td>
+                                        <td><?= $row->harga_pokok ?></td>
+                                        <td><?= $row->jumlah ?></td>
+                                        <td><?= $row->id_user ?></td>
+                                        <td><?= $row->keterangan ?></td>
+                                    </tr>
+
+                                <?php } ?>
+                            </tbody>
             
                             </table>
                         </div>
@@ -53,39 +72,6 @@
     </div>
     <!-- End Page-content -->
 
-
-
-  <script>
-        //setting datatables
-        $('#datatable').DataTable({
-            
-            "processing": true,
-            "serverSide": true,
-            "paging": false,  // Matikan paginasi
-            "searching": false,  // Matikan fitur pencarian
-            "info": false,  // Matikan informasi
-            "order": [],
-            "ajax": {
-                //panggil method ajax list dengan ajax
-                "url": "<?= site_url('Ajax/ajax_tambah_stok_daftar') ?>",
-                "type": "POST"
-            },
-            "columnDefs": [
-                {
-                    "targets": [0,1, 2,3,4,5,6],
-                    "className" : 'text-center'
-                },
-
-                // mematikan sort kolom pilihan
-                {
-                    "targets": [2,3,4,5,6], 
-                    "orderable": false
-                }
-            ]
-        });
-
-         
-    </script>
 
 <!-- format uang -->
 <script src="<?= base_url() ?>assets/js/format-uang.js"></script>

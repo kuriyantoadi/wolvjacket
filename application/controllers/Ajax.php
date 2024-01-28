@@ -213,7 +213,7 @@ class Ajax extends CI_Controller
 
             // add html for action
             $row[] = '
-                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editModal'.$item->no_faktur.'"><i class="bx bxs-pencil"></i>Edit</button>
+                    <a href="'.site_url('Admin/tambah_stok_detail/'.$item->no_faktur).'"  class="btn btn-primary btn-sm"><i class="bx bx-detail"></i> Detail</a>           
                     <a href="'.site_url('Admin/tambah_stok_hapus/'.$item->no_faktur).'" onclick="return confirm(\'Yakin hapus data tambah stok dengan faktur '. $item->no_faktur .' ?\')"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i> Hapus</a>';            
                     
             $data[] = $row;
