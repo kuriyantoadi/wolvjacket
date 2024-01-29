@@ -6,12 +6,17 @@
             <div class="row">
 
             <h4 class="mb-sm-4 font-size-18 ">Tambah Stok</h4>
-
-            <div class="col-xl-7">
-                 <?= $this->session->flashdata('msg') ?>
+            <div class="col-xl-6">
+                <?= $this->session->flashdata('msg') ?>    
             </div>
 
-                <div class="col-xl-7">
+            <div class="col-xl-6">
+                <!-- bagian kosong -->
+            </div>
+           
+        
+                <div class="col-xl-6">
+                   
 
                     <div class="card">  
                         <div class="card-body">
@@ -48,22 +53,24 @@
                                                 
                         </div>
                     </div>
-                </div> <!-- end col -->
+                </div> 
+                <!-- end col -->
 
 
-                <div class="col-xl-5">
+                <div class="col-xl-6">
                     <div class="card">  
                         <div class="card-body">
 
-                        <h4 class="mb-sm-4 font-size-18 ">Keranjang Belanja Masuk</h4>
+                        <h4 class="mb-sm-4 font-size-18 ">Daftar Barang Tambah Stok</h4>
 
                         <table id="tabelKeranjang" class="table table-bordered dt-responsive table-hover table-striped  nowrap w-100">
                             <thead>
                                 <tr>
                                     <th><center>No</th>
                                     <th><center>Nama Barang</th>
-                                    <th><center>Harga Barang</th> 
-                                    <th><center>Jumlah</th>  
+                                    <th><center>Harga Pokok</th> 
+                                    <th><center>Qty</th>  
+                                    <th><center>Total</th>
                                     <th><center>Opsi</th>
                                 </tr>
                             </thead>
@@ -125,73 +132,76 @@
         const tabelKeranjang = document.getElementById('tabelKeranjang').getElementsByTagName('tbody')[0];
         tabelKeranjang.innerHTML = '';
 
+        // Inisialisasi totalSemua
+        var totalSemua = 0;
+
         data.forEach((tampil_kolom, index) => {
             const row = tabelKeranjang.insertRow();
             // row.insertCell(0).textContent = index + 1;
 
             var cell0 = row.insertCell(0);
-            cell0.textContent = index+1;
+            cell0.textContent = index + 1;
             cell0.style.textAlign = 'center';
 
             row.insertCell(1).textContent = tampil_kolom.nama_barang;
             var hargaPokokCell = row.insertCell(2);
             hargaPokokCell.textContent = formatCurrency(tampil_kolom.harga_pokok);
 
-            //  tampil jumlah
+            // Tampil jumlah
             var kolom_jumlah = row.insertCell(3);
             kolom_jumlah.textContent = tampil_kolom.jumlah;
             kolom_jumlah.style.textAlign = 'center';
-            
 
+            // Operasi matematika jumlah * harga pokok
+            var totalHargaCell = row.insertCell(4);
+            var totalHarga = tampil_kolom.jumlah * tampil_kolom.harga_pokok;
+            totalHargaCell.textContent = formatCurrency(totalHarga);
+
+            // Tambahkan ke totalSemua
+            totalSemua += totalHarga;
 
             // awal mode hapus 
-
-            // Mendapatkan nilai id_barang dari PHP
             var id_barang = tampil_kolom.id_barang;
-
-            // Mendapatkan nilai base_url dari PHP
             var base_url = '<?= base_url(); ?>';
-
-            // Membuat link untuk tombol hapus
             var deleteLink = base_url + 'Admin/keranjang_hapus/' + id_barang;
 
-            // Membuat elemen dengan ikon hapus
             var deleteButton = document.createElement('button');
-            deleteButton.className = 'btn btn-sm btn-danger'; // Menambahkan kelas Bootstrap untuk warna merah (danger)
-
-            // Menambahkan ikon hapus ke dalam tombol
+            deleteButton.className = 'btn btn-sm btn-danger';
             var iconElement = document.createElement('i');
-            iconElement.className = 'fas fa-trash-alt'; // Menggunakan ikon trash-alt dari Font Awesome
+            iconElement.className = 'fas fa-trash-alt';
             deleteButton.appendChild(iconElement);
 
-            // posisi elemen di tengah
-           
-
-            // Menambahkan tombol ke dalam sel ke-4 di baris tabel
-            var cell = row.insertCell(4);
+            var cell = row.insertCell(5);
             cell.appendChild(deleteButton);
-            cell.style.textAlign = 'center'; // Menengahkan isi sel ke tengah secara horizontal
+            cell.style.textAlign = 'center';
 
-            // Menambahkan event listener untuk menampilkan konfirmasi sebelum menghapus
             deleteButton.addEventListener('click', function(event) {
-                // ...
-            });
-
-
-            // Menambahkan event listener untuk menampilkan konfirmasi sebelum menghapus
-            deleteButton.addEventListener('click', function(event) {
-                // Tampilkan alert konfirmasi
                 if (!confirm('Apakah Anda yakin ingin menghapus barang ini?')) {
-                    event.preventDefault(); // Mencegah tindakan default tombol jika pembatalan diklik
+                    event.preventDefault();
                 } else {
-                    // Jika konfirmasi diterima, navigasi ke tautan penghapusan
                     window.location.href = deleteLink;
                 }
             });
 
             // akhir mode hapus
-
         });
+
+       // Tambahkan totalSemua ke baris terakhir tabel
+       var rowTotal = tabelKeranjang.insertRow();
+
+        // Sel pertama: Total
+        var totalCell = rowTotal.insertCell(0);
+        totalCell.textContent = "Total";
+        totalCell.style.fontWeight = 'bold';
+        totalCell.setAttribute('colspan', '4'); // Gabungkan 4 kolom
+
+        var totalCell = rowTotal.insertCell(1);
+        // totalCell.setAttribute('colspan', '2');
+
+        totalCell.textContent = formatCurrency(totalSemua);
+        totalCell.style.fontWeight = 'bold';
+        totalCell.style.textAlign = 'center';
+
     }
     fetchData();   
     

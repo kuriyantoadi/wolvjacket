@@ -280,13 +280,13 @@ class M_admin extends CI_Model
 
   // awal tambah stok
 
-  public function transfer_keranjang_ke_stok($id_user, $no_faktur, $keterangan, $tgl_tambah_stok, $nama_barang)
+  public function transfer_keranjang_ke_stok($id_user, $no_faktur, $keterangan, $tgl_tambah_stok)
   {
     // Memindahkan data dari tb_keranjang_masuk ke tb_stok untuk id_user tertentu
     $this->db->trans_start(); // Memulai transaksi
 
     // Memasukkan data ke tb_stok
-    $this->db->select('id_barang, jumlah, harga_pokok');
+    $this->db->select('id_barang, jumlah, harga_pokok','nama_barang');
     $this->db->where('id_user', $id_user);
     $query = $this->db->get('tb_keranjang_masuk');
     $data_keranjang = $query->result_array();
@@ -295,7 +295,7 @@ class M_admin extends CI_Model
         // Tambahkan kolom lain
         $row['keterangan'] = $keterangan;
         $row['tgl_tambah_stok'] = $tgl_tambah_stok;
-        $row['nama_barang'] = $nama_barang;
+        // $row['nama_barang'] = $nama_barang;
         $row['no_faktur'] = $no_faktur;
         $row['keterangan'] = $keterangan;
         $row['id_user'] = $id_user;
@@ -376,6 +376,7 @@ class M_admin extends CI_Model
   {
     $this->db->select('*');
     $this->db->from('tb_tambah_stok');
+    $this->db->join('tb_barang', 'tb_tambah_stok.id_barang = tb_barang.id_barang');
     $this->db->where('no_faktur', $no_faktur);
     $query = $this->db->get()->result();
     return $query;

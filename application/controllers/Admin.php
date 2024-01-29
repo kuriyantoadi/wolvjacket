@@ -712,10 +712,9 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
 
         $keterangan = $this->input->post('keterangan');
         $tgl_tambah_stok = date('Y-m-d H:i:s'); // Tanggal dan waktu saat ini
-        $nama_barang = "Nama Barang Anda"; // Ganti dengan nama barang yang sesuai
 
         // Melakukan transfer dari tb_keranjang_masuk ke tb_stok untuk id_user tertentu
-        $status = $this->M_admin->transfer_keranjang_ke_stok($id_user, $no_faktur, $keterangan, $tgl_tambah_stok, $nama_barang);
+        $status = $this->M_admin->transfer_keranjang_ke_stok($id_user, $no_faktur, $keterangan, $tgl_tambah_stok);
 
 
         $this->session->set_flashdata('msg', '
@@ -732,9 +731,6 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
     {
         $header['title']='WolvJacket';
         $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
-
-        // $data['tampil_daftar_stok'] = $this->M_admin->daftar_tambah_stok();
-        // $data['detail_daftar_stok'] = $this->M_admin->detail_daftar_stok($no_faktur);
 
         $this->load->view('template/header-admin', $header);
         $this->load->view('admin/tambah_stok_daftar');

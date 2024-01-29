@@ -39,6 +39,7 @@
                                     <th><center>No</th>
                                     <th><center>No Faktur</th> 
                                     <th><center>Tanggal</th>
+                                    <th><center>Nama Barang</th>
                                     <th><center>Total Harga</th>
                                     <th><center>Jumlah</th>
                                     <th><center>Id User</th>
@@ -54,6 +55,7 @@
                                         <td><?= $no++ ?></td>
                                         <td><?= $row->no_faktur ?></td>
                                         <td><?= $row->tgl_tambah_stok ?></td>
+                                        <td><?= $row->nama_barang ?></td>
                                         <td><?= $row->harga_pokok ?></td>
                                         <td><?= $row->jumlah ?></td>
                                         <td><?= $row->id_user ?></td>
