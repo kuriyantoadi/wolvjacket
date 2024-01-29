@@ -1,3 +1,54 @@
+
+<?php foreach ($tampil as $row): ?>
+    <div class="modal fade bs-example-modal-xl" id="editModal<?= $row->no_faktur ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myExtraLargeModalLabel">Detail Transaksi - <?= $row->no_faktur ?></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>No Faktur</th>
+                                <th>Tanggal</th>
+                                <th>Nama Barang</th>
+                                <th>Qty</th>
+                                <th>Harga Pokok</th>
+                                <th>Total</th>
+
+                                <!-- Tambahkan kolom sesuai kebutuhan -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                            // Ambil data berdasarkan no_faktur tertentu
+                            $filtered_data = $this->M_admin->get_data_by_no_faktur($row->no_faktur);
+                            $counter = 1;
+                            foreach ($filtered_data as $item): ?>
+                                <tr>
+                                    <td><?= $counter ?></td>
+                                    <td><?= $item->no_faktur ?></td>
+                                    <td><?= $item->tgl_tambah_stok ?></td>
+                                    <td><?= $item->nama_barang ?></td>
+                                    <td><?= $item->jumlah ?></td>
+                                    <td><?= 'Rp '. number_format($item->harga_pokok) ?></td>
+                                    <td><?= 'Rp '. number_format($item->jumlah * $item->harga_pokok) ?></td>
+                                    <!-- Tambahkan kolom lainnya sesuai kebutuhan -->
+                                </tr>
+                            <?php 
+                            $counter++;
+                            endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->  
+<?php endforeach; ?>
+
 <div class="main-content">
 
     <div class="page-content">
@@ -84,8 +135,32 @@
             ]
         });
 
-         
+        $(document).ready(function() {
+            // Ketika tombol detail diklik
+            $(document).on('click', '.btn-detail', function() {
+                var no_faktur = $(this).data('no-faktur');
+
+                // Lakukan AJAX request
+                $.ajax({
+                    url: 'URL_AJAX_YANG_HARUS_DITUJU', // Ganti dengan URL yang benar sesuai dengan rute Anda
+                    type: 'POST', // Atur metode HTTP sesuai kebutuhan Anda
+                    data: {no_faktur: no_faktur}, // Kirim data ke server
+                    dataType: 'json', // Tipe data yang diharapkan dari respons
+                    success: function(response) {
+                        // Lakukan sesuatu dengan respons dari server
+                        // Misalnya, tampilkan data dalam modal atau lakukan pemrosesan lainnya
+                    },
+                    error: function(xhr, status, error) {
+                        // Tangani kesalahan jika terjadi saat melakukan AJAX request
+                    }
+                });
+            });
+        });
+
+
     </script>
+    
+
 
 <!-- format uang -->
 <script src="<?= base_url() ?>assets/js/format-uang.js"></script>

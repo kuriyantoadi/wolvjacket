@@ -195,45 +195,13 @@ class Ajax extends CI_Controller
     //     echo json_encode($output);
     // }
 
-    // function ajax_tambah_stok_daftar() {
-    //     $list = $this->M_ajax_tambah_stok->get_datatables();
-    //     $data = array();
-    //     $no = @$_POST['start'];
-    //     foreach ($list as $item) {
-
-    //         $no++;
-    //         $row = array();
-    //         $row[] = $item->no_faktur;
-    //         $row[] = $item->tgl_tambah_stok;
-    //         $row[] = 'Rp '. number_format($item->total_harga_pokok);
-    //         $row[] = $item->total_barang;
-    //         $row[] = $item->id_user;
-    //         $row[] = $item->keterangan;
-
-    //         // add html for action
-    //         $row[] = '
-    //             <button type="button" class="btn btn-primary btn-sm btn-detail" data-no-faktur="'.$item->no_faktur.'" data-toggle="modal" data-target="#detailModal">
-    //                 <i class="bx bx-detail"></i> Detail
-    //             </button>
-    //             ';            
-                    
-    //         $data[] = $row;
-    //         }
-    //     $output = array(
-    //                 "draw" => @$_POST['draw'],
-    //                 "recordsTotal" => $this->M_ajax->count_all(),
-    //                 "recordsFiltered" => $this->M_ajax->count_filtered(),
-    //                 "data" => $data,
-    //             );
-    //     // output to json format
-    //     echo json_encode($output);
-    // }
-
+    
     function ajax_tambah_stok_daftar() {
         $list = $this->M_ajax_tambah_stok->get_datatables();
         $data = array();
         $no = @$_POST['start'];
         foreach ($list as $item) {
+
             $no++;
             $row = array();
             $row[] = $item->no_faktur;
@@ -243,25 +211,21 @@ class Ajax extends CI_Controller
             $row[] = $item->id_user;
             $row[] = $item->keterangan;
 
-            // Add HTML for action (detail button)
+            // add html for action
             $row[] = '
-                <a href="'.site_url('Admin/tambah_stok_hapus/'.$item->no_faktur).'" onclick="return confirm(\'Yakin hapus data tambah stok dengan faktur '. $item->no_faktur .' ?\')"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i> Hapus</a>
-                <a href="'.site_url('Admin/tambah_stok_edit/'.$item->no_faktur).'"   class="btn btn-info btn-sm"><i class="bx bxs-edit"></i> Edit</a>                        
-                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editModal'.$item->no_faktur.'"><i class="bx bxs-detail"></i>Detail</button>
-            ';            
-
+                    <a href="'.site_url('Admin/tambah_stok_detail/'.$item->no_faktur).'"  class="btn btn-primary btn-sm"><i class="bx bx-detail"></i> Detail</a>           
+                    <a href="'.site_url('Admin/tambah_stok_hapus/'.$item->no_faktur).'" onclick="return confirm(\'Yakin hapus data tambah stok dengan faktur '. $item->no_faktur .' ?\')"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i> Hapus</a>';            
+                    
             $data[] = $row;
-        }
+            }
         $output = array(
-            "draw" => @$_POST['draw'],
-            "recordsTotal" => $this->M_ajax_tambah_stok->count_all(), // Fixed model name
-            "recordsFiltered" => $this->M_ajax_tambah_stok->count_filtered(), // Fixed model name
-            "data" => $data,
-        );
-        // Output to JSON format
+                    "draw" => @$_POST['draw'],
+                    "recordsTotal" => $this->M_ajax->count_all(),
+                    "recordsFiltered" => $this->M_ajax->count_filtered(),
+                    "data" => $data,
+                );
+        // output to json format
         echo json_encode($output);
     }
-
-    
 
 }

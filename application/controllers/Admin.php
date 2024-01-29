@@ -463,7 +463,7 @@ class Admin extends CI_Controller
     public function brand()
     {
         $header['title']='WolvJacket';
-$header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
+        $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $data['tampil'] = $this->M_admin->brand_detail();
 
         $this->load->view('template/header-admin', $header);
@@ -731,9 +731,12 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
     {
         $header['title']='WolvJacket';
         $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
+        $data['tambah_stok_detail'] = $this->M_admin->tambah_stok_detail();
+        $data['tampil'] = $this->M_admin->tambah_stok_detail();
+
 
         $this->load->view('template/header-admin', $header);
-        $this->load->view('admin/tambah_stok_daftar');
+        $this->load->view('admin/tambah_stok_daftar', $data);
         $this->load->view('template/footer-admin');
     }
 
