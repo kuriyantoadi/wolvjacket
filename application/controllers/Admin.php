@@ -753,7 +753,7 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         redirect('Admin/daftar_tambah_stok/');
     }
 
-    public function tambah_stok_detail($no_faktur)
+    public function tambah_stok_edit($no_faktur)
     {
         $header['title']='WolvJacket';
         $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
@@ -764,7 +764,7 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         // var_dump($data['tgl_faktur']);
 
         $this->load->view('template/header-admin', $header);
-        $this->load->view('admin/tambah_stok_detail',$data);
+        $this->load->view('admin/tambah_stok_edit',$data);
         $this->load->view('template/footer-admin');
     }
 
