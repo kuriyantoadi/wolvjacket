@@ -448,8 +448,50 @@ class M_admin extends CI_Model
       $this->db->delete('tb_tambah_stok');
     }
 
-    
+  public function row_faktur($no_faktur)
+  {
+    $this->db->select('id_stok, no_faktur, tgl_tambah_stok, SUM(harga_pokok * jumlah) as total_harga_pokok, SUM(jumlah) as total_barang, harga_pokok, jumlah, keterangan, nama_pengguna');
+    $this->db->from('tb_tambah_stok');
+    $this->db->join('tb_user', 'tb_tambah_stok.id_user = tb_user.id_user');
+    $this->db->group_by('no_faktur');
+    $this->db->order_by('no_faktur', 'ASC');
 
+    // Menambahkan kondisi filter $no_faktur
+    if ($no_faktur != '') {
+        $this->db->where('no_faktur', $no_faktur);
+    }
+
+      // Menjalankan query dan mengembalikan hasilnya
+      $query = $this->db->get();
+      return $query->row(); // Mengembalikan baris terakhir sebagai objek tunggal
+  }
+
+  public function tambah_stok_keterangan_up($keterangan, $no_faktur) {
+      // Query untuk mendapatkan no_faktur yang memiliki lebih dari satu record
+      $this->db->select('no_faktur');
+      $this->db->from('tb_tambah_stok');
+      $this->db->where('no_faktur', $no_faktur);
+      $this->db->group_by('no_faktur');
+      $this->db->having('COUNT(*) > 1');
+      $query = $this->db->get();
+
+      // Jika ada no_faktur yang memiliki lebih dari satu record
+      if ($query->num_rows() > 0) {
+          $affected_rows = 0;
+
+          // Lakukan update untuk setiap no_faktur yang memiliki lebih dari satu record
+          foreach ($query->result() as $row) {
+              $this->db->set('keterangan', $keterangan);
+              $this->db->where('no_faktur', $row->no_faktur);
+              $this->db->update('tb_tambah_stok');
+              $affected_rows += $this->db->affected_rows();
+          }
+
+          return $affected_rows; // Mengembalikan jumlah baris yang terpengaruh oleh update
+      } else {
+          return 0; // Tidak ada no_faktur yang memiliki lebih dari satu record
+      }
+    }
     
 
   // akhir daftar tambah stok

@@ -758,8 +758,11 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $header['title']='WolvJacket';
         $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
 
-        $data['row_faktur'] = $this->M_admin->tambah_stok_tgl($no_faktur);
+        $data['row_faktur'] = $this->M_admin->row_faktur($no_faktur);
         $data['tampil'] = $this->M_admin->tambah_stok_edit($no_faktur);
+
+        //barang
+        $data['tampil_barang'] = $this->M_admin->tampil_barang();
 
 
         $data['no_faktur'] = $no_faktur;
@@ -793,7 +796,6 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
     }
 
     public function tambah_stok_edit_hapus($id_stok, $no_faktur){
-        // $id_stok = array('id_stok' => $id_stok);
 
         $success = $this->M_admin->tambah_stok_edit_hapus($id_stok);
         $this->session->set_flashdata('msg', '
@@ -803,6 +805,25 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
             </div>
         ');
         redirect('Admin/tambah_stok_edit/'.$no_faktur);
+    }
+
+    public function tambah_stok_keterangan_up()
+    {
+        $no_faktur = $this->input->post('no_faktur');
+        $keterangan = $this->input->post('keterangan');
+        
+        // $data_edit = array(
+        //     'keterangan' => $keterangan,
+        // );
+
+        $tambah_stok_keterangan_up = $this->M_admin->tambah_stok_keterangan_up($keterangan, $no_faktur);
+
+        $this->session->set_flashdata('msg', '
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                Update Keterangan Fatkur Berhasil
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>');
+        redirect('Admin/tambah_stok_edit/'.$no_faktur);  
     }
 
     

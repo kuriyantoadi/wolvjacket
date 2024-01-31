@@ -1,38 +1,49 @@
-<?php foreach ($tampil as $row): ?>
+<!-- Awal modal Tambah Barang ============================================================== -->
 
-    <div class="modal fade bs-example-modal-lg" id="editModalStok<?= $row->id_stok ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal fade bs-example-modal-lg" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="myLargeModalLabel">Tambah Stok Edit</h5>
+                    <h5 class="modal-title" id="myLargeModalLabel">Tambah Item Barang</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     
                 <!-- awal isi modal -->
-                <?= form_open('Admin/tambah_stok_edit_up'); ?>
+                <?= form_open('Admin/tambah_stok_barang'); ?>
                 <form class="m-t-40" novalidate>
 
                 <div class="form-group">
                     <label class="control-label mt-3" for="email">No Faktur :</label>
-                    <input type="hidden" name="id_stok" value="<?= $row->id_stok ?>">
-                    <input type="hidden" name="no_faktur" value="<?= $row->no_faktur ?>">
-                    <input type="text" class="form-control" placeholder="" name="no_faktur" value="<?= $row->no_faktur ?>" required readonly>
+                    <input type="hidden" name="no_faktur" value="<?= $row_faktur->no_faktur ?>">
+                    <input type="text" class="form-control" placeholder="" name="no_faktur" value="<?= $row_faktur->no_faktur ?>" required readonly>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label mt-3" for="email">Harga Total :</label>
-                    <input type="text" class="form-control" placeholder="" name="" value="<?= number_format($row->jumlah *  $row->harga_pokok) ?>" required readonly>
+                    <label class="control-label mt-3" for="email">Cari Barang :</label>
+                    <select class="form-control" name="id_barang" data-trigger name="choices-single-default" id="choices-single-default" placeholder="Cari Barang" required>
+                                
+                        <?php foreach ($tampil_barang as $row_barang) { ?>
+                        <option value="<?= $row_barang->id_barang ?>"><?= $row_barang->nama_barang ?></option>
+                        
+                            <?php } ?>
+                    </select>
+                        
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label mt-3" for="email">Stok :</label>
+                    <input type="text" class="form-control" placeholder="" name="stok" value="" required readonly>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label mt-3" for="email">Harga Pokok :</label>
+                    <input type="text" class="form-control" placeholder="" name="harga_pokok" value="<?= $row_faktur->harga_pokok ?>" required readonly>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label mt-3" for="email">Qty :</label>
-                    <input type="text" class="form-control" placeholder="" name="jumlah" value="<?= $row->jumlah ?>" required readonly>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label mt-3" for="email">Keterangan :</label>
-                    <input type="text" class="form-control" placeholder="" name="keterangan" value="<?= $row->keterangan ?>" >
+                    <input type="text" class="form-control" placeholder="" name="jumlah" value="<?= $row_faktur->keterangan ?>" >
                 </div>
 
                     <input type="submit" name="submit" class="btn btn-sm btn-primary btn-sm mb-lg-4 mt-lg-4" value="Update"></input>
@@ -47,8 +58,59 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->  
-<?php endforeach; ?>
-<!-- Akhir modal Edit Barang ============================================================== -->
+<!-- Akhir modal Tambah Barang ============================================================== -->
+
+
+<!-- Awal modal Edit Keterangan ============================================================== -->
+
+    <div class="modal fade bs-example-modal-lg" id="editModalStok<?= $row_faktur->id_stok ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myLargeModalLabel">Tambah Stok Edit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                <!-- awal isi modal -->
+                <?= form_open('Admin/tambah_stok_keterangan_up'); ?>
+                <form class="m-t-40" novalidate>
+
+                <div class="form-group">
+                    <label class="control-label mt-3" for="email">No Faktur :</label>
+                    <input type="hidden" name="id_stok" value="<?= $row_faktur->id_stok ?>">
+                    <input type="hidden" name="no_faktur" value="<?= $row_faktur->no_faktur ?>">
+                    <input type="text" class="form-control" placeholder="" name="no_faktur" value="<?= $row_faktur->no_faktur ?>" required readonly>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label mt-3" for="email">Harga Total :</label>
+                    <input type="text" class="form-control" placeholder="" name="" value="<?= number_format($row_faktur->total_harga_pokok) ?>" required readonly>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label mt-3" for="email">Qty :</label>
+                    <input type="text" class="form-control" placeholder="" name="jumlah" value="<?= $row_faktur->total_barang ?>" required readonly>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label mt-3" for="email">Keterangan :</label>
+                    <input type="text" class="form-control" placeholder="" name="keterangan" value="<?= $row_faktur->keterangan ?>" >
+                </div>
+
+                    <input type="submit" name="submit" class="btn btn-sm btn-primary btn-sm mb-lg-4 mt-lg-4" value="Update"></input>
+                    </div>
+                </center>
+                <?=  form_close(); ?>
+                </form>
+                    
+                <!-- akhir isi modal -->
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->  
+<!-- Akhir modal Edit Keterangan ============================================================== -->
 
 
 
@@ -128,7 +190,8 @@
                 <div class="col-12 mb-2">
                     
                     <div class="d-flex gap-2 flex-wrap mb-1">
-                        <a type="button" href="<?= base_url() ?>Admin/daftar_tambah_stok" class="btn btn-secondary btn-sm waves-effect waves-light" >Kembali</a>
+                        <a type="button" href="<?= base_url() ?>Admin/daftar_tambah_stok" class="btn btn-secondary waves-effect waves-light" >Kembali</a>
+                        <button class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#tambahModal"><i class="bx bx-list-plus"></i>Tambah Item</button>
                     </div>  
 
                 </div>
@@ -157,12 +220,12 @@
                                     <tr>
                                         <td><center><?= $row_faktur->no_faktur ?></td>
                                         <td><center><?= $row_faktur->tgl_tambah_stok ?></td>
-                                        <td><center>Rp <?= number_format($row_faktur->jumlah * $row_faktur->harga_pokok) ?></td>
-                                        <td><center><?= $row_faktur->jumlah ?></td>
+                                        <td><center>Rp <?= number_format($row_faktur->total_harga_pokok) ?></td>
+                                        <td><center><?= $row_faktur->total_barang ?></td>
                                         <td><center><?= $row_faktur->nama_pengguna ?></td>
                                         <td><center><?= $row_faktur->keterangan ?></td>
                                         <td><center>
-                                            <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#editModalStok<?= $row->id_stok ?>"><i class="bx bxs-edit"></i>Edit</button>
+                                            <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#editModalStok<?= $row_faktur->id_stok ?>"><i class="bx bxs-edit"></i>Edit</button>
                                         </td>
 
                                     </tr>
