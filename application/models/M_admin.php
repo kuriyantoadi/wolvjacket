@@ -364,12 +364,22 @@ class M_admin extends CI_Model
 
   public function daftar_tambah_stok()
   {
-    $this->db->select('no_faktur, tgl_tambah_stok, SUM(harga_pokok * jumlah) as total_harga_pokok, SUM(jumlah) as total_barang, keterangan, id_user');
+    $this->db->select('*');
     $this->db->from('tb_tambah_stok');
-    $this->db->group_by('no_faktur');
-    $query = $this->db->get();
+    $this->db->join('tb_barang', 'tb_tambah_stok.id_barang = tb_barang.id_barang');
+    // $this->db->where('no_faktur', $no_faktur);
+    $query = $this->db->get()->result();
+    return $query;
+  }
 
-    return $query->result();
+  public function tambah_stok_daftar($no_faktur)
+  {
+    $this->db->select('*');
+    $this->db->from('tb_tambah_stok');
+    $this->db->join('tb_barang', 'tb_tambah_stok.id_barang = tb_barang.id_barang');
+    $this->db->where('no_faktur', $no_faktur);
+    $query = $this->db->get()->result();
+    return $query;
   }
 
   public function tambah_stok_detail()
@@ -382,21 +392,22 @@ class M_admin extends CI_Model
     return $query;
   }
 
-  // public function tambah_stok_detail($no_faktur)
-  // {
-  //   $this->db->select('*');
-  //   $this->db->from('tb_tambah_stok');
-  //   $this->db->join('tb_barang', 'tb_tambah_stok.id_barang = tb_barang.id_barang');
-  //   $this->db->where('no_faktur', $no_faktur);
-  //   $query = $this->db->get()->result();
-  //   return $query;
-  // }
+  public function tambah_stok_edit($no_faktur)
+  {
+    $this->db->select('*');
+    $this->db->from('tb_tambah_stok');
+    $this->db->join('tb_barang', 'tb_tambah_stok.id_barang = tb_barang.id_barang');
+    $this->db->where('no_faktur', $no_faktur);
+    $query = $this->db->get()->result();
+    return $query;
+  }
 
   public function tambah_stok_tgl($no_faktur)
   {
       $this->db->select('*');
       $this->db->from('tb_tambah_stok');
       $this->db->where('no_faktur', $no_faktur);
+      $this->db->join('tb_user', 'tb_tambah_stok.id_user = tb_user.id_user');
       $this->db->limit(1); // Mengambil hanya satu baris
 
       // Menjalankan query dan mengembalikan hasilnya
@@ -424,6 +435,22 @@ class M_admin extends CI_Model
             return array(); // Kembalikan array kosong jika tidak ada hasil
         }
     }
+
+    function tambah_stok_edit_up($data_edit, $id_stok)
+    {
+      $this->db->where('id_stok', $id_stok);
+      $this->db->update('tb_tambah_stok', $data_edit);
+    }
+
+    function tambah_stok_edit_hapus($id_stok)
+    {
+      $this->db->where('id_stok', $id_stok);
+      $this->db->delete('tb_tambah_stok');
+    }
+
+    
+
+    
 
   // akhir daftar tambah stok
 

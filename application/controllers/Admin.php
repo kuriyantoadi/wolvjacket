@@ -731,7 +731,7 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
     {
         $header['title']='WolvJacket';
         $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
-        $data['tambah_stok_detail'] = $this->M_admin->tambah_stok_detail();
+        // $data['tambah_stok_detail'] = $this->M_admin->tambah_stok_detail();
         $data['tampil'] = $this->M_admin->tambah_stok_detail();
 
 
@@ -757,7 +757,11 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
     {
         $header['title']='WolvJacket';
         $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
-        $data['tampil'] = $this->M_admin->tambah_stok_detail($no_faktur);
+
+        $data['row_faktur'] = $this->M_admin->tambah_stok_tgl($no_faktur);
+        $data['tampil'] = $this->M_admin->tambah_stok_edit($no_faktur);
+
+
         $data['no_faktur'] = $no_faktur;
         $data['tgl_faktur'] = $this->M_admin->tambah_stok_tgl($no_faktur);
 
@@ -767,6 +771,41 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $this->load->view('admin/tambah_stok_edit',$data);
         $this->load->view('template/footer-admin');
     }
+
+    public function tambah_stok_edit_up()
+    {
+        $id_stok = $this->input->post('id_stok');
+        $jumlah = $this->input->post('jumlah');
+        $no_faktur = $this->input->post('no_faktur');
+        
+        $data_edit = array(
+            'jumlah' => $jumlah,
+        );
+
+        $tambah_stok_edit_up = $this->M_admin->tambah_stok_edit_up($data_edit, $id_stok);
+
+        $this->session->set_flashdata('msg', '
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                Update Qty Barang Berhasil
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>');
+        redirect('Admin/tambah_stok_edit/'.$no_faktur);  
+    }
+
+    public function tambah_stok_edit_hapus($id_stok, $no_faktur){
+        // $id_stok = array('id_stok' => $id_stok);
+
+        $success = $this->M_admin->tambah_stok_edit_hapus($id_stok);
+        $this->session->set_flashdata('msg', '
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Hapus Stok Berhasil
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        ');
+        redirect('Admin/tambah_stok_edit/'.$no_faktur);
+    }
+
+    
 
     // akhir tambah stok
 

@@ -1,59 +1,5 @@
 <?php foreach ($tampil as $row): ?>
 
-    <div class="modal fade bs-example-modal-lg" id="editModalStok<?= $row->id_stok ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="myLargeModalLabel">Tambah Stok Edit</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    
-                <!-- awal isi modal -->
-                <?= form_open('Admin/tambah_stok_edit_up'); ?>
-                <form class="m-t-40" novalidate>
-
-                <div class="form-group">
-                    <label class="control-label mt-3" for="email">No Faktur :</label>
-                    <input type="hidden" name="id_stok" value="<?= $row->id_stok ?>">
-                    <input type="hidden" name="no_faktur" value="<?= $row->no_faktur ?>">
-                    <input type="text" class="form-control" placeholder="" name="no_faktur" value="<?= $row->no_faktur ?>" required readonly>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label mt-3" for="email">Harga Total :</label>
-                    <input type="text" class="form-control" placeholder="" name="" value="<?= number_format($row->jumlah *  $row->harga_pokok) ?>" required readonly>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label mt-3" for="email">Qty :</label>
-                    <input type="text" class="form-control" placeholder="" name="jumlah" value="<?= $row->jumlah ?>" required readonly>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label mt-3" for="email">Keterangan :</label>
-                    <input type="text" class="form-control" placeholder="" name="keterangan" value="<?= $row->keterangan ?>" >
-                </div>
-
-                    <input type="submit" name="submit" class="btn btn-sm btn-primary btn-sm mb-lg-4 mt-lg-4" value="Update"></input>
-                    </div>
-                </center>
-                <?=  form_close(); ?>
-                </form>
-                    
-                <!-- akhir isi modal -->
-
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->  
-<?php endforeach; ?>
-<!-- Akhir modal Edit Barang ============================================================== -->
-
-
-
-<?php foreach ($tampil as $row): ?>
-
     <div class="modal fade bs-example-modal-lg" id="editModal<?= $row->id_stok ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -99,6 +45,7 @@
 <!-- Akhir modal Edit Barang ============================================================== -->
 
 
+
 <div class="main-content">
 
     <div class="page-content">
@@ -110,17 +57,8 @@
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                         <h3 class="mb-sm-0 font-size-22">Edit Transaksi Tambah Stok</h3>
 
-                    </div>
-                </div>
-            </div>
-
-             <div class="row">
-                <div class="col-6">
                         <?= $this->session->flashdata('msg') ?>
-                </div>
-
-                <div class="col-6">
-                    <!-- kosong -->
+                    </div>
                 </div>
             </div>
 
@@ -134,12 +72,13 @@
                 </div>
             </div>
             <!-- end page title -->
+
             <div class="row">
                 <div class="col-12">
                     <div class="card">  
                         <div class="card-body">
 
-                        <table id='datatable2' class="table table-bordered dt-responsive nowrap w-100">
+                        <table id='datatable' class="table table-bordered dt-responsive nowrap w-100">
                             <thead>
                                 <tr>
                                     <th><center>No Faktur</th>
@@ -162,7 +101,8 @@
                                         <td><center><?= $row_faktur->nama_pengguna ?></td>
                                         <td><center><?= $row_faktur->keterangan ?></td>
                                         <td><center>
-                                            <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#editModalStok<?= $row->id_stok ?>"><i class="bx bxs-edit"></i>Edit</button>
+                                            <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#editModal<?= $row->id_stok ?>"><i class="bx bxs-edit"></i>Edit</button>
+                                            <a href="<?= site_url('Admin/pelanggan_hapus/'.$row->id_stok) ?>" onclick="return confirm('Yakin hapus data item Barang <?= $row->nama_barang ?>' )"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i> Hapus</a>
                                         </td>
 
                                     </tr>
@@ -170,19 +110,8 @@
             
                         </table>
 
-
-                        </div>
-                    </div>
-                </div> <!-- end col -->
-            </div> <!-- end row -->
-
-
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">  
-                        <div class="card-body">
-                        <h3 class="mb-sm-3 font-size-18">Daftar Barang Tambah Stok Faktur <?= $no_faktur ?></h3>
+                        <strong>Faktur : <?= $no_faktur ?></strong>
+                        <br><strong>Tanggal Faktur : <?= $tgl_faktur->tgl_tambah_stok ?></strong>
                         
                         <table id='datatable' class="table table-bordered dt-responsive table-hover table-striped  nowrap w-100">
                             <thead>
@@ -207,7 +136,7 @@
                                         <td><center>Rp <?= number_format($row->harga_pokok * $row->jumlah) ?></td>
                                         <td><center>
                                             <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#editModal<?= $row->id_stok ?>"><i class="bx bxs-edit"></i>Edit</button>
-                                            <a href="<?= site_url('Admin/tambah_stok_edit_hapus/'.$row->id_stok.'/'.$row->no_faktur) ?>" onclick="return confirm('Yakin hapus data item Barang <?= $row->nama_barang ?>' )"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i> Hapus</a>
+                                            <a href="<?= site_url('Admin/pelanggan_hapus/'.$row->id_stok) ?>" onclick="return confirm('Yakin hapus data item Barang <?= $row->nama_barang ?>' )"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i> Hapus</a>
                                         </td>
                                     </tr>
 
@@ -219,7 +148,6 @@
                     </div>
                 </div> <!-- end col -->
             </div> <!-- end row -->
-
         </div> <!-- container-fluid -->
     </div>
     <!-- End Page-content -->
