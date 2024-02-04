@@ -10,7 +10,7 @@
                 <div class="modal-body">
                     
                 <!-- awal isi modal -->
-                <?= form_open('Admin/tambah_stok_barang_up'); ?>
+                <?= form_open('Admin/tambah_stok_barang'); ?>
                 <form class="m-t-40" novalidate>
 
                 <div class="form-group">
@@ -21,34 +21,30 @@
 
                 <div class="form-group">
                     <label class="control-label mt-3" for="email">Cari Barang :</label>
-
-                    <select id="pilihan_barang" class="form-control" name="id_barang" data-trigger placeholder="Cari Barang" required>
+                    <select class="form-control" name="id_barang" data-trigger name="choices-single-default" id="choices-single-default" placeholder="Cari Barang" required>
                                 
-                        <?php foreach ($tampil_barang as $row_barang): ?>
+                        <?php foreach ($tampil_barang as $row_barang) { ?>
                         <option value="<?= $row_barang->id_barang ?>"><?= $row_barang->nama_barang ?></option>
                         
-                         <?php endforeach; ?>
+                            <?php } ?>
                     </select>
                         
                 </div>
 
-                <!-- <div class="form-group">
+                <div class="form-group">
                     <label class="control-label mt-3" for="email">Stok :</label>
                     <input type="text" class="form-control" placeholder="" name="stok" value="" required readonly>
-                </div> -->
+                </div>
 
                 <div class="form-group">
                     <label class="control-label mt-3" for="email">Harga Pokok :</label>
-                    <input type="text" id="harga_pokok" class="form-control" placeholder="" name="harga_pokok" required readonly>
-                    <input type="hidden" class="form-control" placeholder="" name="keterangan" value="<?= $row_faktur->keterangan ?>" >
+                    <input type="text" class="form-control" placeholder="" name="harga_pokok" value="<?= $row_faktur->harga_pokok ?>" required readonly>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label mt-3" for="email">Qty :</label>
-                    <input type="text" class="form-control" placeholder="" name="jumlah" value="<?= $row_faktur->jumlah ?>" >
+                    <input type="text" class="form-control" placeholder="" name="jumlah" value="<?= $row_faktur->keterangan ?>" >
                 </div>
-
-                
 
                     <input type="submit" name="submit" class="btn btn-sm btn-primary btn-sm mb-lg-4 mt-lg-4" value="Update"></input>
                     </div>
@@ -290,27 +286,6 @@
         </div> <!-- container-fluid -->
     </div>
     <!-- End Page-content -->
-
-
-    <script>
-        $(document).ready(function() {
-            $('#pilihan_barang').change(function() {
-                var id_barang = $(this).val();
-                $.ajax({
-                    url: '<?= base_url('Admin/get_harga_pokok') ?>',
-                    method: 'POST',
-                    data: {id_barang: id_barang},
-                    success: function(response) {
-                        $('#harga_pokok').val(response);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
-            });
-        });
-    </script>
-
 
 
 <!-- format uang -->

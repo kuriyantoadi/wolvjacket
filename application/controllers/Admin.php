@@ -753,6 +753,12 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         redirect('Admin/daftar_tambah_stok/');
     }
 
+    public function get_harga_pokok() {
+        $id_barang = $this->input->post('id_barang'); // Ambil ID barang dari AJAX request
+        $harga_pokok = $this->M_admin->get_harga_pokok($id_barang); // Panggil fungsi model untuk mendapatkan harga pokok
+        echo $harga_pokok; // Kembalikan harga pokok sebagai response
+    }
+
     public function tambah_stok_edit($no_faktur)
     {
         $header['title']='WolvJacket';
@@ -774,6 +780,38 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $this->load->view('admin/tambah_stok_edit',$data);
         $this->load->view('template/footer-admin');
     }
+
+    public function tambah_stok_barang_up(){
+        $id_barang = $this->input->post('id_barang');
+        $no_faktur = $this->input->post('no_faktur');
+        $tgl_tambah_stok = date('Y-m-d H:i:s'); // Tanggal dan waktu saat ini
+        $harga_pokok = $this->input->post('harga_pokok');
+        $jumlah = $this->input->post('jumlah');
+        $keterangan = $this->input->post('keterangan');
+        $id_user = $this->session->userdata('ses_id');
+
+        $data_tambah = array(
+            'id_barang' => $id_barang,
+            'no_faktur' => $no_faktur,
+            'tgl_tambah_stok' => $tgl_tambah_stok,
+            'harga_pokok' => $harga_pokok,
+            'jumlah' => $jumlah,
+            'keterangan' => $keterangan,
+            'id_user' => $id_user
+
+        );
+
+        $tambah_stok_barang_up = $this->M_admin->tambah_stok_barang_up($data_tambah);
+
+        $this->session->set_flashdata('msg', '
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                Update Barang Masuk Berhasil
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>');
+        redirect('Admin/tambah_stok_edit/'.$no_faktur);  
+
+    }
+    
 
     public function tambah_stok_edit_up()
     {
@@ -825,6 +863,8 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
             </div>');
         redirect('Admin/tambah_stok_edit/'.$no_faktur);  
     }
+
+   
 
     
 

@@ -491,7 +491,21 @@ class M_admin extends CI_Model
       } else {
           return 0; // Tidak ada no_faktur yang memiliki lebih dari satu record
       }
-    }
+  }
+
+  public function get_harga_pokok($id_barang) {
+    // Query untuk mendapatkan harga pokok berdasarkan ID barang
+    $this->db->select('harga_pokok');
+    $this->db->where('id_barang', $id_barang);
+    $query = $this->db->get('tb_barang');
+    $row = $query->row();
+    return $row->harga_pokok;
+  }
+
+  function tambah_stok_barang_up($data_tambah)
+  {
+    $this->db->insert('tb_tambah_stok', $data_tambah);
+  }
     
 
   // akhir daftar tambah stok
