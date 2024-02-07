@@ -845,6 +845,14 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         redirect('Admin/tambah_stok_edit/'.$no_faktur);
     }
 
+    public function tambah_stok_print($no_faktur){
+
+        $data['tampil'] = $this->M_admin->tambah_stok_edit($no_faktur);
+        $data['row_faktur'] = $this->M_admin->row_faktur($no_faktur);
+
+        $this->load->view('admin/tambah_stok_print', $data);
+    }
+
     public function tambah_stok_keterangan_up()
     {
         $no_faktur = $this->input->post('no_faktur');
@@ -864,7 +872,6 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         redirect('Admin/tambah_stok_edit/'.$no_faktur);  
     }
 
-   
 
     
 
