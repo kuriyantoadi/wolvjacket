@@ -246,7 +246,8 @@ class Ajax extends CI_Controller
             // Add HTML for action (detail button)
             $row[] = '
                 <a href="'.site_url('Admin/tambah_stok_hapus/'.$item->no_faktur).'" onclick="return confirm(\'Yakin hapus data tambah stok dengan faktur '. $item->no_faktur .' ?\')"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i> Hapus</a>
-                <a href="'.site_url('Admin/tambah_stok_edit/'.$item->no_faktur).'"   class="btn btn-info btn-sm"><i class="bx bxs-edit"></i> Edit</a>                        
+                <a href="'.site_url('Admin/tambah_stok_edit/'.$item->no_faktur).'"   class="btn btn-info btn-sm"><i class="bx bxs-edit"></i> Edit</a>
+                <a class="btn btn-success btn-sm" href="' . site_url('Admin/tambah_stok_print/' . $item->no_faktur) . '"><i class="bx bxs-printer"></i>Print</a>                        
                 <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editModal'.$item->no_faktur.'"><i class="bx bxs-detail"></i>Detail</button>
             ';            
 

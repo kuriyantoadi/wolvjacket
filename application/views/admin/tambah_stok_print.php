@@ -10,14 +10,37 @@
 
 
     <style>
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         .text-title {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 10px;
         }
 
         .table-faktur {
+            margin-bottom: 5px;
+        }
+
+        p {
+            font-size: 12px; /* Contoh pengaturan ukuran font */
+            margin:0;
+        }
+
+        .table-barang {
             margin-bottom: 20px;
         }
+
+        .table-barang th, 
+        .table-barang td{
+            border: 0.2px solid #808080;
+            font-size: 12px; /* Mengatur ukuran font menjadi 14px */
+        }
+        
 
         /* Menyembunyikan tombol cetak saat mencetak */
         @media print {
@@ -29,33 +52,31 @@
     </style>
 </head>
 <body>
-    <div class="container">
-
-       
+    <div style="width: auto; max-width: 580px; min-width: 250px; margin: 0 auto;">
 
             <h3 class="text-title">Faktur WolvJacket</h3>
 
             <table class="table-faktur">
                 <tr>
-                    <td>Tanggal </td>
-                    <td>: <?= $row_faktur->tgl_tambah_stok ?></td>
+                    <td><p>Tanggal</p> </td>
+                    <td><p>: <?= $row_faktur->tgl_tambah_stok ?></p></td>
                 </tr>
                 <tr>
-                    <td>No Faktur </td>
-                    <td>: <?= $row_faktur->no_faktur ?></td>
+                    <td><p>No Faktur </p></td>
+                    <td><p>: <?= $row_faktur->no_faktur ?></p></td>
                 </tr>
                 <tr>
-                    <td>Keterangan </td>
-                    <td>: <?= $row_faktur->keterangan ?></td>
+                    <td><p>Keterangan </p></td>
+                    <td><p>: <?= $row_faktur->keterangan ?></p></td>
                 </tr>
                 
             </table>
 
-            <table class="table table-bordered dt-responsive nowrap w-100">
+            <table class="table-barang">
                     <thead>
                         <tr>
                             <th><center>No</th>
-                            <th><center>Daftar Item Barang</th> 
+                            <th><center>Item Barang</th> 
                             <th><center>Qty</th>
                             <th><center>Harga Pokok</th>
                             <th><center>Total</th>
@@ -79,8 +100,9 @@
 
                 </table>
         
-        <a class="btn btn-secondary btn-hidden" href="<?= site_url('Admin/tambah_stok_edit/'.$row_faktur->no_faktur) ?>">Kembali</a>
-        <button class="btn btn-primary btn-hidden" onclick="printContent()"><i class="bx bxs-printer"></i>Print Faktur</button>
+        <a class="btn btn-sm btn-info btn-hidden" href="<?= site_url('Admin/tambah_stok_edit/'.$row_faktur->no_faktur) ?>">Edit Faktur</a>
+        <a class="btn btn-sm btn-secondary btn-hidden" href="<?= site_url('Admin/daftar_tambah_stok/') ?>">Daftar Tambah Stok</a>
+        <button class="btn btn-sm btn-success btn-hidden" onclick="printContent()"><i class="bx bxs-printer"></i>Print Faktur</button>
 
     </div>
 

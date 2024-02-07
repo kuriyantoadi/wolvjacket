@@ -232,7 +232,7 @@
                                         <td><center><?= $row_faktur->keterangan ?></td>
                                         <td><center>
                                             <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#editModalStok<?= $row_faktur->id_stok ?>"><i class="bx bxs-edit"></i>Edit</button>
-                                            <a class="btn btn-primary btn-sm" href="<?= site_url('Admin/tambah_stok_print/'. $row_faktur->no_faktur) ?>"><i class="bx bxs-printer"></i>Print</a>
+                                            <a class="btn btn-success btn-sm" href="<?= site_url('Admin/tambah_stok_print/'. $row_faktur->no_faktur) ?>"><i class="bx bxs-printer"></i>Print</a>
                                         </td>
                                        
                                     </tr>

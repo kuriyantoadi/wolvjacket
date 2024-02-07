@@ -17,7 +17,7 @@
             <div class="container-fluid">
             <div class="row">
             
-                <div class="col-xl-3 col-md-6">
+                <div class="col-sm-3 col-md-3">
                     <!-- card -->
                     <div class="card card-h-100">
                         <!-- card body -->
@@ -25,7 +25,7 @@
                         <div class="card-body">
                             <div class="row align-items-center">
                                  
-                                <div class="col-12">
+                                <div class="col-12 d-flex align-items-center justify-content-center flex-column">
                                     <i class="bx bx-shopping-bag" style="font-size: 3em"></i>
                                     <h6>Transaksi Penjualan</h6>
                                 </div>
@@ -36,7 +36,7 @@
                     </div><!-- end card -->
                 </div><!-- end col -->
 
-                <div class="col-xl-3 col-md-6">
+                <div class="col-sm-3 col-md-3">
                     <!-- card -->
                     <div class="card card-h-100">
                         <!-- card body -->
@@ -44,7 +44,7 @@
                         <div class="card-body">
                             <div class="row align-items-center">
 
-                                <div class="col-12">
+                                <div class="col-12 d-flex align-items-center justify-content-center flex-column">
                                     <i class="bx bx-box" style="font-size: 3em"></i>
                                     <h6>Data Barang</h6>
                                 </div>
@@ -55,7 +55,7 @@
                     </div><!-- end card -->
                 </div><!-- end col -->
 
-                <div class="col-xl-3 col-md-6">
+                <div class="col-sm-3 col-md-3">
                     <!-- card -->
                     <div class="card card-h-100">
                         <!-- card body -->
@@ -63,7 +63,7 @@
                         <div class="card-body">
                             <div class="row align-items-center">
 
-                                <div class="col-12">
+                                <div class="col-12 d-flex align-items-center justify-content-center flex-column">
                                     <i class="bx bx-user" style="font-size: 3em"></i>
                                     <h6>Data Pengguna</h6>
                                 </div>
@@ -74,7 +74,7 @@
                     </div><!-- end card -->
                 </div><!-- end col -->
 
-                <div class="col-xl-3 col-md-6">
+                <div class="col-sm-3 col-md-3">
                     <!-- card -->
                     <div class="card card-h-100">
                         <!-- card body -->
@@ -82,9 +82,9 @@
                         <div class="card-body">
                             <div class="row align-items-center">
 
-                                <div class="col-12">
+                                <div class="col-12 d-flex align-items-center justify-content-center flex-column">
                                     <i class="bx bxs-inbox" style="font-size: 3em"></i>
-                                    <h6>Tambah Sotk</h6>
+                                    <h6>Tambah Stok</h6>
                                 </div>
 
                             </div>
@@ -93,7 +93,7 @@
                     </div><!-- end card -->
                 </div><!-- end col -->
 
-                <div class="col-xl-3 col-md-6">
+                <div class="col-sm-3 col-md-3">
                     <!-- card -->
                     <div class="card card-h-100">
                         <!-- card body -->
@@ -101,7 +101,7 @@
                         <div class="card-body">
                             <div class="row align-items-center">
 
-                                 <div class="col-12">
+                                <div class="col-12 d-flex align-items-center justify-content-center flex-column">
                                     <i class="bx bx-repeat" style="font-size: 3em"></i>
                                     <h6>Return Ke Produsen</h6>
                                 </div>
@@ -112,7 +112,7 @@
                     </div><!-- end card -->
                 </div><!-- end col -->
 
-                <div class="col-xl-3 col-md-6">
+                <div class="col-sm-3 col-md-3">
                     <!-- card -->
                     <div class="card card-h-100">
                         <!-- card body -->
@@ -120,7 +120,7 @@
                         <div class="card-body">
                             <div class="row align-items-center">
 
-                                <div class="col-12">
+                                <div class="col-12 d-flex align-items-center justify-content-center flex-column">
                                     <i class="bx bx-rotate-right" style="font-size: 3em"></i>
                                     <h6>Refund</h6>
                                 </div>
@@ -131,7 +131,7 @@
                     </div><!-- end card -->
                 </div><!-- end col -->
 
-                <div class="col-xl-3 col-md-6">
+                <div class="col-sm-3 col-md-3">
                     <!-- card -->
                     <div class="card card-h-100">
                         <!-- card body -->
@@ -139,7 +139,7 @@
                         <div class="card-body">
                             <div class="row align-items-center">
 
-                                <div class="col-12">
+                                <div class="col-12 d-flex align-items-center justify-content-center flex-column">
                                     <i class="bx bx-closet" style="font-size: 3em"></i>
                                     <h6>Set Stok Akhir</h6>
                                 </div>
@@ -150,7 +150,7 @@
                     </div><!-- end card -->
                 </div><!-- end col -->
 
-                <div class="col-xl-3 col-md-6">
+                <div class="col-sm-3 col-md-3">
                     <!-- card -->
                     <div class="card card-h-100">
                         <!-- card body -->
@@ -158,7 +158,7 @@
                         <div class="card-body">
                             <div class="row align-items-center">
 
-                                <div class="col-12">
+                                <div class="col-12 d-flex align-items-center justify-content-center flex-column">
                                     <i class="bx bx-joystick" style="font-size: 3em"></i>
                                     <h6>Setting Info</h6>
                                 </div>
