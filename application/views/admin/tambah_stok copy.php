@@ -13,31 +13,11 @@
             <div class="col-xl-6">
                 <!-- bagian kosong -->
             </div>
-
-                <div class="col-xl-4">
+           
+        
+                <div class="col-xl-6">
                    
-                    <div class="card">  
-                        <div class="card-body">
 
-                        <h4 class="mb-sm-4 font-size-18 ">Kategori Barang</h4>
-
-                        <a class="btn btn-success  btn-sm" href="<?= site_url('Admin/tambah_stok') ?>">Semua</a>
-
-                        <?php foreach ($tampil_kategori as $row): ?>
-
-                                <a class="btn btn-info  btn-sm" style="margin: 3px" href="<?= site_url('Admin/tambah_stok_kategori/'. $row->id_kategori_barang) ?>">
-                                    <?= $row->nama_kategori_barang?>
-                                </a>
-
-                        <?php endforeach; ?> 
-                                                
-                        </div>
-                    </div>
-                </div> 
-                <!-- end col -->
-
-                <div class="col-xl-8">
-                   
                     <div class="card">  
                         <div class="card-body">
 
@@ -76,39 +56,39 @@
                 </div> 
                 <!-- end col -->
 
-            <div class="col-xl-12">
-                <div class="card">  
-                    <div class="card-body">
 
-                    <h4 class="mb-sm-4 font-size-18 ">Daftar Barang Tambah Stok</h4>
+                <div class="col-xl-6">
+                    <div class="card">  
+                        <div class="card-body">
 
-                    <table id="tabelKeranjang" class="table table-bordered dt-responsive table-hover table-striped  nowrap w-100">
-                        <thead>
-                            <tr>
-                                <th><center>No</th>
-                                <th><center>Nama Barang</th>
-                                <th><center>Harga Pokok</th> 
-                                <th><center>Qty</th>  
-                                <th><center>Total</th>
-                                <th><center>Opsi</th>
-                            </tr>
-                        </thead>
-                            <tbody id="tabelKeranjang">
-                            <!-- Baris-baris keranjang -->
-                        </tbody>
-                    
-                    </table>
+                        <h4 class="mb-sm-4 font-size-18 ">Daftar Barang Tambah Stok</h4>
+
+                        <table id="tabelKeranjang" class="table table-bordered dt-responsive table-hover table-striped  nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th><center>No</th>
+                                    <th><center>Nama Barang</th>
+                                    <th><center>Harga Pokok</th> 
+                                    <th><center>Qty</th>  
+                                    <th><center>Total</th>
+                                    <th><center>Opsi</th>
+                                </tr>
+                            </thead>
+                             <tbody id="tabelKeranjang">
+                                <!-- Baris-baris keranjang -->
+                            </tbody>
                         
-                        <strong>Keterangan</strong>
-                        <?= form_open('Admin/tambah_stok_up') ?>
-                        <input type="text" class="form-control" name="keterangan">
-                        <input style="float: right;" type="submit" name="submit" value="Proses" onclick="return confirm('Data Sudah Sesuai?')" class="btn mt-2 btn-md btn-success">
-                        <?= form_close() ?>
+                        </table>
+                            
+                            <strong>Keterangan</strong>
+                            <?= form_open('Admin/tambah_stok_up') ?>
+                            <input type="text" class="form-control" name="keterangan">
+                            <input type="submit" name="submit" value="Proses" onclick="return confirm('Data Sudah Sesuai?')" class="btn mt-2 btn-md btn-success">
+                            <?= form_close() ?>
 
+                        </div>
                     </div>
-                </div>
-            </div> <!-- end col -->
-                
+                </div> <!-- end col -->
                 
             </div> <!-- end row -->
 

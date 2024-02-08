@@ -19,7 +19,7 @@
 
         .text-title {
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .table-faktur {
@@ -27,7 +27,7 @@
         }
 
         p {
-            font-size: 12px; /* Contoh pengaturan ukuran font */
+            font-size: 14px; /* Contoh pengaturan ukuran font */
             margin:0;
         }
 
@@ -52,53 +52,53 @@
     </style>
 </head>
 <body>
-    <div style="width: auto; max-width: 580px; min-width: 250px; margin: 0 auto;">
 
-            <h3 class="text-title">Faktur WolvJacket</h3>
+<div class="container">
+    <h3 class="text-title">Faktur WolvJacket</h3>
 
-            <table class="table-faktur">
+    <table class="table-faktur">
+        <tr>
+            <td><p>Tanggal</p> </td>
+            <td><p>: <?= $row_faktur->tgl_tambah_stok ?></p></td>
+        </tr>
+        <tr>
+            <td><p>No Faktur </p></td>
+            <td><p>: <?= $row_faktur->no_faktur ?></p></td>
+        </tr>
+        <tr>
+            <td><p>Keterangan </p></td>
+            <td><p>: <?= $row_faktur->keterangan ?></p></td>
+        </tr>
+        
+    </table>
+
+    <table class="table table-borderd">
+            <thead>
                 <tr>
-                    <td><p>Tanggal</p> </td>
-                    <td><p>: <?= $row_faktur->tgl_tambah_stok ?></p></td>
+                    <th><center>No</th>
+                    <th><center>Item Barang</th> 
+                    <th><center>Qty</th>
+                    <th><center>Harga Pokok</th>
+                    <th><center>Total</th>
                 </tr>
-                <tr>
-                    <td><p>No Faktur </p></td>
-                    <td><p>: <?= $row_faktur->no_faktur ?></p></td>
-                </tr>
-                <tr>
-                    <td><p>Keterangan </p></td>
-                    <td><p>: <?= $row_faktur->keterangan ?></p></td>
-                </tr>
-                
-            </table>
+            </thead>
 
-            <table class="table-barang">
-                    <thead>
-                        <tr>
-                            <th><center>No</th>
-                            <th><center>Item Barang</th> 
-                            <th><center>Qty</th>
-                            <th><center>Harga Pokok</th>
-                            <th><center>Total</th>
-                        </tr>
-                    </thead>
+            <tbody>
+                <?php $no=1; ?>
+                <?php foreach ($tampil as $row) { ?>
+                    <tr>
+                        <td><center><?= $no++ ?></td>
+                        <td><?= $row->nama_barang ?></td>
+                        <td><center><?= $row->jumlah ?></td>
+                        <td><center>Rp <?= number_format($row->harga_pokok) ?></td>
+                        <td><center>Rp <?= number_format($row->harga_pokok * $row->jumlah) ?></td>
+                    
+                    </tr>
 
-                    <tbody>
-                        <?php $no=1; ?>
-                        <?php foreach ($tampil as $row) { ?>
-                            <tr>
-                                <td><center><?= $no++ ?></td>
-                                <td><?= $row->nama_barang ?></td>
-                                <td><center><?= $row->jumlah ?></td>
-                                <td><center>Rp <?= number_format($row->harga_pokok) ?></td>
-                                <td><center>Rp <?= number_format($row->harga_pokok * $row->jumlah) ?></td>
-                            
-                            </tr>
+                <?php } ?>
+            </tbody>
 
-                        <?php } ?>
-                    </tbody>
-
-                </table>
+        </table>
         
         <a class="btn btn-sm btn-info btn-hidden" href="<?= site_url('Admin/tambah_stok_edit/'.$row_faktur->no_faktur) ?>">Edit Faktur</a>
         <a class="btn btn-sm btn-secondary btn-hidden" href="<?= site_url('Admin/daftar_tambah_stok/') ?>">Daftar Tambah Stok</a>

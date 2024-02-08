@@ -48,6 +48,15 @@ class M_admin extends CI_Model
     return $tampil;
   }
 
+  function tampil_barang_kategori($id_kategori_barang)
+  {
+    $this->db->select('*');
+    $this->db->from('tb_barang');
+    $this->db->where('id_kategori_barang', $id_kategori_barang);
+    $query = $this->db->get()->result();
+    return $query;
+  }
+
 
   function barang_edit()
   {

@@ -40,7 +40,7 @@
                     <!-- card -->
                     <div class="card card-h-100">
                         <!-- card body -->
-                        <a href="">
+                        <a href="<?= base_url() ?>Admin/barang">
                         <div class="card-body">
                             <div class="row align-items-center">
 
@@ -59,7 +59,7 @@
                     <!-- card -->
                     <div class="card card-h-100">
                         <!-- card body -->
-                        <a href="">
+                        <a href="<?= base_url() ?>Admin/pengguna">
                         <div class="card-body">
                             <div class="row align-items-center">
 
@@ -78,7 +78,7 @@
                     <!-- card -->
                     <div class="card card-h-100">
                         <!-- card body -->
-                        <a href="">
+                        <a href="<?= base_url() ?>Admin/tambah_stok">
                         <div class="card-body">
                             <div class="row align-items-center">
 

@@ -628,42 +628,12 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $id_user = $this->session->userdata('ses_id');
 
         $data['tampil'] = $this->M_admin->tampil_barang();
-        $data['tampil_kategori'] = $this->M_admin->tampil_kategori_barang();
         $data['tampil_keranjang'] = $this->M_admin->tampil_keranjang_pengguna($id_user);
 
         $this->load->view('template/header-admin', $header);
         $this->load->view('admin/tambah_stok', $data);
         $this->load->view('template/footer-admin');
     }
-
-     public function tambah_stok_kategori($id_kategori_barang)
-    {
-        $header['title']='WolvJacket';
-        $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
-        $id_user = $this->session->userdata('ses_id');
-
-        $data['tampil'] = $this->M_admin->tampil_barang_kategori($id_kategori_barang);
-        $data['tampil_kategori'] = $this->M_admin->tampil_kategori_barang();
-        $data['tampil_keranjang'] = $this->M_admin->tampil_keranjang_pengguna($id_user);
-
-        $this->load->view('template/header-admin', $header);
-        $this->load->view('admin/tambah_stok', $data);
-        $this->load->view('template/footer-admin');
-    }
-
-    //  public function tambah_stok()
-    // {
-    //     $header['title']='WolvJacket';
-    //     $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
-    //     $id_user = $this->session->userdata('ses_id');
-
-    //     $data['tampil'] = $this->M_admin->tampil_barang();
-    //     $data['tampil_keranjang'] = $this->M_admin->tampil_keranjang_pengguna($id_user);
-
-    //     $this->load->view('template/header-admin', $header);
-    //     $this->load->view('admin/tambah_stok', $data);
-    //     $this->load->view('template/footer-admin');
-    // }
 
     public function tampil_keranjang() {
         // Mengambil data barang dari model
