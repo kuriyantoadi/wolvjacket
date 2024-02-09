@@ -15,6 +15,7 @@
                                 <th>No Faktur</th>
                                 <th>Tanggal</th>
                                 <th>Nama Barang</th>
+                                <th>Brand</th>
                                 <th>Qty</th>
                                 <th>Harga Pokok</th>
                                 <th>Total</th>
@@ -33,6 +34,7 @@
                                     <td><?= $item->no_faktur ?></td>
                                     <td><?= $item->tgl_tambah_stok ?></td>
                                     <td><?= $item->nama_barang ?></td>
+                                    <td><?= $item->nama_brand ?></td>
                                     <td><?= $item->jumlah ?></td>
                                     <td><?= 'Rp '. number_format($item->harga_pokok) ?></td>
                                     <td><?= 'Rp '. number_format($item->jumlah * $item->harga_pokok) ?></td>

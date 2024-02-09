@@ -169,65 +169,6 @@ class Ajax extends CI_Controller
         // output to json format
         echo json_encode($output);
     }
-    
-
-    // function ajax_tambah_stok() {
-    //     $list = $this->M_ajax->get_datatables();
-    //     $data = array();
-    //     $no = @$_POST['start'];
-    //     foreach ($list as $item) {
-    //         $no++;
-    //         $row = array();
-    //         $row[] = $no;
-    //         $row[] = $item->nama_barang;
-    //         $row[] = 'Rp '. $item->harga_pokok;
-    //         // $row[] = '<input type="number" id="jumlahBarang' . $item['id_barang'] . '" value="1" min="1">';
-    //         $row[] = '<a class="tambahBarang" onclick="tambahKeKeranjang(\'' . $item['nama_barang'] . '\', ' . $item['harga'] . ', \'jumlahBarang' . $item['id_barang'] . '\', ' . $item['id_barang'] . ')">Tambah</a>';
-    //         $data[] = $row;
-    //     }
-    //     $output = array(
-    //                 "draw" => @$_POST['draw'],
-    //                 "recordsTotal" => $this->M_ajax->count_all(),
-    //                 "recordsFiltered" => $this->M_ajax->count_filtered(),
-    //                 "data" => $data,
-    //             );
-    //     // output to json format
-    //     echo json_encode($output);
-    // }
-
-    // function ajax_tambah_stok_daftar() {
-    //     $list = $this->M_ajax_tambah_stok->get_datatables();
-    //     $data = array();
-    //     $no = @$_POST['start'];
-    //     foreach ($list as $item) {
-
-    //         $no++;
-    //         $row = array();
-    //         $row[] = $item->no_faktur;
-    //         $row[] = $item->tgl_tambah_stok;
-    //         $row[] = 'Rp '. number_format($item->total_harga_pokok);
-    //         $row[] = $item->total_barang;
-    //         $row[] = $item->id_user;
-    //         $row[] = $item->keterangan;
-
-    //         // add html for action
-    //         $row[] = '
-    //             <button type="button" class="btn btn-primary btn-sm btn-detail" data-no-faktur="'.$item->no_faktur.'" data-toggle="modal" data-target="#detailModal">
-    //                 <i class="bx bx-detail"></i> Detail
-    //             </button>
-    //             ';            
-                    
-    //         $data[] = $row;
-    //         }
-    //     $output = array(
-    //                 "draw" => @$_POST['draw'],
-    //                 "recordsTotal" => $this->M_ajax->count_all(),
-    //                 "recordsFiltered" => $this->M_ajax->count_filtered(),
-    //                 "data" => $data,
-    //             );
-    //     // output to json format
-    //     echo json_encode($output);
-    // }
 
     function ajax_tambah_stok_daftar() {
         $list = $this->M_ajax_tambah_stok->get_datatables();

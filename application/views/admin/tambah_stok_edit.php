@@ -252,13 +252,15 @@
                 <div class="col-12">
                     <div class="card">  
                         <div class="card-body">
-                        <h3 class="mb-sm-3 font-size-18">Daftar Barang Tambah Stok Faktur <?= $no_faktur ?></h3>
+                        <h3 class="mb-sm-3 font-size-18">Daftar Barang Tambah Stok</h3>
+                        <h3 class="mb-sm-3 font-size-14">Faktur <?= $no_faktur ?></h3>
                         
                         <table id='datatable' class="table table-bordered dt-responsive table-hover table-striped  nowrap w-100">
                             <thead>
                                 <tr>
                                     <th><center>No</th>
-                                    <th><center>Daftar Item Barang</th> 
+                                    <th><center>Daftar Item Barang</th>
+                                    <th><center>Brand</th>  
                                     <th><center>Qty</th>
                                     <th><center>Harga Pokok</th>
                                     <th><center>Total</th>
@@ -272,6 +274,7 @@
                                     <tr>
                                         <td><center><?= $no++ ?></td>
                                         <td><?= $row->nama_barang ?></td>
+                                        <td><center><?= $row->nama_brand ?></td>
                                         <td><center><?= $row->jumlah ?></td>
                                         <td><center>Rp <?= number_format($row->harga_pokok) ?></td>
                                         <td><center>Rp <?= number_format($row->harga_pokok * $row->jumlah) ?></td>

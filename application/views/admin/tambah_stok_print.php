@@ -76,7 +76,8 @@
             <thead>
                 <tr>
                     <th><center>No</th>
-                    <th><center>Item Barang</th> 
+                    <th><center>Item Barang</th>
+                    <th><center>Brand</th>  
                     <th><center>Qty</th>
                     <th><center>Harga Pokok</th>
                     <th><center>Total</th>
@@ -89,6 +90,7 @@
                     <tr>
                         <td><center><?= $no++ ?></td>
                         <td><?= $row->nama_barang ?></td>
+                        <td><center><?= $row->nama_brand ?></td>
                         <td><center><?= $row->jumlah ?></td>
                         <td><center>Rp <?= number_format($row->harga_pokok) ?></td>
                         <td><center>Rp <?= number_format($row->harga_pokok * $row->jumlah) ?></td>

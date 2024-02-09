@@ -48,6 +48,7 @@
                                 <tr>
                                     <th><center>No</th>
                                     <th><center>Nama Barang</th>
+                                    <th><center>Brand</th>
                                     <th><center>Harga Barang</th> 
                                     <th><center>Jumlah</th> 
                                     <th><center>Opsi</th>
@@ -60,7 +61,8 @@
                                 <tr>
                                     
                                     <td><center><?= $no++; ?></td>
-                                    <td><center><?= $row->nama_barang?></td>
+                                    <td><center><?= $row->nama_barang ?></td>
+                                    <td><center><?= $row->nama_brand ?></td>
                                     <td><center>Rp <?= number_format($row->harga_pokok) ?></td>
                                     <td><input type="number" class="form-control" id="jumlahBarang<?= $row->id_barang; ?>" value="1" min="1" maxlength="5"></td>
                                     <td><center><button class="btn btn-sm btn-primary" onclick="tambahKeKeranjang('<?= $row->nama_barang; ?>', <?= $row->harga_pokok; ?>, 'jumlahBarang<?= $row->id_barang; ?>', <?= $row->id_barang; ?>)"><i class="fas fa-shopping-cart"></i></button></td>
@@ -87,6 +89,7 @@
                             <tr>
                                 <th><center>No</th>
                                 <th><center>Nama Barang</th>
+                                <th><center>Brand</th>
                                 <th><center>Harga Pokok</th> 
                                 <th><center>Qty</th>  
                                 <th><center>Total</th>
@@ -164,16 +167,19 @@
             cell0.style.textAlign = 'center';
 
             row.insertCell(1).textContent = tampil_kolom.nama_barang;
-            var hargaPokokCell = row.insertCell(2);
+
+            row.insertCell(2).textContent = tampil_kolom.nama_brand;
+            
+            var hargaPokokCell = row.insertCell(3);
             hargaPokokCell.textContent = formatCurrency(tampil_kolom.harga_pokok);
 
             // Tampil jumlah
-            var kolom_jumlah = row.insertCell(3);
+            var kolom_jumlah = row.insertCell(4);
             kolom_jumlah.textContent = tampil_kolom.jumlah;
             kolom_jumlah.style.textAlign = 'center';
 
             // Operasi matematika jumlah * harga pokok
-            var totalHargaCell = row.insertCell(4);
+            var totalHargaCell = row.insertCell(5);
             var totalHarga = tampil_kolom.jumlah * tampil_kolom.harga_pokok;
             totalHargaCell.textContent = formatCurrency(totalHarga);
 
@@ -191,7 +197,7 @@
             iconElement.className = 'fas fa-trash-alt';
             deleteButton.appendChild(iconElement);
 
-            var cell = row.insertCell(5);
+            var cell = row.insertCell(6);
             cell.appendChild(deleteButton);
             cell.style.textAlign = 'center';
 

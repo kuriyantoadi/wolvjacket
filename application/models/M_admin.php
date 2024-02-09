@@ -48,10 +48,19 @@ class M_admin extends CI_Model
     return $tampil;
   }
 
+  function tampil_barang_stok()
+  {
+    $this->db->from('tb_barang');
+    $this->db->join('tb_brand', 'tb_barang.id_brand = tb_brand.id_brand');
+    $query = $this->db->get()->result();
+    return $query;
+  }
+
   function tampil_barang_kategori($id_kategori_barang)
   {
     $this->db->select('*');
     $this->db->from('tb_barang');
+    $this->db->join('tb_brand', 'tb_barang.id_brand = tb_brand.id_brand');
     $this->db->where('id_kategori_barang', $id_kategori_barang);
     $query = $this->db->get()->result();
     return $query;
@@ -254,10 +263,18 @@ class M_admin extends CI_Model
   {
     $this->db->select('*');
     $this->db->from('tb_keranjang_masuk');
-    $this->db->join('tb_barang', 'tb_keranjang_masuk.id_barang = tb_barang.id_barang');
+    $this->db->join('tb_barang as barang_keranjang', 'tb_keranjang_masuk.id_barang = barang_keranjang.id_barang');
+    $this->db->join('tb_brand', 'barang_keranjang.id_brand = tb_brand.id_brand');
     $this->db->where('tb_keranjang_masuk.id_user', $id_user);
-    $query = $this->db->get()->result();
-    return $query;
+
+    $query = $this->db->get();
+
+    if ($query->num_rows() > 0) {
+        return $query->result(); // Mengembalikan hasil query sebagai objek
+    } else {
+        return array(); // Mengembalikan array kosong jika tidak ada hasil
+    }
+
   }
 
   public function cek_id_barang($id_barang) {
@@ -406,6 +423,7 @@ class M_admin extends CI_Model
     $this->db->select('*');
     $this->db->from('tb_tambah_stok');
     $this->db->join('tb_barang', 'tb_tambah_stok.id_barang = tb_barang.id_barang');
+    $this->db->join('tb_brand', 'tb_barang.id_brand = tb_brand.id_brand');
     $this->db->where('no_faktur', $no_faktur);
     $query = $this->db->get()->result();
     return $query;
@@ -432,18 +450,22 @@ class M_admin extends CI_Model
 
 
   public function get_data_by_no_faktur($no_faktur) {
-        // Ambil data dari tabel berdasarkan no_faktur tertentu
-        $this->db->where('no_faktur', $no_faktur);
-        $this->db->join('tb_barang', 'tb_tambah_stok.id_barang = tb_barang.id_barang');
-        $query = $this->db->get('tb_tambah_stok'); // Ganti 'nama_tabel' dengan nama tabel Anda
+    $this->db->select('*');
+    $this->db->from('tb_tambah_stok');
+    $this->db->join('tb_barang', 'tb_tambah_stok.id_barang = tb_barang.id_barang');
+    $this->db->join('tb_brand', 'tb_barang.id_brand = tb_brand.id_brand');
+    $this->db->where('tb_tambah_stok.no_faktur', $no_faktur);
 
-        // Periksa apakah query berhasil dieksekusi
-        if ($query->num_rows() > 0) {
-            return $query->result(); // Kembalikan hasil query
-        } else {
-            return array(); // Kembalikan array kosong jika tidak ada hasil
-        }
+    $query = $this->db->get();
+
+    if ($query->num_rows() > 0) {
+        return $query->result(); // Mengembalikan hasil query sebagai objek
+    } else {
+        return array(); // Mengembalikan array kosong jika tidak ada hasil
     }
+}
+
+
 
     function tambah_stok_edit_up($data_edit, $id_stok)
     {

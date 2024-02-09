@@ -627,7 +627,7 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $id_user = $this->session->userdata('ses_id');
 
-        $data['tampil'] = $this->M_admin->tampil_barang();
+        $data['tampil'] = $this->M_admin->tampil_barang_stok();
         $data['tampil_kategori'] = $this->M_admin->tampil_kategori_barang();
         $data['tampil_keranjang'] = $this->M_admin->tampil_keranjang_pengguna($id_user);
 
