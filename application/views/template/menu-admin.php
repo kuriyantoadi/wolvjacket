@@ -127,7 +127,7 @@
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle arrow-none" href="" id="topnav-pages" role="button">
-                            <i class="dripicons-trophy"></i><span data-key="t-apps"> Laporan</span>
+                            <i class="dripicons-document"></i><span data-key="t-apps"> Laporan</span>
                             <div class="arrow-down"></div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-pages">
@@ -139,7 +139,7 @@
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle arrow-none" href="" id="topnav-pages" role="button">
-                            <i class="dripicons-trophy"></i><span data-key="t-apps"> Grafik Penjualan</span>
+                            <i class="dripicons-graph-bar"></i><span data-key="t-apps"> Grafik Penjualan</span>
                             <div class="arrow-down"></div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-pages">
