@@ -219,7 +219,7 @@
         var totalCell = rowTotal.insertCell(0);
         totalCell.textContent = "Total";
         totalCell.style.fontWeight = 'bold';
-        totalCell.setAttribute('colspan', '4'); // Gabungkan 4 kolom
+        totalCell.setAttribute('colspan', '5'); // Gabungkan 4 kolom
 
         var totalCell = rowTotal.insertCell(1);
         // totalCell.setAttribute('colspan', '2');

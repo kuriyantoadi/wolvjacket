@@ -14,7 +14,6 @@
             </div>
             <!-- end page title -->
 
-            <div class="container-fluid">
             <div class="row">
             
                 <div class="col-sm-3 col-md-3">
@@ -169,12 +168,12 @@
                     </div><!-- end card -->
                 </div><!-- end col -->
             
-            </div>
-    </div>
+        </div>
 
 
-        </div> <!-- container-fluid -->
-    </div>
+    </div> <!-- container-fluid -->
+    
+</div>
     <!-- End Page-content -->
 
 
