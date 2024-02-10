@@ -55,7 +55,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                 <?php $no=1; ?>
+                                <?php $no=1; ?>
                                 <?php foreach ($tampil as $row): ?>
                                
                                 <tr>

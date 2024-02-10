@@ -131,9 +131,17 @@
                             <div class="arrow-down"></div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-pages">
-                            <a href="#" class="dropdown-item" data-key="t-calendar">Rangking Perhari (Pelanggan)</a>
-                            <a href="#" class="dropdown-item" data-key="t-calendar">Rangking Bulan (Pelanggan)</a>
-                            <a href="#" class="dropdown-item" data-key="t-calendar">Rangking Tahun (Pelanggan)</a>
+                            <a href="#" class="dropdown-item" data-key="t-calendar">Kartu Stok</a>
+                            <a href="<?= base_url() ?>Laporan/kartu_stok_barang_datang" class="dropdown-item" data-key="t-calendar">Kartu Stok Datang Barang</a>
+                            <a href="#" class="dropdown-item" data-key="t-calendar">Penjualan Harian</a>
+                            <a href="#" class="dropdown-item" data-key="t-calendar">Transaksi Harian (Semua)</a>
+                            <a href="#" class="dropdown-item" data-key="t-calendar">Transaksi Harian (Tunai)</a>
+                            <a href="#" class="dropdown-item" data-key="t-calendar">Transaksi Harian (Debit)</a>
+                            <a href="#" class="dropdown-item" data-key="t-calendar">Transaksi Harian (Transfer)</a>
+                            <a href="#" class="dropdown-item" data-key="t-calendar">Penjualan Per Tahun</a>
+                            <a href="#" class="dropdown-item" data-key="t-calendar">Stok Barang Dagang</a>
+                           
+
                         </div>
                     </li>
 
@@ -143,9 +151,8 @@
                             <div class="arrow-down"></div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-pages">
-                            <a href="#" class="dropdown-item" data-key="t-calendar">Rangking Perhari (Pelanggan)</a>
-                            <a href="#" class="dropdown-item" data-key="t-calendar">Rangking Bulan (Pelanggan)</a>
-                            <a href="#" class="dropdown-item" data-key="t-calendar">Rangking Tahun (Pelanggan)</a>
+                            <a href="#" class="dropdown-item" data-key="t-calendar">Grafik Penjualan per Bulan</a>
+                            <a href="#" class="dropdown-item" data-key="t-calendar">Grafik Penjualan per Tahun</a>
                         </div>
                     </li>
 

@@ -25,7 +25,7 @@
                             <div class="row align-items-center">
                                  
                                 <div class="col-12 d-flex align-items-center justify-content-center flex-column">
-                                    <i class="bx bx-shopping-bag" style="font-size: 3em"></i>
+                                    <i class="dripicons-cart" style="font-size: 3em"></i>
                                     <h6>Transaksi Penjualan</h6>
                                 </div>
 
@@ -44,7 +44,7 @@
                             <div class="row align-items-center">
 
                                 <div class="col-12 d-flex align-items-center justify-content-center flex-column">
-                                    <i class="bx bx-box" style="font-size: 3em"></i>
+                                    <i class="dripicons-view-thumb" style="font-size: 3em"></i>
                                     <h6>Data Barang</h6>
                                 </div>
 
@@ -63,7 +63,7 @@
                             <div class="row align-items-center">
 
                                 <div class="col-12 d-flex align-items-center justify-content-center flex-column">
-                                    <i class="bx bx-user" style="font-size: 3em"></i>
+                                    <i class="dripicons-user" style="font-size: 3em"></i>
                                     <h6>Data Pengguna</h6>
                                 </div>
 
@@ -82,7 +82,7 @@
                             <div class="row align-items-center">
 
                                 <div class="col-12 d-flex align-items-center justify-content-center flex-column">
-                                    <i class="bx bxs-inbox" style="font-size: 3em"></i>
+                                    <i class="dripicons-plus" style="font-size: 3em"></i>
                                     <h6>Tambah Stok</h6>
                                 </div>
 
@@ -101,7 +101,7 @@
                             <div class="row align-items-center">
 
                                 <div class="col-12 d-flex align-items-center justify-content-center flex-column">
-                                    <i class="bx bx-repeat" style="font-size: 3em"></i>
+                                    <i class="dripicons-return" style="font-size: 3em"></i>
                                     <h6>Return Ke Produsen</h6>
                                 </div>
                                  
@@ -120,7 +120,7 @@
                             <div class="row align-items-center">
 
                                 <div class="col-12 d-flex align-items-center justify-content-center flex-column">
-                                    <i class="bx bx-rotate-right" style="font-size: 3em"></i>
+                                    <i class="dripicons-retweet" style="font-size: 3em"></i>
                                     <h6>Refund</h6>
                                 </div>
 
@@ -139,7 +139,7 @@
                             <div class="row align-items-center">
 
                                 <div class="col-12 d-flex align-items-center justify-content-center flex-column">
-                                    <i class="bx bx-closet" style="font-size: 3em"></i>
+                                    <i class="dripicons-lock" style="font-size: 3em"></i>
                                     <h6>Set Stok Akhir</h6>
                                 </div>
 
@@ -158,7 +158,7 @@
                             <div class="row align-items-center">
 
                                 <div class="col-12 d-flex align-items-center justify-content-center flex-column">
-                                    <i class="bx bx-joystick" style="font-size: 3em"></i>
+                                    <i class="dripicons-gear" style="font-size: 3em"></i>
                                     <h6>Setting Info</h6>
                                 </div>
 
