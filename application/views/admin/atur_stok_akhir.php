@@ -6,23 +6,16 @@
 
             <!-- start page title -->
             <div class="row">
-                
-
-                <div class="col-12">
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        PROSES PENGATURAN STOK HANYA DILAKUKAN PADA AKHIR PERIODE PENJUALAN SETIAP BULAN !
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                </div>
 
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                         <h4 class="mb-sm-0 font-size-18">Atur Stok Akhir</h4>
+                        <?= $this->session->flashdata('msg') ?>
                     </div>
                 </div>
 
 
-                <?= form_open('Laporan/kartu_stok_barang_datang_up'); ?>
+                <?= form_open('Admin/atur_stok_akhir_up'); ?>
                 <div class="col-6">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                         <input name="bulan_tahun" class="form-control m-1" type="month" value="" id="example-month-input" required>

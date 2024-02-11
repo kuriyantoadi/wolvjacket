@@ -541,4 +541,44 @@ class M_admin extends CI_Model
 
   // akhir daftar tambah stok
 
+
+  // awal Atur Stok Akhir
+  // public function atur_stok_akhir_up($bulan_tahun) {
+  //   $this->db->select('id_barang, LEFT(tgl_tambah_stok, 7) AS bulan_tahun, harga_pokok, SUM(jumlah) AS total_stok, SUM(harga_pokok * jumlah) AS total_modal');
+  //   $this->db->from('tb_tambah_stok');
+  //   $this->db->where('bulan_tahun',`$bulan_tahun`);
+  //   $this->db->group_by('id_barang, bulan_tahun, harga_pokok');
+  //   $query = $this->db->get();
+  //   return $query->result_array();
+  // }
+
+  public function cari_stok($start_date, $end_date) {
+    $this->db->select('id_barang, LEFT(tgl_tambah_stok, 7) AS bulan_tahun, harga_pokok, SUM(jumlah) AS total_stok');
+    $this->db->from('tb_tambah_stok');
+    $this->db->where('tgl_tambah_stok >=', $start_date);
+    $this->db->where('tgl_tambah_stok <', $end_date);
+    $this->db->group_by('id_barang, bulan_tahun');
+    $query = $this->db->get();
+    return $query->result_array();
+
+  }
+
+  public function cek_bulan_stok($bulan_tahun){
+    $this->db->select('bulan_tahun');
+    $this->db->from('tb_stok_akhir');
+    $this->db->where('bulan_tahun', $bulan_tahun);
+    $this->db->limit(1); // Mengambil hanya satu baris
+
+    // Menjalankan query dan mengembalikan hasilnya
+    $query = $this->db->get();
+    return $query->row(); // Mengembalikan baris terakhir sebagai objek tunggal
+  }
+
+  public function cek_tambah_Stok(){
+
+  }
+
+  // akhir Atur Stok Akhir
+ 
+
 }
