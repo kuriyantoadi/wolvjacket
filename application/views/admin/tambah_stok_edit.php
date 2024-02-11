@@ -25,7 +25,9 @@
                     <label class="control-label mt-3" for="email">Cari Barang :</label>
 
                     <select id="pilihan_barang" class="form-control" name="id_barang" data-trigger placeholder="Cari Barang" required>
-                                
+                        
+                        <option value="">Pilihan</option>
+
                         <?php foreach ($tampil_barang as $row_barang): ?>
                         <option value="<?= $row_barang->id_barang ?>"><?= $row_barang->nama_barang ?></option>
                         
@@ -176,7 +178,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h3 class="mb-sm-0 font-size-22">Edit Transaksi Tambah Stok</h3>
+                        <h4 class="mb-sm-0 font-size-18">Edit Transaksi Tambah Stok</h4>
+
 
                     </div>
                 </div>
@@ -302,17 +305,21 @@
         $(document).ready(function() {
             $('#pilihan_barang').change(function() {
                 var id_barang = $(this).val();
-                $.ajax({
-                    url: '<?= base_url('Admin/get_harga_pokok') ?>',
-                    method: 'POST',
-                    data: {id_barang: id_barang},
-                    success: function(response) {
-                        $('#harga_pokok').val(response);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
+                if (id_barang === '') {
+                    $('#harga_pokok').val('Anda Belum Memilih Barang');
+                } else {
+                    $.ajax({
+                        url: '<?= base_url('Admin/get_harga_pokok') ?>',
+                        method: 'POST',
+                        data: {id_barang: id_barang},
+                        success: function(response) {
+                            $('#harga_pokok').val(response);
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                }
             });
         });
     </script>

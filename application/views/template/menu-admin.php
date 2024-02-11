@@ -106,7 +106,7 @@
                             <a href="<?= base_url() ?>Admin/barang" class="dropdown-item" data-key="t-calendar">Data Barang</a>
                             <a href="<?= base_url() ?>Admin/kategori_barang" class="dropdown-item" data-key="t-chat">Kategori Barang</a>
                             <a href="<?= base_url() ?>Admin/brand" class="dropdown-item" data-key="t-chat">Brand</a>
-                            <a href="#" class="dropdown-item" data-key="t-chat">Atur Stok Akhir</a>
+                            <a href="<?= base_url() ?>Admin/atur_stok_akhir" class="dropdown-item" data-key="t-chat">Atur Stok Akhir</a>
                             <a href="<?= base_url() ?>Admin/tambah_stok" class="dropdown-item" data-key="t-chat">Tambah Stok</a>
                             <a href="<?= base_url() ?>Admin/daftar_tambah_stok" class="dropdown-item" data-key="t-chat">Daftar Tambah Stok</a>
                             

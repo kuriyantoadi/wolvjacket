@@ -791,6 +791,19 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
 
     public function tambah_stok_edit($no_faktur)
     {
+        $cek_faktur = $this->M_admin->row_faktur($no_faktur);
+        
+        if($cek_faktur == NULL){
+            $this->session->set_flashdata('msg', '
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        Faktur di Hapus, Data Terhapus Semua
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            ');
+
+             redirect('Admin/daftar_tambah_stok/');
+        }
+
         $header['title']='WolvJacket';
         $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
 
@@ -902,10 +915,21 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         redirect('Admin/tambah_stok_edit/'.$no_faktur);  
     }
 
-
-    
-
     // akhir tambah stok
 
+
+    // awal atur stok akhir
+
+    public function atur_stok_akhir()
+	{
+        $header['title']='WolvJacket';
+        $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
+
+        $this->load->view('template/header-admin', $header);
+		$this->load->view('admin/atur_stok_akhir');
+        $this->load->view('template/footer-admin');
+	}
+
+    // akhir atur stok akhir
 
 }
