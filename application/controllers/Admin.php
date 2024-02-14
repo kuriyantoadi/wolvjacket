@@ -924,9 +924,10 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
 	{
         $header['title']='WolvJacket';
         $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
+        $data['tampil'] = $this->M_admin->tb_stok_akhir_detail();
 
         $this->load->view('template/header-admin', $header);
-		$this->load->view('admin/atur_stok_akhir');
+		$this->load->view('admin/atur_stok_akhir', $data);
         $this->load->view('template/footer-admin');
 	}
 
@@ -938,6 +939,9 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $cek_bulan_stok = $this->M_admin->cek_bulan_stok($bulan_tahun);
 
         if($cek_bulan_stok == NULL){
+
+            // membentuk id_proses_stok
+            $id_proses_stok = date("YmdHis");
 
             // jika atur stok belum ada
             $start_date = $bulan_tahun.'-1'; // or any other start date you prefer
@@ -961,6 +965,7 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
                 // jika ada transaksi
                 foreach ($data_stok as $stok) {
                     $data = array(
+                        'id_proses_stok' => $id_proses_stok,
                         'id_barang' => $stok['id_barang'],
                         'bulan_tahun' => $stok['bulan_tahun'],
                         'harga_pokok' => $stok['harga_pokok'],
@@ -987,6 +992,19 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
             redirect('Admin/atur_stok_akhir/');  
         }
 
+    }
+
+    public function atur_stok_hapus($id_proses_stok){
+        // $id_proses_stok = $id_proses_stok);
+
+        $success = $this->M_admin->atur_stok_hapus($id_proses_stok);
+        $this->session->set_flashdata('msg', '
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Hapus Atur Stok Akhir Berhasil
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        ');
+        redirect('Admin/atur_stok_akhir/');
     }
 
     // akhir atur stok akhir

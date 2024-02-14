@@ -13,6 +13,7 @@ class Ajax extends CI_Controller
         $this->load->model('M_ajax_pengguna');
         $this->load->model('M_ajax_pelanggan');
         $this->load->model('M_ajax_tambah_stok');
+        $this->load->model('M_ajax_atur_stok');
 
         // $this->load->library('upload');
 
@@ -197,6 +198,37 @@ class Ajax extends CI_Controller
             "draw" => @$_POST['draw'],
             "recordsTotal" => $this->M_ajax_tambah_stok->count_all(), // Fixed model name
             "recordsFiltered" => $this->M_ajax_tambah_stok->count_filtered(), // Fixed model name
+            "data" => $data,
+        );
+        // Output to JSON format
+        echo json_encode($output);
+    }
+
+    function ajax_atur_stok() {
+        $list = $this->M_ajax_atur_stok->get_datatables();
+        $data = array();
+        $no = @$_POST['start'];
+        foreach ($list as $item) {
+            $no++;
+            $row = array();
+            $row[] = $no;
+            $row[] = $item->id_proses_stok;
+            $row[] = $item->bulan_tahun;
+            $row[] = $item->total_stok;
+            $row[] = 'Rp '. number_format($item->total_stok * $item->harga_pokok);
+
+            // Add HTML for action (detail button)
+            $row[] = '
+                <a href="'.site_url('Admin/atur_stok_hapus/'.$item->id_proses_stok).'" onclick="return confirm(\'Yakin hapus data stok akhir '. $item->id_proses_stok .' ?\')"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i> Hapus</a>
+                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#detailModal'.$item->id_proses_stok.'"><i class="bx bxs-detail"></i>Detail</button>
+            ';            
+
+            $data[] = $row;
+        }
+        $output = array(
+            "draw" => @$_POST['draw'],
+            "recordsTotal" => $this->M_ajax_atur_stok->count_all(), // Fixed model name
+            "recordsFiltered" => $this->M_ajax_atur_stok->count_filtered(), // Fixed model name
             "data" => $data,
         );
         // Output to JSON format

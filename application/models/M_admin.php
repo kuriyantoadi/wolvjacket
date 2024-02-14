@@ -455,6 +455,7 @@ class M_admin extends CI_Model
     $this->db->join('tb_barang', 'tb_tambah_stok.id_barang = tb_barang.id_barang');
     $this->db->join('tb_brand', 'tb_barang.id_brand = tb_brand.id_brand');
     $this->db->where('tb_tambah_stok.no_faktur', $no_faktur);
+    $this->db->order_by('tb_barang.nama_barang', 'ASC'); // Urutkan secara ascending
 
     $query = $this->db->get();
 
@@ -463,7 +464,7 @@ class M_admin extends CI_Model
     } else {
         return array(); // Mengembalikan array kosong jika tidak ada hasil
     }
-}
+  }
 
 
 
@@ -542,16 +543,6 @@ class M_admin extends CI_Model
   // akhir daftar tambah stok
 
 
-  // awal Atur Stok Akhir
-  // public function atur_stok_akhir_up($bulan_tahun) {
-  //   $this->db->select('id_barang, LEFT(tgl_tambah_stok, 7) AS bulan_tahun, harga_pokok, SUM(jumlah) AS total_stok, SUM(harga_pokok * jumlah) AS total_modal');
-  //   $this->db->from('tb_tambah_stok');
-  //   $this->db->where('bulan_tahun',`$bulan_tahun`);
-  //   $this->db->group_by('id_barang, bulan_tahun, harga_pokok');
-  //   $query = $this->db->get();
-  //   return $query->result_array();
-  // }
-
   public function cari_stok($start_date, $end_date) {
     $this->db->select('id_barang, LEFT(tgl_tambah_stok, 7) AS bulan_tahun, harga_pokok, SUM(jumlah) AS total_stok');
     $this->db->from('tb_tambah_stok');
@@ -576,6 +567,41 @@ class M_admin extends CI_Model
 
   public function cek_tambah_Stok(){
 
+  }
+
+
+  function atur_stok_hapus($id_proses_stok)
+  {
+    $this->db->where('id_proses_stok' ,$id_proses_stok);
+    $this->db->delete('tb_stok_akhir');
+  }
+
+
+  public function get_data_by_proses_stok($id_proses_stok) {
+    $this->db->select('*');
+    $this->db->from('tb_stok_akhir');
+    $this->db->join('tb_barang', 'tb_stok_akhir.id_barang = tb_barang.id_barang');
+    $this->db->where('tb_stok_akhir.id_proses_stok', $id_proses_stok);
+
+    $query = $this->db->get();
+
+    if ($query->num_rows() > 0) {
+        return $query->result(); // Mengembalikan hasil query sebagai objek
+    } else {
+        return array(); // Mengembalikan array kosong jika tidak ada hasil
+    }
+  }
+
+  public function tb_stok_akhir_detail()
+  {
+    $this->db->select('*');
+    $this->db->from('tb_stok_akhir');
+    $this->db->join('tb_barang', 'tb_stok_akhir.id_barang = tb_barang.id_barang');
+    $this->db->order_by('nama_barang', 'ASC'); // Urutkan nama_barang secara ascending
+
+    // $this->db->where('no_faktur', $no_faktur);
+    $query = $this->db->get()->result();
+    return $query;
   }
 
   // akhir Atur Stok Akhir
