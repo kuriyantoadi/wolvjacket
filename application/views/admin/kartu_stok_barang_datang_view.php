@@ -131,6 +131,7 @@
                         <td><center><?= $no++; ?></td>
                         <td><center><?= $row->nama_barang ?></td>
                         <td><center>Rp <?= $harga_pokok_formatted ?></td>
+                        <td><center><?= $row->stok_awal ?></td>
                     </tr>
             
                 <?php endforeach; ?>     

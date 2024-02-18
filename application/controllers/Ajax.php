@@ -213,7 +213,7 @@ class Ajax extends CI_Controller
             $row = array();
             $row[] = $no;
             $row[] = $item->id_proses_stok;
-            $row[] = $item->bulan_tahun;
+            $row[] = $item->tahun_bulan;
             $row[] = $item->total_stok;
             $row[] = 'Rp '. number_format($item->total_stok * $item->harga_pokok);
 

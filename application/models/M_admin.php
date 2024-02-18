@@ -544,20 +544,32 @@ class M_admin extends CI_Model
 
 
   public function cari_stok($start_date, $end_date) {
-    $this->db->select('id_barang, LEFT(tgl_tambah_stok, 7) AS bulan_tahun, harga_pokok, SUM(jumlah) AS total_stok');
+    $this->db->select('id_barang, LEFT(tgl_tambah_stok, 7) AS tahun_bulan, harga_pokok, SUM(jumlah) AS total_stok');
     $this->db->from('tb_tambah_stok');
     $this->db->where('tgl_tambah_stok >=', $start_date);
     $this->db->where('tgl_tambah_stok <', $end_date);
-    $this->db->group_by('id_barang, bulan_tahun');
+    $this->db->group_by('id_barang, tahun_bulan');
     $query = $this->db->get();
     return $query->result_array();
 
   }
 
-  public function cek_bulan_stok($bulan_tahun){
-    $this->db->select('bulan_tahun');
+
+  public function get_total_stok_sebelumnya($previous_month) {
+    $this->db->select('id_barang, SUM(total_stok) AS total_stok');
     $this->db->from('tb_stok_akhir');
-    $this->db->where('bulan_tahun', $bulan_tahun);
+    $this->db->where('tahun_bulan', $previous_month);
+    $this->db->group_by('id_barang');
+    $query = $this->db->get();
+    return $query->result_array();
+  }
+
+
+
+  public function cek_bulan_stok($tahun_bulan){
+    $this->db->select('tahun_bulan');
+    $this->db->from('tb_stok_akhir');
+    $this->db->where('tahun_bulan', $tahun_bulan);
     $this->db->limit(1); // Mengambil hanya satu baris
 
     // Menjalankan query dan mengembalikan hasilnya

@@ -3,7 +3,7 @@
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="myExtraLargeModalLabel">Stok Akhir - <?= $row->bulan_tahun ?></h5>
+                    <h5 class="modal-title" id="myExtraLargeModalLabel">Stok Akhir - <?= $row->tahun_bulan ?></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -68,7 +68,7 @@
                 <?= form_open('Admin/atur_stok_akhir_up'); ?>
                 <div class="col-6">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <input name="bulan_tahun" class="form-control m-1" type="month" value="" id="example-month-input" required>
+                        <input name="tahun_bulan" class="form-control m-1" type="month" value="" id="example-month-input" required>
                         <input type="submit" class="btn btn-primary btn-sm m-1" value="Atur Stok Akhir Bulan Ini">
                     </div>
                 </div>

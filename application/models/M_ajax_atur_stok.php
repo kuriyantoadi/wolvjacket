@@ -5,13 +5,13 @@ class M_ajax_atur_stok extends CI_Model
 
   // awal ajax 
 
-    var $column_order = array(null, 'bulan_tahun'); //set column field database for datatable orderable
-    var $column_search = array('bulan_tahun'); //set column field database for datatable searchable
-    var $order = array('bulan_tahun' => 'asc'); // default order 
+    var $column_order = array(null, 'tahun_bulan'); //set column field database for datatable orderable
+    var $column_search = array('tahun_bulan'); //set column field database for datatable searchable
+    var $order = array('tahun_bulan' => 'asc'); // default order 
  
     private function _get_datatables_query() {
         
-        $this->db->select('id_proses_stok, total_stok, bulan_tahun, bulan_tahun, harga_pokok, id_stok_akhir');
+        $this->db->select('id_proses_stok, total_stok, tahun_bulan, harga_pokok, id_stok_akhir');
         $this->db->from('tb_stok_akhir');
         $this->db->group_by('id_proses_stok');
 

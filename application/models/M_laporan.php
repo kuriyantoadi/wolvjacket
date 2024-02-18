@@ -6,8 +6,26 @@ class M_laporan extends CI_Model{
     {
         $this->db->select('*');
         $this->db->from('tb_barang');
-        // $this->db->join('tb_kategori_barang', 'tb_barang.id_kategori_barang = tb_kategori_barang.id_kategori_barang');
-        // $this->db->where('id_barang', $id_barang);
+        $query = $this->db->get()->result();
+        return $query;
+    }
+
+    public function tb_stok_akhir_detail()
+    {
+        $this->db->select('*');
+        $this->db->from('tb_stok_akhir');
+        $this->db->join('tb_barang', 'tb_stok_akhir.id_barang = tb_barang.id_barang');
+        $this->db->order_by('nama_barang', 'ASC'); // Urutkan nama_barang secara ascending
+
+        $this->db->where('bulan_tahun', $no_faktur);
+        $query = $this->db->get()->result();
+        return $query;
+    }
+
+    function stok_bln_sblmnya($stok_bln_sblmnya)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_barang');
         $query = $this->db->get()->result();
         return $query;
     }
