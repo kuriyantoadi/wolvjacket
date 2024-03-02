@@ -29,8 +29,8 @@
                                     <td><?= $counter ?></td>
                                     <td><?= $item->id_proses_stok ?></td>
                                     <td><?= $item->nama_barang ?></td>
-                                    <td><?= $item->total_stok ?></td>
-                                    <td><?= 'Rp '. number_format($item->harga_pokok * $item->total_stok) ?></td>
+                                    <td><?= $item->total_stok_masuk ?></td>
+                                    <td><?= 'Rp '. number_format($item->harga_pokok * $item->total_stok_masuk) ?></td>
                                     <!-- <td><?= 'Rp '. number_format($item->harga_pokok) ?></td> -->
                                     <!-- <td><?= 'Rp '. number_format($item->jumlah * $item->harga_pokok) ?></td> -->
                                     <!-- Tambahkan kolom lainnya sesuai kebutuhan -->

@@ -20,7 +20,7 @@
                 <?= form_open('Laporan/kartu_stok_barang_datang_up'); ?>
                 <div class="col-5">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <input name="bulan_tahun" class="form-control" type="month" value="" id="example-month-input" required>
+                        <input name="tahun_bulan" class="form-control" type="month" value="" id="example-month-input" required>
                     </div>
                 </div>
 

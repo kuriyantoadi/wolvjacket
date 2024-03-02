@@ -544,7 +544,7 @@ class M_admin extends CI_Model
 
 
   public function cari_stok($start_date, $end_date) {
-    $this->db->select('id_barang, LEFT(tgl_tambah_stok, 7) AS tahun_bulan, harga_pokok, SUM(jumlah) AS total_stok');
+    $this->db->select('id_barang, LEFT(tgl_tambah_stok, 7) AS tahun_bulan, harga_pokok, SUM(jumlah) AS total_stok_masuk');
     $this->db->from('tb_tambah_stok');
     $this->db->where('tgl_tambah_stok >=', $start_date);
     $this->db->where('tgl_tambah_stok <', $end_date);
@@ -555,11 +555,11 @@ class M_admin extends CI_Model
   }
 
 
-  public function get_total_stok_sebelumnya($previous_month) {
-    $this->db->select('id_barang, SUM(total_stok) AS total_stok');
+  public function get_total_stok_sebelumnya($previous_month, $id_barang) {
+    $this->db->select('id_barang, total_stok_masuk');
     $this->db->from('tb_stok_akhir');
     $this->db->where('tahun_bulan', $previous_month);
-    $this->db->group_by('id_barang');
+    $this->db->where('id_barang', $id_barang);
     $query = $this->db->get();
     return $query->result_array();
   }

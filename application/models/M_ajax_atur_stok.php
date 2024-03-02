@@ -11,9 +11,10 @@ class M_ajax_atur_stok extends CI_Model
  
     private function _get_datatables_query() {
         
-        $this->db->select('id_proses_stok, total_stok, tahun_bulan, harga_pokok, id_stok_akhir');
+        $this->db->select('id_proses_stok, SUM(total_stok_masuk) as total_stok_masuk, tahun_bulan, harga_pokok, id_stok_akhir');
         $this->db->from('tb_stok_akhir');
-        $this->db->group_by('id_proses_stok');
+        $this->db->group_by('id_proses_stok, tahun_bulan');
+
 
         $i = 0;
         foreach ($this->column_search as $item) { // loop column 

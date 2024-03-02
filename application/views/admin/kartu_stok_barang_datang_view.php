@@ -132,6 +132,7 @@
                         <td><center><?= $row->nama_barang ?></td>
                         <td><center>Rp <?= $harga_pokok_formatted ?></td>
                         <td><center><?= $row->stok_awal ?></td>
+                        <td><center><?= $row->total_stok_masuk ?></td>
                     </tr>
             
                 <?php endforeach; ?>     

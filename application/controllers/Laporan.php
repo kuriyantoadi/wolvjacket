@@ -34,24 +34,12 @@ class Laporan extends CI_Controller {
 
     public function kartu_stok_barang_datang_up(){
 
-        $bulan_tahun = $this->input->post('bulan_tahun');
+        $tahun_bulan = $this->input->post('tahun_bulan');
 
-        $v_bulan = substr($bulan_tahun, 5,2);
-        $v_tahun = substr($bulan_tahun, 0,4);
-        $bulan = $v_bulan-1;
+        // echo $tahun_bulan;
 
-        if($bulan == 0){
-            $tahun = $v_tahun-1;
-            $bulan = 12;
-        }else{
-            $tahun = substr($bulan_tahun, 0,4);
-        }
-
-        $stok_bln_sblmnya = $tahun.'-'.sprintf("%02d", $bulan);
-        
-
-        $data['stok_bln_sblmnya'] = $this->M_laporan->stok_bln_sblmnya($stok_bln_sblmnya);
-        $data['tampil'] = $this->M_laporan->kartu_stok_barang_datang_view();
+        // $data['stok_bln_sblmnya'] = $this->M_laporan->stok_bln_sblmnya($stok_bln_sblmnya);
+        $data['tampil'] = $this->M_laporan->kartu_stok_barang_datang_view($tahun_bulan);
 		
         $this->load->view('admin/kartu_stok_barang_datang_view', $data);
     }

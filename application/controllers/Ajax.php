@@ -214,8 +214,8 @@ class Ajax extends CI_Controller
             $row[] = $no;
             $row[] = $item->id_proses_stok;
             $row[] = $item->tahun_bulan;
-            $row[] = $item->total_stok;
-            $row[] = 'Rp '. number_format($item->total_stok * $item->harga_pokok);
+            $row[] = $item->total_stok_masuk;
+            $row[] = 'Rp '. number_format($item->total_stok_masuk * $item->harga_pokok);
 
             // Add HTML for action (detail button)
             $row[] = '

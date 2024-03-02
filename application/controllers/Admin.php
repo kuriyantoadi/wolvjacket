@@ -931,70 +931,6 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $this->load->view('template/footer-admin');
 	}
 
-    // public function atur_stok_akhir_up()
-    // {
-    //     $tahun_bulan = $this->input->post('tahun_bulan');
-
-    //     // cek atur stok bulan ini
-    //     $cek_bulan_stok = $this->M_admin->cek_bulan_stok($tahun_bulan);
-
-    //     if($cek_bulan_stok == NULL){
-
-    //         // membentuk id_proses_stok
-    //         $id_proses_stok = date("YmdHis");
-
-    //         // jika atur stok belum ada
-    //         $start_date = $tahun_bulan.'-1'; // or any other start date you prefer
-    //         $end_date = $tahun_bulan.'-31';
-
-    //         // cari data tb_tambah_stok
-    //         $data_stok = $this->M_admin->cari_stok($start_date, $end_date);
-
-    //         // jika bulan yang di input tidak ada transaksi
-    //         if($data_stok == NULL){
-
-    //             $this->session->set_flashdata('msg', '
-    //             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    //                 Tahun dan Bulan yang di input tidak ada Transaksi
-    //                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    //             </div>');
-    //             redirect('Admin/atur_stok_akhir/');  
-
-    //         }else{
-
-    //             // jika ada transaksi
-    //             foreach ($data_stok as $stok) {
-    //                 $data = array(
-    //                     'id_proses_stok' => $id_proses_stok,
-    //                     'id_barang' => $stok['id_barang'],
-    //                     'tahun_bulan' => $stok['tahun_bulan'],
-    //                     'harga_pokok' => $stok['harga_pokok'],
-    //                     'total_stok' => $stok['total_stok'],
-    //                     // 'stok_awal' => 
-    //                 );
-    //                 $this->db->insert('tb_stok_akhir', $data);
-    //             }
-
-    //             $this->session->set_flashdata('msg', '
-    //                 <div class="alert alert-info alert-dismissible fade show" role="alert">
-    //                     Atur Stok Akhir Berhasil
-    //                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    //                 </div>');
-    //             redirect('Admin/atur_stok_akhir/');  
-    //         }
-
-    //     }else{
-    //         // jika atur stok sudah ada
-    //         $this->session->set_flashdata('msg', '
-    //         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    //             Atur Stok Sudah Pernah Dilakukan. Anda Tidak Perlu Atur Stok Ulang.
-    //             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    //         </div>');
-    //         redirect('Admin/atur_stok_akhir/');  
-    //     }
-
-    // }
-
 
     public function atur_stok_akhir_up() {
         $tahun_bulan = $this->input->post('tahun_bulan');
@@ -1010,14 +946,16 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
             $previous_month = date('Y-m', strtotime('-1 month', strtotime($tahun_bulan)));
 
             // jika atur stok belum ada
-            $start_date = $tahun_bulan.'-1'; // or any other start date you prefer
+            $start_date = $tahun_bulan.'-01'; // or any other start date you prefer
             $end_date = $tahun_bulan.'-31';
 
             // cari data tb_tambah_stok
             $data_stok = $this->M_admin->cari_stok($start_date, $end_date);
 
+            // var_dump($data_stok);
+
             // cari data total_stok dari bulan sebelumnya
-            $data_stok_sebelumnya = $this->M_admin->get_total_stok_sebelumnya($previous_month);
+
 
             // jika bulan yang di input tidak ada transaksi
             if($data_stok == NULL) {
@@ -1026,25 +964,35 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
                     Tahun dan Bulan yang di input tidak ada Transaksi
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>');
-                redirect('Admin/atur_stok_akhir/');  
+                // redirect('Admin/atur_stok_akhir/');  
             } else {
                 // jika ada transaksi
                 foreach ($data_stok as $stok) {
                     // Mendapatkan total stok dari bulan sebelumnya
-                    $stok_awal = 0;
-                    foreach ($data_stok_sebelumnya as $stok_sebelumnya) {
-                        if ($stok_sebelumnya['id_barang'] == $stok['id_barang']) {
-                            $stok_awal = $stok_sebelumnya['total_stok'];
-                            break;
-                        }
-                    }
+                $id_barang = $stok['id_barang'];
 
+                echo $id_barang;
+                
+                $data_stok_sebelumnya = $this->M_admin->get_total_stok_sebelumnya($previous_month, $id_barang);
+                
+                if ($data_stok_sebelumnya == NULL){
+                    echo "data stok null";
+                    $stok_awal = 0;
+                }else{
+
+                    foreach($data_stok_sebelumnya as $data_sblmnya){
+                        $stok_awal = $data_sblmnya['total_stok_masuk'];
+                    }
+                   
+
+                }
+                    
                     $data = array(
                         'id_proses_stok' => $id_proses_stok,
                         'id_barang' => $stok['id_barang'],
                         'tahun_bulan' => $stok['tahun_bulan'],
                         'harga_pokok' => $stok['harga_pokok'],
-                        'total_stok' => $stok['total_stok'],
+                        'total_stok_masuk' => $stok['total_stok_masuk'],
                         'stok_awal' => $stok_awal
                     );
                     $this->db->insert('tb_stok_akhir', $data);
