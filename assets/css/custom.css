@@ -1,0 +1,12 @@
+.container-small {
+    width: 99%;
+    /* Lebar container */
+    margin: 0 auto;
+    /* Posisi container di tengah */
+    padding: 5px;
+    /* Padding untuk konten di dalam container */
+    /* background-color: #fff; */
+    /* Warna latar belakang container */
+    box-sizing: border-box;
+    /* Menyertakan padding dan border dalam perhitungan lebar */
+}

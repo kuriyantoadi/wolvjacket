@@ -1,7 +1,7 @@
 <div class="main-content">
 
     <div class="page-content">
-        <div class="container-small">
+        <div class="container-fluid">
 
             <div class="row">
 
@@ -14,7 +14,7 @@
                 <!-- bagian kosong -->
             </div>
 
-                <!-- <div class="col-xl-4">
+                <div class="col-xl-4">
                    
                     <div class="card">  
                         <div class="card-body">
@@ -33,32 +33,15 @@
                                                 
                         </div>
                     </div>
-                </div>  -->
+                </div> 
                 <!-- end col -->
 
-                <div class="col-xl-6">
+                <div class="col-xl-8">
                    
                     <div class="card">  
                         <div class="card-body">
 
-
-                        <!-- awal -->
-
-                        <h4 class="mb-sm-4 font-size-16 ">Kategori Barang</h4>
-
-                        <a class="btn btn-success  btn-sm" href="<?= site_url('Admin/tambah_stok') ?>">Semua</a>
-
-                        <?php foreach ($tampil_kategori as $row): ?>
-
-                                <a class="btn btn-info  btn-sm" style="margin: 3px" href="<?= site_url('Admin/tambah_stok_kategori/'. $row->id_kategori_barang) ?>">
-                                    <?= $row->nama_kategori_barang?>
-                                </a>
-
-                        <?php endforeach; ?> 
-
-                        <!-- akhir -->
-
-                        <h4 class="mb-sm-4 mt-sm-4 font-size-16">Data Barang</h4>
+                        <h4 class="mb-sm-4 font-size-18 ">Data Barang</h4>
 
                         <table id="datatable" class="table table-bordered dt-responsive table-hover table-striped  nowrap w-100">
                             <thead>
@@ -95,11 +78,11 @@
                 </div> 
                 <!-- end col -->
 
-            <div class="col-xl-6">
+            <div class="col-xl-12">
                 <div class="card">  
                     <div class="card-body">
 
-                    <h4 class="mb-sm-4 font-size-16 ">Daftar Barang Tambah Stok</h4>
+                    <h4 class="mb-sm-4 font-size-18 ">Daftar Barang Tambah Stok</h4>
 
                     <table id="tabelKeranjang" class="table table-bordered dt-responsive table-hover table-striped  nowrap w-100">
                         <thead>

@@ -25,6 +25,9 @@
     <!-- App Css-->
     <link href="<?= base_url() ?>assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
 
+    <!-- css custom -->
+    <link rel="stylesheet" href="<?= base_url() ?>assets/css/custom.css" type="text/css" />
+
     <!-- DataTables -->
     <link href="<?= base_url() ?>assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?= base_url() ?>assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
