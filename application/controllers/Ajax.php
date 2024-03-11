@@ -14,6 +14,8 @@ class Ajax extends CI_Controller
         $this->load->model('M_ajax_pelanggan');
         $this->load->model('M_ajax_tambah_stok');
         $this->load->model('M_ajax_atur_stok');
+        $this->load->model('M_ajax_retur');
+
 
         // $this->load->library('upload');
 
@@ -232,6 +234,41 @@ class Ajax extends CI_Controller
             "data" => $data,
         );
         // Output to JSON format
+        echo json_encode($output);
+    }
+
+    function ajax_retur() {
+        $list = $this->M_ajax_retur->get_datatables();
+        $data = array();
+        $no = @$_POST['start'];
+        foreach ($list as $item) {
+
+            $no++;
+            $row = array();
+            $row[] = $no;
+            $row[] = $item->no_faktur_retur;
+            $row[] = $item->tanggal;
+            $row[] = 'Rp '. number_format($item->total_harga);
+            $row[] = $item->qty;
+            $row[] = $item->id_user;
+            $row[] = $item->keterangan;
+
+            // add html for action
+            $row[] = '
+                    <a class="btn btn-warning btn-sm" ><i class="bx bxs-printer"></i></a>
+                    <a class="btn btn-primary btn-sm" ><i class="bx bxs-pencil"></i></a>
+                    <a href="'.site_url('Retur/retur_hapus/'.$item->id_retur).'" onclick="return confirm(\'Yakin hapus data barang'. $item->no_faktur_retur .' ?\')"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i></a>
+                    <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editModal'.$item->id_retur.'"><i class="bx bxs-detail"></i></button>
+                ';
+            $data[] = $row;
+        }
+        $output = array(
+                    "draw" => @$_POST['draw'],
+                    "recordsTotal" => $this->M_ajax->count_all(),
+                    "recordsFiltered" => $this->M_ajax->count_filtered(),
+                    "data" => $data,
+                );
+        // output to json format
         echo json_encode($output);
     }
 

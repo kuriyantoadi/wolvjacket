@@ -984,9 +984,7 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
                         $stok_awal = $data_sblmnya['total_stok_masuk'];
                     }
                    
-
                 }
-                    
                     $data = array(
                         'id_proses_stok' => $id_proses_stok,
                         'id_barang' => $stok['id_barang'],

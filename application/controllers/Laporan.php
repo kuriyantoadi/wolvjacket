@@ -36,8 +36,6 @@ class Laporan extends CI_Controller {
 
         $tahun_bulan = $this->input->post('tahun_bulan');
 
-        // echo $tahun_bulan;
-
         // $data['stok_bln_sblmnya'] = $this->M_laporan->stok_bln_sblmnya($stok_bln_sblmnya);
         $data['tampil'] = $this->M_laporan->kartu_stok_barang_datang_view($tahun_bulan);
 		
