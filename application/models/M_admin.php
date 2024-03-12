@@ -284,7 +284,7 @@ class M_admin extends CI_Model
       return $query->num_rows() > 0;
   }
 
-  public function tambah_ke_keranjang($data) {
+    public function tambah_ke_keranjang($data) {
         return $this->db->insert('tb_keranjang_masuk', $data);
     }
 

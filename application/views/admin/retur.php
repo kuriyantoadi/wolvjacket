@@ -2,7 +2,7 @@
 <div class="main-content">
 
     <div class="page-content">
-        <div class="container-small">
+        <div class="container">
 
             <!-- start page title -->
             <div class="row">
@@ -19,7 +19,7 @@
                 <div class="col-12 mb-2">
                     
                     <div class="d-flex gap-2 flex-wrap mb-1">
-                        <button type="button" class="btn btn-info btn-sm waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg">Tambah</button>
+                        <a href="<?= site_url('Retur/retur_tambah') ?>" class="btn btn-info btn-sm waves-effect waves-light">Tambah</a>
                     </div>  
 
                 </div>

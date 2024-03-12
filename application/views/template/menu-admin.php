@@ -80,7 +80,7 @@
                             <div class="arrow-down"></div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-pages">
-                            <a href="#" class="dropdown-item" data-key="t-calendar">Retur</a>
+                            <a href="<?= base_url() ?>Retur/retur_tambah" class="dropdown-item" data-key="t-calendar">Retur</a>
                             <a href="<?= base_url() ?>Retur/index" class="dropdown-item" data-key="t-chat">Daftar Retur</a>
                         </div>
                     </li>
