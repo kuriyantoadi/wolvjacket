@@ -15,6 +15,21 @@ class M_retur extends CI_Model{
         return $query;
     }
 
+    public function retur_keranjang_hapus($id_retur_keranjang)
+    {
+        $this->db->where('id_retur_keranjang',$id_retur_keranjang);
+        $this->db->delete('tb_retur_keranjang');
+    }
+
+    public function cek_id_barang($id_barang) {
+      $this->db->where('id_barang', $id_barang);
+      $query = $this->db->get('tb_retur_keranjang');
+
+      return $query->num_rows() > 0;
+    }
+
+    
+
     public function get_last_no_faktur()
     {
         $this->db->select("LEFT(no_faktur_retur, 6) as no_faktur_awal", false); // Menggunakan LEFT() untuk mengambil 6 karakter pertama
@@ -25,17 +40,36 @@ class M_retur extends CI_Model{
     }
 
     public function cek_seri_no_faktur()
-  {
+    {
         $this->db->select("RIGHT(no_faktur_retur, 6) as no_faktur_akhir", false); // Menggunakan RIGHT() untuk mengambil 7 karakter terakhir
         $this->db->order_by('id_retur', 'DESC');
         $this->db->limit(1);
         $query = $this->db->get('tb_retur');
         return $query->row()->no_faktur_akhir;
-  }
+    }
+
+    function tampil_keranjang_pengguna($id_user)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_retur_keranjang');
+        $this->db->join('tb_barang as barang_keranjang', 'tb_retur_keranjang.id_barang = barang_keranjang.id_barang');
+        $this->db->join('tb_brand', 'barang_keranjang.id_brand = tb_brand.id_brand');
+        $this->db->where('tb_retur_keranjang.id_user', $id_user);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result(); // Mengembalikan hasil query sebagai objek
+        } else {
+            return array(); // Mengembalikan array kosong jika tidak ada hasil
+        }
+
+    }
 
     public function transfer_keranjang_ke_retur($id_user, $no_faktur_retur, $keterangan, $tgl_tambah_stok)
     {
         // Memindahkan data dari tb_keranjang_masuk ke tb_stok untuk id_user tertentu
+        
         $this->db->trans_start(); // Memulai transaksi
 
         // Memasukkan data ke tb_retur_barang
@@ -52,13 +86,39 @@ class M_retur extends CI_Model{
 
         // menghapus keranjang masuk
         $this->db->where('id_user', $id_user);
-        $this->db->delete('tb_keranjang_masuk');
+        $this->db->delete('tb_retur_keranjang');
 
         $this->db->trans_complete(); // Menyelesaikan transaksi
 
         return $this->db->trans_status(); // Mengembalikan status transaksi
-    
     }
+
+    public function retur_tambah_up($data){
+        return $this->db->insert('tb_retur', $data);
+    }
+
+    public function get_data_retur($no_faktur_retur) {
+        $this->db->select('SUM(tb_retur_barang.jumlah) AS jumlah_total, SUM(tb_retur_barang.harga_pokok) AS total_harga');
+        $this->db->from('tb_retur');
+        $this->db->join('tb_retur_barang', 'tb_retur.no_faktur_retur = tb_retur_barang.no_faktur_retur', 'left');
+        $this->db->where('tb_retur_barang.no_faktur_retur', $no_faktur_retur);
+        $query = $this->db->get();
+
+        $result = $query->row();
+
+        // Update kolom total_jumlah dan total_harga pada tabel tb_retur
+        $data = array(
+            'total_jumlah' => $result->jumlah_total,
+            'total_harga' => $result->total_harga
+        );
+        $this->db->where('no_faktur_retur', $no_faktur_retur);
+        $this->db->update('tb_retur', $data);
+
+        return $result;
+    }
+
+
+
 
 
 }

@@ -5,7 +5,7 @@ class M_ajax_retur extends CI_Model
 
   // awal ajax 
 
-    var $column_order = array(null, 'no_faktur_retur'); //set column field database for datatable orderable
+    var $column_order = array(null, 'no_faktur_retur','tanggal','total_harga','total_jumlah','id_user'); //set column field database for datatable orderable
     var $column_search = array('no_faktur_retur'); //set column field database for datatable searchable
     var $order = array('no_faktur_retur' => 'asc'); // default order 
  

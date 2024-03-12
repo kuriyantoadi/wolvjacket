@@ -79,7 +79,7 @@
 
                 // mematikan sort kolom pilihan
                 {
-                // "targets": [8], 
+                "targets": [6,7], 
                 "orderable": false
                 }
             ]

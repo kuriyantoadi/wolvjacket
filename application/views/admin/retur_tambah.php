@@ -143,7 +143,7 @@
 
         // Kirim data ke server PHP untuk disimpan di database
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', '<?= base_url('admin/tambah_ke_keranjang'); ?>', true);
+        xhr.open('POST', '<?= base_url('retur/tambah_ke_keranjang'); ?>', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
@@ -166,7 +166,7 @@
 
     // Fungsi untuk mendapatkan data barang dari server
     async function fetchData() {
-        const response = await fetch('<?= base_url('admin/tampil_keranjang'); ?>');
+        const response = await fetch('<?= base_url('retur/tampil_keranjang'); ?>');
         const data = await response.json();
 
         const tabelKeranjang = document.getElementById('tabelKeranjang').getElementsByTagName('tbody')[0];
@@ -204,9 +204,9 @@
             totalSemua += totalHarga;
 
             // awal mode hapus 
-            var id_barang = tampil_kolom.id_barang;
+            var id_retur_keranjang = tampil_kolom.id_retur_keranjang;
             var base_url = '<?= base_url(); ?>';
-            var deleteLink = base_url + 'Admin/keranjang_hapus/' + id_barang;
+            var deleteLink = base_url + 'Retur/retur_keranjang_hapus/' + id_retur_keranjang;
 
             var deleteButton = document.createElement('button');
             deleteButton.className = 'btn btn-sm btn-danger';

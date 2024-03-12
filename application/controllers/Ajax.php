@@ -248,8 +248,9 @@ class Ajax extends CI_Controller
             $row[] = $no;
             $row[] = $item->no_faktur_retur;
             $row[] = $item->tanggal;
+            // $row[] = 'Rp '. number_format($item->total_stok_masuk * $item->harga_pokok);
             $row[] = 'Rp '. number_format($item->total_harga);
-            $row[] = $item->qty;
+            $row[] = $item->total_jumlah;
             $row[] = $item->id_user;
             $row[] = $item->keterangan;
 
@@ -264,8 +265,8 @@ class Ajax extends CI_Controller
         }
         $output = array(
                     "draw" => @$_POST['draw'],
-                    "recordsTotal" => $this->M_ajax->count_all(),
-                    "recordsFiltered" => $this->M_ajax->count_filtered(),
+                    "recordsTotal" => $this->M_ajax_retur->count_all(),
+                    "recordsFiltered" => $this->M_ajax_retur->count_filtered(),
                     "data" => $data,
                 );
         // output to json format
