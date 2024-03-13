@@ -97,7 +97,8 @@ class M_retur extends CI_Model{
         return $this->db->insert('tb_retur', $data);
     }
 
-    public function get_data_retur($no_faktur_retur) {
+    public function get_data_retur($no_faktur_retur) 
+    {
         $this->db->select('SUM(tb_retur_barang.jumlah) AS jumlah_total, SUM(tb_retur_barang.harga_pokok) AS total_harga');
         $this->db->from('tb_retur');
         $this->db->join('tb_retur_barang', 'tb_retur.no_faktur_retur = tb_retur_barang.no_faktur_retur', 'left');
@@ -117,7 +118,11 @@ class M_retur extends CI_Model{
         return $result;
     }
 
-
+    public function retur_hapus($id_retur)
+    {
+        $this->db->where('id_retur',$id_retur);
+        $this->db->delete('tb_retur');
+    }
 
 
 

@@ -166,6 +166,19 @@ class Retur extends CI_Controller
 
     }
 
+    public function retur_hapus($id_retur){
+        // $id_proses_stok = $id_proses_stok);
+
+        $success = $this->M_retur->retur_hapus($id_retur);
+        $this->session->set_flashdata('msg', '
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Hapus Retur Berhasil
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        ');
+        redirect('Retur/index/');
+    }
+
     
 
 }
