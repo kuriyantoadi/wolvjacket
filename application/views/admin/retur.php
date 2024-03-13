@@ -1,6 +1,54 @@
+<?php foreach ($tampil as $row): ?>
+    <div class="modal fade bs-example-modal-xl" id="editModal<?= $row->no_faktur_retur ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myExtraLargeModalLabel">Detail Transaksi - <?= $row->no_faktur_retur ?></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>No Faktur</th>
+                                <th>Nama Barang</th>
+                                <th>Brand</th>
+                                <th>Qty</th>
+                                <th>Harga Pokok</th>
+                                <th>Total</th>
+
+                                <!-- Tambahkan kolom sesuai kebutuhan -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                            // Ambil data berdasarkan no_faktur tertentu
+                            $filtered_data = $this->M_retur->get_data_by_no_faktur($row->no_faktur_retur);
+                            $counter = 1;
+                            foreach ($filtered_data as $item): ?>
+                                <tr>
+                                    <td><?= $counter ?></td>
+                                    <td><?= $item->no_faktur_retur ?></td>
+                                    <td><?= $item->nama_barang ?></td>
+                                    <td><?= $item->nama_brand ?></td>
+                                    <td><?= $item->jumlah ?></td>
+                                    <td><?= 'Rp '. number_format($item->harga_pokok) ?></td>
+                                    <td><?= 'Rp '. number_format($item->jumlah * $item->harga_pokok) ?></td>
+                                    <!-- Tambahkan kolom lainnya sesuai kebutuhan -->
+                                </tr>
+                            <?php 
+                            $counter++;
+                            endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->  
+<?php endforeach; ?> 
 
 <div class="main-content">
-
     <div class="page-content">
         <div class="container">
 

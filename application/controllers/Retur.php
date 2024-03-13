@@ -22,9 +22,10 @@ class Retur extends CI_Controller
     {
         $header['title']='WolvJacket';
         $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
+        $data['tampil'] = $this->M_retur->retur_detail();
 
         $this->load->view('template/header-admin', $header);
-        $this->load->view('admin/retur');
+        $this->load->view('admin/retur', $data);
         $this->load->view('template/footer-admin');
     }
 
@@ -132,10 +133,10 @@ class Retur extends CI_Controller
         $tgl_skrg = date('dmy');
 
         if($no_faktur_awal == NULL){
-            $no_faktur_retur = $tgl_skrg.'000001';
+            $no_faktur_retur = 'RT'.$tgl_skrg.'000001';
         }else{
             $akhir_faktur = $cek_seri_no_faktur+1;
-            $no_faktur_retur = $tgl_skrg.sprintf("%06d", $akhir_faktur);
+            $no_faktur_retur = 'RT'.$tgl_skrg.sprintf("%06d", $akhir_faktur);
         }
 
         $keterangan = $this->input->post('keterangan');
@@ -167,8 +168,6 @@ class Retur extends CI_Controller
     }
 
     public function retur_hapus($id_retur){
-        // $id_proses_stok = $id_proses_stok);
-
         $success = $this->M_retur->retur_hapus($id_retur);
         $this->session->set_flashdata('msg', '
             <div class="alert alert-danger alert-dismissible fade show" role="alert">

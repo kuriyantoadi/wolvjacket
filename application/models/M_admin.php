@@ -413,7 +413,6 @@ class M_admin extends CI_Model
     $this->db->select('*');
     $this->db->from('tb_tambah_stok');
     $this->db->join('tb_barang', 'tb_tambah_stok.id_barang = tb_barang.id_barang');
-    // $this->db->where('no_faktur', $no_faktur);
     $query = $this->db->get()->result();
     return $query;
   }
@@ -464,6 +463,7 @@ class M_admin extends CI_Model
     } else {
         return array(); // Mengembalikan array kosong jika tidak ada hasil
     }
+    
   }
 
 

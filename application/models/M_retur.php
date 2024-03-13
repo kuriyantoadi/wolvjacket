@@ -124,6 +124,32 @@ class M_retur extends CI_Model{
         $this->db->delete('tb_retur');
     }
 
+    public function retur_detail()
+    {
+        $this->db->select('*');
+        $this->db->from('tb_retur_barang');
+        $query = $this->db->get()->result();
+        return $query;
+    }
+
+    public function get_data_by_no_faktur($no_faktur_retur) {
+        $this->db->select('*');
+        $this->db->from('tb_retur_barang');
+        $this->db->join('tb_barang', 'tb_retur_barang.id_barang = tb_barang.id_barang');
+        $this->db->join('tb_brand', 'tb_barang.id_brand = tb_brand.id_brand');
+        $this->db->where('tb_retur_barang.no_faktur_retur', $no_faktur_retur);
+        $this->db->order_by('tb_barang.nama_barang', 'ASC'); // Urutkan secara ascending
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result(); // Mengembalikan hasil query sebagai objek
+        } else {
+            return array(); // Mengembalikan array kosong jika tidak ada hasil
+        }
+        
+    }
+
 
 
 }
