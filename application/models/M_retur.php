@@ -15,6 +15,22 @@ class M_retur extends CI_Model{
         return $query;
     }
 
+    public function get_stok_barang($idBarang) {
+        $this->db->select('stok');
+        $this->db->from('tb_barang');
+        $this->db->where('id_barang', $idBarang);
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            return $row->stok;
+        } else {
+            // Jika tidak ada data dengan id_barang yang diberikan, kembalikan null atau nilai default yang sesuai
+            return null;
+        }
+    }
+
+
     public function retur_keranjang_hapus($id_retur_keranjang)
     {
         $this->db->where('id_retur_keranjang',$id_retur_keranjang);
@@ -68,8 +84,13 @@ class M_retur extends CI_Model{
 
     public function transfer_keranjang_ke_retur($id_user, $no_faktur_retur, $keterangan, $tgl_tambah_stok)
     {
+        // update data stok barang
+        $query = "UPDATE tb_barang 
+        INNER JOIN tb_retur_keranjang ON tb_barang.id_barang = tb_retur_keranjang.id_barang 
+        SET tb_barang.stok = tb_barang.stok - tb_retur_keranjang.jumlah";
+        $this->db->query($query);
+
         // Memindahkan data dari tb_keranjang_masuk ke tb_stok untuk id_user tertentu
-        
         $this->db->trans_start(); // Memulai transaksi
 
         // Memasukkan data ke tb_retur_barang

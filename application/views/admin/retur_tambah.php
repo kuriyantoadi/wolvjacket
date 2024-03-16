@@ -8,6 +8,8 @@
             <h4 class="mb-sm-4 font-size-18 ">Retur Barang</h4>
             <div class="col-xl-6">
                 <?= $this->session->flashdata('msg') ?>    
+                <div id="message-container"></div>
+
             </div>
 
             <div class="col-xl-6">
@@ -46,7 +48,7 @@
 
                         <h4 class="mb-sm-4 font-size-16 ">Kategori Barang</h4>
 
-                        <a class="btn btn-success  btn-sm" href="<?= site_url('Retur/retur_kategori') ?>">Semua</a>
+                        <a class="btn btn-success  btn-sm" href="<?= site_url('Retur/retur_tambah') ?>">Semua</a>
 
                         <?php foreach ($tampil_kategori as $row): ?>
 
@@ -65,7 +67,7 @@
                                 <tr>
                                     <th><center>No</th>
                                     <th><center>Nama Barang</th>
-                                    <th><center>Brand</th>
+                                    <th><center>Stok</th>
                                     <th><center>Harga Barang</th> 
                                     <th><center>Qty</th> 
                                     <th><center>Opsi</th>
@@ -79,7 +81,7 @@
                                     
                                     <td><center><?= $no++; ?></td>
                                     <td><center><?= $row->nama_barang ?></td>
-                                    <td><center><?= $row->nama_brand ?></td>
+                                    <td><center><?= $row->stok ?></td>
                                     <td><center>Rp <?= number_format($row->harga_pokok) ?></td>
                                     <td><input type="number" class="form-control" id="jumlahBarang<?= $row->id_barang; ?>" value="1" min="1" maxlength="5"></td>
                                     <td><center><button class="btn btn-sm btn-primary" onclick="tambahKeKeranjang('<?= $row->nama_barang; ?>', <?= $row->harga_pokok; ?>, 'jumlahBarang<?= $row->id_barang; ?>', <?= $row->id_barang; ?>)"><i class="fas fa-shopping-cart"></i></button></td>
@@ -137,7 +139,7 @@
     <!-- End Page-content -->
 
 <script>
-    // Fungsi untuk menambahkan barang ke keranjang
+
     function tambahKeKeranjang(namaBarang, harga_pokok, inputId, idBarang) {
         var jumlah = document.getElementById(inputId).value;
 
@@ -146,12 +148,21 @@
         xhr.open('POST', '<?= base_url('retur/tambah_ke_keranjang'); ?>', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                const result = JSON.parse(xhr.responseText);
-                console.log(result);
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    const result = JSON.parse(xhr.responseText);
+                    console.log(result);
 
-                // Refresh data keranjang setelah menambah barang
-                fetchData();
+                    // Jika pesan berhasil ditambahkan
+                    if (result.message) {
+                        alert(result.message);
+                        // Refresh data keranjang setelah menambah barang
+                        fetchData();
+                    }
+                } else {
+                    // Tampilkan pesan error jika terjadi masalah saat mengirim permintaan
+                    alert('Terjadi masalah saat menambahkan barang ke keranjang.');
+                }
             }
         };
         xhr.send('nama_barang=' + encodeURIComponent(namaBarang) + '&harga_pokok=' + harga_pokok + '&jumlah=' + jumlah + '&id_barang=' + idBarang);

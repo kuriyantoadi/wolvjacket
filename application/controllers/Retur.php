@@ -59,18 +59,28 @@ class Retur extends CI_Controller
         $this->load->view('template/footer-admin');
     }
 
+
     public function tambah_ke_keranjang() {
         $id_user = $this->session->userdata('ses_id');
         $harga_pokok = $this->input->post('harga_pokok');
         $jumlah = $this->input->post('jumlah');
         $idBarang = $this->input->post('id_barang');
 
+        // Dapatkan stok dari database untuk id_barang yang diberikan
+        $stok = $this->M_retur->get_stok_barang($idBarang);
+
+        // Pengecekan apakah jumlah stok lebih sedikit dari faktur retur
+        if ($stok < $jumlah) {
+            echo json_encode(['message' => 'Stok barang tidak mencukupi.']);
+            return;
+        }
+
         // Pengecekan apakah id_barang sudah ada dalam keranjang
         if ($this->M_retur->cek_id_barang($idBarang)) {
             echo json_encode(['message' => 'Barang sudah ada dalam keranjang.']);
             return;
         }
-
+        
         $data = array(
             'harga_pokok' => $harga_pokok,
             'jumlah' => $jumlah,
@@ -86,6 +96,7 @@ class Retur extends CI_Controller
             echo json_encode(['message' => 'Gagal menambahkan barang ke keranjang.']);
         }
     }
+
 
     public function tampil_keranjang() {
         // Mengambil data barang dari model

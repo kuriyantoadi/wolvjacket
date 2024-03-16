@@ -651,20 +651,6 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $this->load->view('template/footer-admin');
     }
 
-    //  public function tambah_stok()
-    // {
-    //     $header['title']='WolvJacket';
-    //     $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
-    //     $id_user = $this->session->userdata('ses_id');
-
-    //     $data['tampil'] = $this->M_admin->tampil_barang();
-    //     $data['tampil_keranjang'] = $this->M_admin->tampil_keranjang_pengguna($id_user);
-
-    //     $this->load->view('template/header-admin', $header);
-    //     $this->load->view('admin/tambah_stok', $data);
-    //     $this->load->view('template/footer-admin');
-    // }
-
     public function tampil_keranjang() {
         // Mengambil data barang dari model
         $id_user = $this->session->userdata('ses_id');
@@ -757,6 +743,28 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
 
     }
 
+    public function get_stok_barang() {
+        // Ambil id_barang dari data POST
+        $id_barang = $this->input->post('id_barang');
+
+        // Lakukan query untuk mendapatkan stok barang dari tabel tb_barang berdasarkan id_barang
+        $this->db->select('stok');
+        $this->db->from('tb_barang');
+        $this->db->where('id_barang', $id_barang);
+        $query = $this->db->get();
+
+        // Periksa apakah ada hasil dari query
+        if ($query->num_rows() > 0) {
+            // Jika ada, kembalikan stok sebagai respon
+            $row = $query->row();
+            echo $row->stok;
+        } else {
+            // Jika tidak ada, kembalikan pesan bahwa stok tidak ditemukan atau stok tidak tersedia
+            echo "Stok tidak tersedia";
+        }
+    }
+
+
     public function daftar_tambah_stok()
     {
         $header['title']='WolvJacket';
@@ -786,6 +794,12 @@ $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
     public function get_harga_pokok() {
         $id_barang = $this->input->post('id_barang'); // Ambil ID barang dari AJAX request
         $harga_pokok = $this->M_admin->get_harga_pokok($id_barang); // Panggil fungsi model untuk mendapatkan harga pokok
+        echo $harga_pokok; // Kembalikan harga pokok sebagai response
+    }
+
+     public function get_stok() {
+        $id_barang = $this->input->post('id_barang'); // Ambil ID barang dari AJAX request
+        $harga_pokok = $this->M_admin->get_stok($id_barang); // Panggil fungsi model untuk mendapatkan harga pokok
         echo $harga_pokok; // Kembalikan harga pokok sebagai response
     }
 

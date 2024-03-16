@@ -3,7 +3,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="myLargeModalLabel">Tambah Item Barang</h5>
+                    <h5 class="modal-title" id="myLargeModalLabel">Retur - Tambah Item Barang</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -42,10 +42,10 @@
                         
                 </div>
 
-                <!-- <div class="form-group">
+                <div class="form-group">
                     <label class="control-label mt-3" for="email">Stok :</label>
-                    <input type="text" class="form-control" placeholder="" name="stok" value="" required readonly>
-                </div> -->
+                    <input type="text"  id="stok" class="form-control" placeholder="" name="stok" value="" required readonly>
+                </div>
 
                 <div class="form-group">
                     <label class="control-label mt-3" for="email">Harga Pokok :</label>
@@ -208,11 +208,33 @@
 
 
     <script>
+        // $(document).ready(function() {
+        //     $('#pilihan_barang').change(function() {
+        //         var id_barang = $(this).val();
+        //         if (id_barang === '') {
+        //             $('#harga_pokok').val('Anda Belum Memilih Barang');
+        //         } else {
+        //             $.ajax({
+        //                 url: '<?= base_url('Admin/get_harga_pokok') ?>',
+        //                 method: 'POST',
+        //                 data: {id_barang: id_barang},
+        //                 success: function(response) {
+        //                     $('#harga_pokok').val(response);
+        //                 },
+        //                 error: function(xhr, status, error) {
+        //                     console.error(xhr.responseText);
+        //                 }
+        //             });
+        //         }
+        //     });
+        // });
+
         $(document).ready(function() {
             $('#pilihan_barang').change(function() {
                 var id_barang = $(this).val();
                 if (id_barang === '') {
                     $('#harga_pokok').val('Anda Belum Memilih Barang');
+                    $('#stok_barang').val('');
                 } else {
                     $.ajax({
                         url: '<?= base_url('Admin/get_harga_pokok') ?>',
@@ -225,9 +247,23 @@
                             console.error(xhr.responseText);
                         }
                     });
+
+                    // Permintaan AJAX untuk mendapatkan stok barang
+                    $.ajax({
+                        url: '<?= base_url('Admin/get_stok_barang') ?>',
+                        method: 'POST',
+                        data: {id_barang: id_barang},
+                        success: function(response) {
+                            $('#stok').val(response);
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
                 }
             });
         });
+
     </script>
 
  

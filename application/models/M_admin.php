@@ -52,6 +52,7 @@ class M_admin extends CI_Model
   {
     $this->db->from('tb_barang');
     $this->db->join('tb_brand', 'tb_barang.id_brand = tb_brand.id_brand');
+    $this->db->where('tb_barang.stok > 0');
     $query = $this->db->get()->result();
     return $query;
   }
@@ -308,12 +309,23 @@ class M_admin extends CI_Model
 
   public function transfer_keranjang_ke_stok($id_user, $no_faktur, $keterangan, $tgl_tambah_stok)
   {
+
+    // update data stok barang
+    $query = "UPDATE tb_barang 
+    INNER JOIN tb_keranjang_masuk ON tb_barang.id_barang = tb_keranjang_masuk.id_barang 
+    SET tb_barang.stok = tb_barang.stok + tb_keranjang_masuk.jumlah";
+    $this->db->query($query);
+
+
     // Memindahkan data dari tb_keranjang_masuk ke tb_stok untuk id_user tertentu
     $this->db->trans_start(); // Memulai transaksi
+
+
 
     // Memasukkan data ke tb_stok
     $this->db->select('id_barang, jumlah, harga_pokok','nama_barang');
     $this->db->where('id_user', $id_user);
+
     $query = $this->db->get('tb_keranjang_masuk');
     $data_keranjang = $query->result_array();
 
@@ -321,7 +333,6 @@ class M_admin extends CI_Model
         // Tambahkan kolom lain
         $row['keterangan'] = $keterangan;
         $row['tgl_tambah_stok'] = $tgl_tambah_stok;
-        // $row['nama_barang'] = $nama_barang;
         $row['no_faktur'] = $no_faktur;
         $row['keterangan'] = $keterangan;
         $row['id_user'] = $id_user;
@@ -532,6 +543,15 @@ class M_admin extends CI_Model
     $query = $this->db->get('tb_barang');
     $row = $query->row();
     return $row->harga_pokok;
+  }
+
+  public function get_stok($id_barang) {
+    // Query untuk mendapatkan harga pokok berdasarkan ID barang
+    $this->db->select('stok');
+    $this->db->where('id_barang', $id_barang);
+    $query = $this->db->get('tb_barang');
+    $row = $query->row();
+    return $row->stok;
   }
 
   function tambah_stok_barang_up($data_tambah)
