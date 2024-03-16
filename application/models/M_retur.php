@@ -150,6 +150,17 @@ class M_retur extends CI_Model{
         
     }
 
+    public function retur_edit($id_retur)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_retur');
+        $this->db->where('id_retur',$id_retur);
+        $query = $this->db->get()->result();
+        return $query;
+    }
+
+    
+
 
 
 }

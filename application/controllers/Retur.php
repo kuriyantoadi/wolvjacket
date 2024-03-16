@@ -178,6 +178,18 @@ class Retur extends CI_Controller
         redirect('Retur/index/');
     }
 
+    public function retur_edit($id_retur, $no_faktur_retur)
+    {
+        $header['title']='WolvJacket';
+        $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
+        $data['tampil'] = $this->M_retur->retur_edit($id_retur);
+        $data['tampil_barang'] = $this->M_retur->get_data_by_no_faktur($no_faktur_retur);
+
+        $this->load->view('template/header-admin', $header);
+        $this->load->view('admin/retur_edit', $data);
+        $this->load->view('template/footer-admin');
+    }
+
     
 
 }
