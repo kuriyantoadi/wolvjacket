@@ -44,8 +44,6 @@ class M_retur extends CI_Model{
       return $query->num_rows() > 0;
     }
 
-    
-
     public function get_last_no_faktur()
     {
         $this->db->select("LEFT(no_faktur_retur, 6) as no_faktur_awal", false); // Menggunakan LEFT() untuk mengambil 6 karakter pertama
@@ -212,6 +210,16 @@ class M_retur extends CI_Model{
 
         return $result;
     }
+
+    public function update_total_barang($jumlah, $id_barang)
+    {
+        // Update data stok barang
+        $query = "UPDATE tb_barang 
+                SET stok = stok - $jumlah
+                WHERE id_barang = $id_barang";
+        $this->db->query($query);
+    }
+
 
 }
 

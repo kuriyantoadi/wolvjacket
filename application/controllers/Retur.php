@@ -44,6 +44,62 @@ class Retur extends CI_Controller
         $this->load->view('template/footer-admin');
     }
 
+    public function retur_tambah_up()
+    {
+        $id_user = $this->session->userdata('ses_id');
+        $cek_keranjang_masuk = $this->M_retur->cek_keranjang_masuk($id_user);
+
+        // var_dump($cek_keranjang_masuk);
+
+        if($cek_keranjang_masuk == NULL){
+            $this->session->set_flashdata('msg', '
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Proses Gagal, Keranjang Kosong.    
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            ');
+            redirect('Retur/retur_tambah/');
+        }
+
+        $no_faktur_awal = $this->M_retur->get_last_no_faktur();
+        $cek_seri_no_faktur = $this->M_retur->cek_seri_no_faktur();
+        $tgl_skrg = date('dmy');
+
+        if($no_faktur_awal == NULL){
+            $no_faktur_retur = 'RT'.$tgl_skrg.'000001';
+        }else{
+            $akhir_faktur = $cek_seri_no_faktur+1;
+            $no_faktur_retur = 'RT'.$tgl_skrg.sprintf("%06d", $akhir_faktur);
+        }
+
+        $keterangan = $this->input->post('keterangan');
+        $tanggal = date('Y-m-d H:i:s'); // Tanggal dan waktu saat ini
+
+        // Melakukan transfer dari tb_keranjang_masuk ke tb_stok untuk id_user tertentu
+        $status = $this->M_retur->transfer_keranjang_ke_retur($id_user, $no_faktur_retur, $keterangan);
+
+        // isi data tb_retur
+        $data = array(
+            'no_faktur_retur' => $no_faktur_retur,
+            'keterangan' => $keterangan,
+            'tanggal' => $tanggal,
+            'id_user' => $id_user
+        );
+
+        $this->M_retur->retur_tambah_up($data);
+
+        $cek_retur = $this->M_retur->get_data_retur($no_faktur_retur);
+
+        $this->session->set_flashdata('msg', '
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    Tambah Data Retur Berhasil
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        ');
+        redirect('Retur/index/');
+
+    }
+
     public function retur_kategori($id_kategori_barang)
     {
         $header['title']='WolvJacket';
@@ -122,61 +178,7 @@ class Retur extends CI_Controller
         redirect('Retur/retur_tambah/');
     }
 
-    public function retur_tambah_up()
-    {
-        $id_user = $this->session->userdata('ses_id');
-        $cek_keranjang_masuk = $this->M_retur->cek_keranjang_masuk($id_user);
-
-        // var_dump($cek_keranjang_masuk);
-
-        if($cek_keranjang_masuk == NULL){
-            $this->session->set_flashdata('msg', '
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    Proses Gagal, Keranjang Kosong.    
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            ');
-            redirect('Retur/retur_tambah/');
-        }
-
-        $no_faktur_awal = $this->M_retur->get_last_no_faktur();
-        $cek_seri_no_faktur = $this->M_retur->cek_seri_no_faktur();
-        $tgl_skrg = date('dmy');
-
-        if($no_faktur_awal == NULL){
-            $no_faktur_retur = 'RT'.$tgl_skrg.'000001';
-        }else{
-            $akhir_faktur = $cek_seri_no_faktur+1;
-            $no_faktur_retur = 'RT'.$tgl_skrg.sprintf("%06d", $akhir_faktur);
-        }
-
-        $keterangan = $this->input->post('keterangan');
-        $tanggal = date('Y-m-d H:i:s'); // Tanggal dan waktu saat ini
-
-        // Melakukan transfer dari tb_keranjang_masuk ke tb_stok untuk id_user tertentu
-        $status = $this->M_retur->transfer_keranjang_ke_retur($id_user, $no_faktur_retur, $keterangan);
-
-        // isi data tb_retur
-        $data = array(
-            'no_faktur_retur' => $no_faktur_retur,
-            'keterangan' => $keterangan,
-            'tanggal' => $tanggal,
-            'id_user' => $id_user
-        );
-
-        $this->M_retur->retur_tambah_up($data);
-
-        $cek_retur = $this->M_retur->get_data_retur($no_faktur_retur);
-
-        $this->session->set_flashdata('msg', '
-            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    Tambah Data Retur Berhasil
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        ');
-        redirect('Retur/index/');
-
-    }
+    
 
     public function retur_hapus($id_retur){
         $success = $this->M_retur->retur_hapus($id_retur);
@@ -215,29 +217,48 @@ class Retur extends CI_Controller
         $id_barang = $this->input->post('id_barang');
         $jumlah = $this->input->post('jumlah');
         $harga_pokok = $this->input->post('harga_pokok');
-        // $id_faktur = $this->input->post('id_faktur');
+        $id_retur = $this->input->post('id_retur');
 
         $stok = $this->M_retur->get_stok_barang($id_barang);
 
         if ($stok < $jumlah) {
             $this->session->set_flashdata('msg', '
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Hapus Retur Berhasil
+                    Jumlah <strong> Stok Barang</strong> lebih sedikit dari jumlah <strong> Retur</strong> 
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             ');
-            // redirect('Retur/retur_edit/');
+
+            // echo "error";
+            redirect('Retur/retur_edit/'.$id_retur);
+
+        }else{
+
+            $data = array(
+                'no_faktur_retur' => $no_faktur_retur,
+                'id_barang' => $id_barang,
+                'jumlah' => $jumlah,
+                'harga_pokok' => $harga_pokok,
+            );
+
+            $this->M_retur->retur_edit_tambah($data);
+
+            // update total retur di tb_retur
+            $cek_retur = $this->M_retur->update_total_retur($no_faktur_retur);
+
+            // update total stok di tb_barang
+            $cek_total_barang = $this->M_retur->update_total_barang($jumlah, $id_barang);
+
+            $this->session->set_flashdata('msg', '
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    Tambah Barang Retur Berhasil
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            ');
+
+            // echo "error";
+            redirect('Retur/retur_edit/'.$id_retur);
         }
-
-
-        $data = array(
-            'no_faktur_retur' => $no_faktur_retur,
-            'id_barang' => $id_barang,
-            'jumlah' => $jumlah,
-            'harga_pokok' => $harga_pokok,
-        );
-
-        $this->M_retur->retur_edit_tambah($data);
 
     }
 

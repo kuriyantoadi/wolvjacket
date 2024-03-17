@@ -17,7 +17,7 @@
                 <div class="form-group">
                     <label class="control-label mt-3" for="email">No Faktur Retur:</label>
                     <input type="hidden" name="no_faktur_retur" value="<?= $row_faktur->no_faktur_retur ?>">
-                    <!-- <input type="hidden" name="id_faktur" value="<?= $row_faktur->id_faktur ?>"> -->
+                    <input type="hidden" name="id_retur" value="<?= $row_faktur->id_retur ?>">
                     <input type="text" class="form-control" placeholder="" name="no_faktur_retur" value="<?= $row_faktur->no_faktur_retur ?>" required readonly>
                 </div>
 
@@ -73,6 +73,59 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->  
 <!-- Akhir modal Tambah Barang ============================================================== -->
+
+
+<!-- Awal modal Edit Keterangan ============================================================== -->
+
+    <div class="modal fade bs-example-modal-lg" id="editKeterangan" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myLargeModalLabel">Tambah Stok Edit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                <!-- awal isi modal -->
+                <?= form_open('Admin/tambah_stok_keterangan_up'); ?>
+                <form class="m-t-40" novalidate>
+
+                <div class="form-group">
+                    <label class="control-label mt-3" for="email">No Faktur :</label>
+                    <input type="hidden" name="id_stok" value="<?= $row_faktur->id_stok ?>">
+                    <input type="hidden" name="no_faktur" value="<?= $row_faktur->no_faktur ?>">
+                    <input type="text" class="form-control" placeholder="" name="no_faktur" value="<?= $row_faktur->no_faktur ?>" required readonly>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label mt-3" for="email">Harga Total :</label>
+                    <input type="text" class="form-control" placeholder="" name="" value="<?= number_format($row_faktur->total_harga_pokok) ?>" required readonly>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label mt-3" for="email">Qty :</label>
+                    <input type="text" class="form-control" placeholder="" name="jumlah" value="<?= $row_faktur->total_barang ?>" required readonly>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label mt-3" for="email">Keterangan :</label>
+                    <input type="text" class="form-control" placeholder="" name="keterangan" value="<?= $row_faktur->keterangan ?>" >
+                </div>
+
+                    <input type="submit" name="submit" class="btn btn-sm btn-primary btn-sm mb-lg-4 mt-lg-4" value="Update"></input>
+                    </div>
+                </center>
+                <?=  form_close(); ?>
+                </form>
+                    
+                <!-- akhir isi modal -->
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->  
+<!-- Akhir modal Edit Keterangan ============================================================== -->
+
 
 
 
@@ -142,7 +195,7 @@
                                         <td><center><?= $row->id_user ?></td>
                                         <td><center><?= $row->keterangan ?></td>
                                         <td><center>
-                                            <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#editModalStok<?= $row->id_retur ?>"><i class="bx bxs-edit"></i>Edit</button>
+                                            <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#editKeterangan"><i class="bx bxs-edit"></i>Edit</button>
                                             <a class="btn btn-success btn-sm" href="<?= site_url('Admin/tambah_stok_print/'. $row->id_retur) ?>"><i class="bx bxs-printer"></i>Print</a>
                                         </td>
                                        
@@ -164,7 +217,7 @@
                 <div class="col-12">
                     <div class="card">  
                         <div class="card-body">
-                        <h3 class="mb-sm-3 font-size-18">Daftar Barang Faktur</h3>
+                        <h3 class="mb-sm-3 font-size-18">Daftar Barang Retur</h3>
                         
                         <table id='datatable' class="table table-bordered dt-responsive table-hover table-striped  nowrap w-100">
                             <thead>

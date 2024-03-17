@@ -256,10 +256,10 @@ class Ajax extends CI_Controller
 
             // add html for action
             $row[] = '
-                    <a class="btn btn-warning btn-sm" ><i class="bx bxs-printer"></i></a>
-                    <a href="'.site_url('Retur/retur_edit/'.$item->id_retur).'" class="btn btn-primary btn-sm" ><i class="bx bxs-pencil"></i></a>
-                    <a href="'.site_url('Retur/retur_hapus/'.$item->id_retur).'" onclick="return confirm(\'Yakin hapus data barang'. $item->no_faktur_retur .' ?\')"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i></a>
-                    <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editModal'.$item->no_faktur_retur.'"><i class="bx bxs-detail"></i></button>
+                    <a class="btn btn-success btn-sm" ><i class="bx bxs-printer"></i>Print</a>
+                    <a href="'.site_url('Retur/retur_edit/'.$item->id_retur).'" class="btn btn-info btn-sm" ><i class="bx bxs-pencil"></i>Edit</a>
+                    <a href="'.site_url('Retur/retur_hapus/'.$item->id_retur).'" onclick="return confirm(\'Yakin hapus data barang'. $item->no_faktur_retur .' ?\')"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i>Hapus</a>
+                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editModal'.$item->no_faktur_retur.'"><i class="bx bxs-detail"></i>Detail</button>
                 ';
             $data[] = $row;
         }
