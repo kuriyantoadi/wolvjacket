@@ -189,18 +189,78 @@ class Retur extends CI_Controller
         redirect('Retur/index/');
     }
 
-    public function retur_edit($id_retur, $no_faktur_retur)
+    public function retur_edit($id_retur)
     {
         $header['title']='WolvJacket';
         $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $data['tampil'] = $this->M_retur->retur_edit($id_retur);
-        $data['tampil_barang'] = $this->M_retur->get_data_by_no_faktur($no_faktur_retur);
+        $data['tampil_barang'] = $this->M_admin->tampil_barang();
+
+        // cari no_faktur dari id_faktur
+        $cek_no_faktur = $this->M_retur->retur_edit($id_retur);
+        foreach($cek_no_faktur as $row){
+            $no_faktur_retur = $row->no_faktur_retur;
+        }
+
+        $data['faktur_barang'] = $this->M_retur->get_data_by_no_faktur($no_faktur_retur);
 
         $this->load->view('template/header-admin', $header);
         $this->load->view('admin/retur_edit', $data);
         $this->load->view('template/footer-admin');
     }
 
+    public function retur_edit_tambah()
+    {
+        $no_faktur_retur = $this->input->post('no_faktur_retur');
+        $id_barang = $this->input->post('id_barang');
+        $jumlah = $this->input->post('jumlah');
+        $harga_pokok = $this->input->post('harga_pokok');
+        // $id_faktur = $this->input->post('id_faktur');
+
+        $stok = $this->M_retur->get_stok_barang($id_barang);
+
+        if ($stok < $jumlah) {
+            $this->session->set_flashdata('msg', '
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Hapus Retur Berhasil
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            ');
+            // redirect('Retur/retur_edit/');
+        }
+
+
+        $data = array(
+            'no_faktur_retur' => $no_faktur_retur,
+            'id_barang' => $id_barang,
+            'jumlah' => $jumlah,
+            'harga_pokok' => $harga_pokok,
+        );
+
+        $this->M_retur->retur_edit_tambah($data);
+
+    }
+
+    public function retur_edit_hapus($id_retur_barang, $id_retur)
+    {
+        // cari no_faktur dari id_faktur
+        $cek_no_faktur = $this->M_retur->retur_edit($id_retur);
+        foreach($cek_no_faktur as $row){
+            $no_faktur_retur = $row->no_faktur_retur;
+        }
+
+        $success = $this->M_retur->retur_edit_hapus($id_retur_barang);
+        $this->session->set_flashdata('msg', '
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Hapus Retur Barang Berhasil
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        ');
+
+        $cek_retur = $this->M_retur->update_total_retur($no_faktur_retur);
+
+        redirect('Retur/retur_edit/'.$id_retur);
+    }
     
 
 }

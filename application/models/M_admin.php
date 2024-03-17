@@ -52,7 +52,7 @@ class M_admin extends CI_Model
   {
     $this->db->from('tb_barang');
     $this->db->join('tb_brand', 'tb_barang.id_brand = tb_brand.id_brand');
-    $this->db->where('tb_barang.stok > 0');
+    // $this->db->where('tb_barang.stok > 0');
     $query = $this->db->get()->result();
     return $query;
   }

@@ -133,6 +133,7 @@ class M_retur extends CI_Model{
             'total_jumlah' => $result->jumlah_total,
             'total_harga' => $result->total_harga
         );
+
         $this->db->where('no_faktur_retur', $no_faktur_retur);
         $this->db->update('tb_retur', $data);
 
@@ -181,8 +182,36 @@ class M_retur extends CI_Model{
     }
 
     
+    public function retur_edit_tambah($data) {
+        return $this->db->insert('tb_retur_barang', $data);
+    }
+
+    public function retur_edit_hapus($id_retur_barang){
+        $this->db->where('id_retur_barang',$id_retur_barang);
+        $this->db->delete('tb_retur_barang');
+    }
 
 
+    public function update_total_retur($no_faktur_retur) 
+    {
+        $this->db->select('SUM(jumlah) AS jumlah_total, SUM(harga_pokok * jumlah) AS total_harga');
+        $this->db->from('tb_retur_barang');
+        $this->db->where('no_faktur_retur', $no_faktur_retur);
+        $query = $this->db->get();
+
+        $result = $query->row();
+
+        // Update kolom total_jumlah dan total_harga pada tabel tb_retur
+        $data = array(
+            'total_jumlah' => $result->jumlah_total,
+            'total_harga' => $result->total_harga
+        );
+        
+        $this->db->where('no_faktur_retur', $no_faktur_retur);
+        $this->db->update('tb_retur', $data);
+
+        return $result;
+    }
 
 }
 

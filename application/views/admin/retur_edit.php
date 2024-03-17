@@ -9,7 +9,7 @@
                 <div class="modal-body">
                     
                 <!-- awal isi modal -->
-                <?= form_open('Admin/tambah_stok_barang_up'); ?>
+                <?= form_open('Retur/retur_edit_tambah'); ?>
                 <form class="m-t-40" novalidate>
 
                 <?php foreach ($tampil as $row_faktur): ?>
@@ -17,6 +17,7 @@
                 <div class="form-group">
                     <label class="control-label mt-3" for="email">No Faktur Retur:</label>
                     <input type="hidden" name="no_faktur_retur" value="<?= $row_faktur->no_faktur_retur ?>">
+                    <!-- <input type="hidden" name="id_faktur" value="<?= $row_faktur->id_faktur ?>"> -->
                     <input type="text" class="form-control" placeholder="" name="no_faktur_retur" value="<?= $row_faktur->no_faktur_retur ?>" required readonly>
                 </div>
 
@@ -103,7 +104,7 @@
                 <div class="col-12 mb-2">
                     
                     <div class="d-flex gap-2 flex-wrap mb-1">
-                        <a type="button" href="<?= base_url() ?>Admin/daftar_tambah_stok" class="btn btn-sm btn-secondary waves-effect waves-light" >Kembali</a>
+                        <a type="button" href="<?= base_url() ?>Retur/index" class="btn btn-sm btn-secondary waves-effect waves-light" >Kembali</a>
                         <button class="btn btn-sm btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#tambahModal"><i class="bx bx-list-plus"></i>Tambah Item</button>
                     </div>  
 
@@ -132,6 +133,7 @@
                                 <?php $no=1; ?>
 
                                 <?php foreach ($tampil as $row): ?>
+                                <?php $id_retur = $row->id_retur ?>
                                     <tr>
                                         <td><center><?= $row->no_faktur_retur ?></td>
                                         <td><center><?= $row->tanggal ?></td>
@@ -179,7 +181,7 @@
 
                             <tbody>
                                 <?php $no=1; ?>
-                                <?php foreach ($tampil_barang as $row) { ?>
+                                <?php foreach ($faktur_barang as $row) { ?>
                                     <tr>
                                         <td><center><?= $no++ ?></td>
                                         <td><?= $row->nama_barang ?></td>
@@ -189,7 +191,7 @@
                                         <td><center>Rp <?= number_format($row->harga_pokok * $row->jumlah) ?></td>
                                         <td><center>
                                             <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#editModal<?= $row->id_retur_barang ?>"><i class="bx bxs-edit"></i>Edit</button>
-                                            <a href="<?= site_url('Admin/tambah_stok_edit_hapus/'.$row->id_retur_barang.'/'.$row->no_faktur_retur) ?>" onclick="return confirm('Yakin hapus data item Barang <?= $row->nama_barang ?>' )"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i> Hapus</a>
+                                            <a href="<?= site_url('Retur/retur_edit_hapus/'.$row->id_retur_barang.'/'.$id_retur) ?>" onclick="return confirm('Yakin hapus data item Barang <?= $row->nama_barang ?>' )"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i> Hapus</a>
                                         </td>
                                     </tr>
 
