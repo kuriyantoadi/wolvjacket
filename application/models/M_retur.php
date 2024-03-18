@@ -221,6 +221,12 @@ class M_retur extends CI_Model{
     }
 
 
+    function retur_edit_keterangan($data_edit, $id_retur)
+    {
+        $this->db->where('id_retur', $id_retur);
+        $this->db->update('tb_retur', $data_edit);
+    }
+
 }
 
  ?>

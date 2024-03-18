@@ -282,6 +282,32 @@ class Retur extends CI_Controller
 
         redirect('Retur/retur_edit/'.$id_retur);
     }
+
+    public function retur_edit_keterangan()
+    {
+        $id_retur = $this->input->post('id_retur');
+        $keterangan = $this->input->post('keterangan');
+
+        $data_edit = array(
+            'id_retur' => $id_retur,
+            'keterangan' => $keterangan,
+        );
+
+        $this->M_retur->retur_edit_keterangan($data_edit, $id_retur);
+
+        $this->session->set_flashdata('msg', '
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                Edit Keterangan Retur Berhasil
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        ');
+
+        // echo "error";
+        redirect('Retur/retur_edit/'.$id_retur);
+
+
+
+    }
     
 
 }

@@ -87,35 +87,41 @@
                 <div class="modal-body">
                     
                 <!-- awal isi modal -->
-                <?= form_open('Admin/tambah_stok_keterangan_up'); ?>
+                <?= form_open('Retur/retur_edit_keterangan'); ?>
+                 <?php foreach ($tampil as $row){ ?>
                 <form class="m-t-40" novalidate>
 
                 <div class="form-group">
                     <label class="control-label mt-3" for="email">No Faktur :</label>
-                    <input type="hidden" name="id_stok" value="<?= $row_faktur->id_stok ?>">
-                    <input type="hidden" name="no_faktur" value="<?= $row_faktur->no_faktur ?>">
-                    <input type="text" class="form-control" placeholder="" name="no_faktur" value="<?= $row_faktur->no_faktur ?>" required readonly>
+                    <input type="hidden" name="id_retur" value="<?= $row->id_retur ?>">
+                    <input type="text" class="form-control" placeholder="" name="no_faktur_retur" value="<?= $row->no_faktur_retur ?>" required readonly>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label mt-3" for="email">Tanggal :</label>
+                    <input type="text" class="form-control" placeholder="" name="" value="<?= $row->tanggal ?>" required readonly>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label mt-3" for="email">Harga Total :</label>
-                    <input type="text" class="form-control" placeholder="" name="" value="<?= number_format($row_faktur->total_harga_pokok) ?>" required readonly>
+                    <input type="text" class="form-control" placeholder="" name="total_harga" value="<?= number_format($row->total_harga) ?>" required readonly>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label mt-3" for="email">Qty :</label>
-                    <input type="text" class="form-control" placeholder="" name="jumlah" value="<?= $row_faktur->total_barang ?>" required readonly>
+                    <label class="control-label mt-3" for="email">Jumlah :</label>
+                    <input type="text" class="form-control" placeholder="" name="jumlah" value="<?= $row->total_jumlah ?>" required readonly>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label mt-3" for="email">Keterangan :</label>
-                    <input type="text" class="form-control" placeholder="" name="keterangan" value="<?= $row_faktur->keterangan ?>" >
+                    <input type="text" class="form-control" placeholder="" name="keterangan" value="<?= $row->keterangan ?>" >
                 </div>
 
                     <input type="submit" name="submit" class="btn btn-sm btn-primary btn-sm mb-lg-4 mt-lg-4" value="Update"></input>
                     </div>
                 </center>
                 <?=  form_close(); ?>
+                <?php } ?>
                 </form>
                     
                 <!-- akhir isi modal -->
