@@ -81,14 +81,15 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="myLargeModalLabel">Tambah Stok Edit</h5>
+                    <h5 class="modal-title" id="myLargeModalLabel">Edit Transaksi Retur</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     
                 <!-- awal isi modal -->
                 <?= form_open('Retur/retur_edit_keterangan'); ?>
-                 <?php foreach ($tampil as $row){ ?>
+                <?php foreach ($tampil as $row){ ?>
+                <?php $id_retur = $row->id_retur ?>
                 <form class="m-t-40" novalidate>
 
                 <div class="form-group">
@@ -132,6 +133,59 @@
     </div><!-- /.modal -->  
 <!-- Akhir modal Edit Keterangan ============================================================== -->
 
+
+<!-- Awal modal Jumlah Barang ============================================================== -->
+<?php foreach ($tampil_barang_modal as $row){ ?>
+
+    <div class="modal fade bs-example-modal-lg" id="editJumlah<?= $row->id_retur_barang ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myLargeModalLabel">Tambah Stok Edit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                <!-- awal isi modal -->
+                <?= form_open('Retur/retur_edit_jumlah'); ?>
+            
+                <form class="m-t-40" novalidate>
+
+                <div class="form-group">
+                    <label class="control-label mt-3" for="email">Nama Barang : </label>
+                    <input type="hidden" name="id_retur_barang" value="<?= $row->id_retur_barang ?>">
+                    <input type="hidden" name="no_faktur_retur" value="<?= $row->no_faktur_retur ?>">
+                    <input type="hidden" name='id_retur' value="<?= $id_retur ?>">
+                    <input type="hidden" name='id_barang' value="<?= $row->id_barang ?>">
+                    <input type="text" class="form-control" placeholder="" name="nama_barang" value="<?= $row->nama_barang ?>" required readonly>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label mt-3" for="email">Jumlah Awal :</label>
+                    <input type="text" class="form-control" placeholder="" name="jumlah_awal" value="<?= $row->jumlah ?>" required readonly>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label mt-3" for="email">Jumlah Edit :</label>
+                    <input type="text" class="form-control" placeholder="" name="jumlah" value="<?= $row->jumlah ?>" required>
+                </div>
+
+
+                    <input type="submit" name="submit" class="btn btn-sm btn-primary btn-sm mb-lg-4 mt-lg-4" value="Update"></input>
+                    </div>
+                </center>
+                <?=  form_close(); ?>
+              
+                </form>
+                    
+                <!-- akhir isi modal -->
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->  
+<!-- Akhir modal Jumlah Barang ============================================================== -->
+<?php } ?>
 
 
 
@@ -249,7 +303,7 @@
                                         <td><center>Rp <?= number_format($row->harga_pokok) ?></td>
                                         <td><center>Rp <?= number_format($row->harga_pokok * $row->jumlah) ?></td>
                                         <td><center>
-                                            <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#editModal<?= $row->id_retur_barang ?>"><i class="bx bxs-edit"></i>Edit</button>
+                                            <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#editJumlah<?= $row->id_retur_barang ?>"><i class="bx bxs-edit"></i>Edit</button>
                                             <a href="<?= site_url('Retur/retur_edit_hapus/'.$row->id_retur_barang.'/'.$id_retur) ?>" onclick="return confirm('Yakin hapus data item Barang <?= $row->nama_barang ?>' )"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i> Hapus</a>
                                         </td>
                                     </tr>

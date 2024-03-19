@@ -220,11 +220,36 @@ class M_retur extends CI_Model{
         $this->db->query($query);
     }
 
+    public function update_plus_total_barang($jumlah_edit, $id_barang)
+    {
+        // Update data stok barang
+        $query = "UPDATE tb_barang 
+                SET stok = stok + $jumlah_edit
+                WHERE id_barang = $id_barang";
+        $this->db->query($query);
+    }
+
 
     function retur_edit_keterangan($data_edit, $id_retur)
     {
         $this->db->where('id_retur', $id_retur);
         $this->db->update('tb_retur', $data_edit);
+    }
+
+    function tampil_barang_modal()
+    {
+        $this->db->select('*');
+        $this->db->from('tb_retur_barang');
+        $this->db->join('tb_barang', 'tb_retur_barang.id_barang = tb_barang.id_barang');
+        // $this->db->where('tb_retur_barang.id_retur_barang', $id_retur_barang);
+        $query = $this->db->get()->result();
+        return $query;
+    }
+
+    function retur_edit_jumlah($data_edit, $id_retur_barang)
+    {
+        $this->db->where('id_retur_barang', $id_retur_barang);
+        $this->db->update('tb_retur_barang', $data_edit);
     }
 
 }

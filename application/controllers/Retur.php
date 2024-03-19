@@ -197,6 +197,7 @@ class Retur extends CI_Controller
         $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
         $data['tampil'] = $this->M_retur->retur_edit($id_retur);
         $data['tampil_barang'] = $this->M_admin->tampil_barang();
+        $data['tampil_barang_modal'] = $this->M_retur->tampil_barang_modal();
 
         // cari no_faktur dari id_faktur
         $cek_no_faktur = $this->M_retur->retur_edit($id_retur);
@@ -304,8 +305,40 @@ class Retur extends CI_Controller
 
         // echo "error";
         redirect('Retur/retur_edit/'.$id_retur);
+    }
 
+    public function retur_edit_jumlah()
+    {
+        $id_retur_barang = $this->input->post('id_retur_barang');
+        $id_retur = $this->input->post('id_retur');
+        $id_barang = $this->input->post('id_barang');
+        $no_faktur_retur = $this->input->post('no_faktur_retur');
+        $jumlah_awal = $this->input->post('jumlah_awal');
+        $jumlah = $this->input->post('jumlah');
 
+        $jumlah_edit = $jumlah_awal - $jumlah;
+
+        $data_edit = array(
+            // 'id_retur_barang' => $id_retur_barang,
+            'jumlah' => $jumlah,
+        );
+
+        $this->M_retur->retur_edit_jumlah($data_edit, $id_retur_barang);
+
+        // update total stok di tb_barang
+        $cek_total_barang = $this->M_retur->update_plus_total_barang($jumlah_edit, $id_barang);
+
+        $cek_retur = $this->M_retur->update_total_retur($no_faktur_retur);
+
+        $this->session->set_flashdata('msg', '
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                Edit Jumlah Barang Berhasil
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        ');
+
+        // echo "error";
+        redirect('Retur/retur_edit/'.$id_retur);
 
     }
     
