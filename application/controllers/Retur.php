@@ -318,27 +318,48 @@ class Retur extends CI_Controller
 
         $jumlah_edit = $jumlah_awal - $jumlah;
 
-        $data_edit = array(
-            // 'id_retur_barang' => $id_retur_barang,
-            'jumlah' => $jumlah,
-        );
+        // cek jumlah stok
+        $stok = $this->M_retur->get_stok_barang($id_barang);
 
-        $this->M_retur->retur_edit_jumlah($data_edit, $id_retur_barang);
+        // jika jumlah stok lebih sedikit dari jumlah_edit
+        if($stok > $jumlah_edit){
+            // jika stok kurang dari retur
+            $this->session->set_flashdata('msg', '
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Update tidak dapat dilakukan, <b>stok kurang dari retur yang di ajukan. </b>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            ');
 
-        // update total stok di tb_barang
-        $cek_total_barang = $this->M_retur->update_plus_total_barang($jumlah_edit, $id_barang);
+            // echo "error";
+            redirect('Retur/retur_edit/'.$id_retur);
 
-        $cek_retur = $this->M_retur->update_total_retur($no_faktur_retur);
+        }else{
 
-        $this->session->set_flashdata('msg', '
-            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                Edit Jumlah Barang Berhasil
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        ');
+            // jika stok cukup untuk retur
 
-        // echo "error";
-        redirect('Retur/retur_edit/'.$id_retur);
+            $data_edit = array(
+                // 'id_retur_barang' => $id_retur_barang,
+                'jumlah' => $jumlah,
+            );
+
+            $this->M_retur->retur_edit_jumlah($data_edit, $id_retur_barang);
+
+            // update total stok di tb_barang
+            $cek_total_barang = $this->M_retur->update_plus_total_barang($jumlah_edit, $id_barang);
+
+            $cek_retur = $this->M_retur->update_total_retur($no_faktur_retur);
+
+            $this->session->set_flashdata('msg', '
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    Edit Jumlah Barang Berhasil
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            ');
+
+            // echo "error";
+            redirect('Retur/retur_edit/'.$id_retur);
+        }
 
     }
     
