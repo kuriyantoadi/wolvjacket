@@ -27,6 +27,15 @@ class Admin extends CI_Controller
         $this->load->view('template/footer-admin');
     }
 
+     public function menu()
+    {
+        // $header['title']='WolvJacket';
+        // $header['ses_nama_pengguna'] = $this->session->userdata('ses_nama_pengguna');
+
+        $this->load->view('menu/index');
+        // $this->load->view('template/footer-admin');
+    }
+
 
     // awal pengguna 
     public function profil()

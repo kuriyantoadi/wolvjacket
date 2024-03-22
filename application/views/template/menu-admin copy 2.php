@@ -97,7 +97,7 @@
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-pages" role="button">
-                            <i data-feather="grid" class="dripicons-retweet"> </i><span data-key="t-apps"> Refund</span>
+                            <i data-feather="grid" class="dripicons-retweet"></i><span data-key="t-apps">Refund</span>
                             <div class="arrow-down"></div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-pages">
@@ -126,20 +126,7 @@
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-pages" role="button">
-                            <i data-feather="grid"></i><span data-key="t-apps">Rangking</span>
-                            <div class="arrow-down"></div>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="topnav-pages">
-
-                            <a href="apps-calendar.php" class="dropdown-item" data-key="t-calendar">Rangking Perhari (Pelanggan)</a>
-                            <a href="apps-chat.php" class="dropdown-item" data-key="t-chat">Rangking Perbulan (Pelanggan)</a>
-                            <a href="apps-chat.php" class="dropdown-item" data-key="t-chat">Rangking Pertahun (Pelanggan)</a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-pages" role="button">
-                            <i data-feather="grid"></i><span data-key="t-apps">Laporan</span>
+                            <i data-feather="grid"></i><span data-key="t-apps">Retur</span>
                             <div class="arrow-down"></div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-pages">
@@ -151,7 +138,7 @@
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-pages" role="button">
-                            <i data-feather="grid"></i><span data-key="t-apps">Grafik Penjualan</span>
+                            <i data-feather="grid"></i><span data-key="t-apps">Retur</span>
                             <div class="arrow-down"></div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-pages">
@@ -163,13 +150,25 @@
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-pages" role="button">
-                            <i data-feather="grid"></i><span data-key="t-apps">Data Master</span>
+                            <i data-feather="grid"></i><span data-key="t-apps">Retur</span>
                             <div class="arrow-down"></div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-pages">
 
-                            <a href="apps-calendar.php" class="dropdown-item" data-key="t-calendar">Data Pelanggan</a>
-                            <a href="apps-chat.php" class="dropdown-item" data-key="t-chat">Data Pengguna</a>
+                            <a href="apps-calendar.php" class="dropdown-item" data-key="t-calendar">Retur</a>
+                            <a href="apps-chat.php" class="dropdown-item" data-key="t-chat">Daftar Retur</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-pages" role="button">
+                            <i data-feather="grid"></i><span data-key="t-apps">Retur</span>
+                            <div class="arrow-down"></div>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="topnav-pages">
+
+                            <a href="apps-calendar.php" class="dropdown-item" data-key="t-calendar">Retur</a>
+                            <a href="apps-chat.php" class="dropdown-item" data-key="t-chat">Daftar Retur</a>
                         </div>
                     </li>
 
