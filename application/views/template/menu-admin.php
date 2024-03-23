@@ -71,7 +71,7 @@
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-pages" role="button">
-                            <i data-feather="grid"></i><span data-key="t-apps">Transaksi</span>
+                            <i data-feather="grid" class="dripicons-cart"></i><span data-key="t-apps"> Transaksi</span>
                             <div class="arrow-down"></div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-pages">
@@ -85,13 +85,13 @@
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-pages" role="button">
-                            <i data-feather="grid"></i><span data-key="t-apps">Retur</span>
+                            <i class="dripicons-return" data-feather="grid"></i><span data-key="t-apps"> Retur</span>
                             <div class="arrow-down"></div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-pages">
 
-                            <a href="apps-calendar.php" class="dropdown-item" data-key="t-calendar">Retur</a>
-                            <a href="apps-chat.php" class="dropdown-item" data-key="t-chat">Daftar Retur</a>
+                            <a href="<?= base_url() ?>Retur/retur_tambah" class="dropdown-item" data-key="t-calendar">Retur</a>
+                            <a href="<?= base_url() ?>Retur/index" class="dropdown-item" data-key="t-chat">Daftar Retur</a>
                         </div>
                     </li>
 
@@ -109,24 +109,25 @@
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-pages" role="button">
-                            <i data-feather="grid"></i><span data-key="t-apps">Barang</span>
+                            <i class="dripicons-view-thumb" data-feather="grid"></i><span data-key="t-apps"> Barang</span>
                             <div class="arrow-down"></div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-pages">
 
-                            <a href="apps-calendar.php" class="dropdown-item" data-key="t-calendar">Data Barang</a>
-                            <a href="apps-chat.php" class="dropdown-item" data-key="t-chat">Kategori Barang</a>
-                            <a href="apps-chat.php" class="dropdown-item" data-key="t-chat">Brand</a>
-                            <a href="apps-chat.php" class="dropdown-item" data-key="t-chat">Atur Stok Akhir</a>
-                            <a href="apps-chat.php" class="dropdown-item" data-key="t-chat">Tambah Stok</a>
-                            <a href="apps-chat.php" class="dropdown-item" data-key="t-chat">Daftar Tambah Stok</a>
+                            <a href="<?= base_url() ?>Admin/barang" class="dropdown-item" data-key="t-calendar">Data Barang</a>
+                            <a href="<?= base_url() ?>Admin/kategori_barang" class="dropdown-item" data-key="t-chat">Kategori Barang</a>
+                            <a href="<?= base_url() ?>Admin/brand" class="dropdown-item" data-key="t-chat">Brand</a>
+                            <a href="<?= base_url() ?>Admin/atur_stok_akhir" class="dropdown-item" data-key="t-chat">Atur Stok Akhir</a>
+                            <a href="<?= base_url() ?>Admin/tambah_stok" class="dropdown-item" data-key="t-chat">Tambah Stok</a>
+                            <a href="<?= base_url() ?>Admin/daftar_tambah_stok" class="dropdown-item" data-key="t-chat">Daftar Tambah Stok</a>
+                            
 
                         </div>
                     </li>
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-pages" role="button">
-                            <i data-feather="grid"></i><span data-key="t-apps">Rangking</span>
+                            <i class="dripicons-trophy" data-feather="grid"></i><span data-key="t-apps"> Rangking</span>
                             <div class="arrow-down"></div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-pages">
@@ -139,37 +140,43 @@
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-pages" role="button">
-                            <i data-feather="grid"></i><span data-key="t-apps">Laporan</span>
+                            <i  class="dripicons-document" data-feather="grid"></i><span data-key="t-apps"> Laporan</span>
                             <div class="arrow-down"></div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-pages">
 
-                            <a href="apps-calendar.php" class="dropdown-item" data-key="t-calendar">Retur</a>
-                            <a href="apps-chat.php" class="dropdown-item" data-key="t-chat">Daftar Retur</a>
+                            <a href="#" class="dropdown-item" data-key="t-calendar">Kartu Stok</a>
+                            <a href="<?= base_url() ?>Laporan/kartu_stok_barang_datang" class="dropdown-item" data-key="t-calendar">Kartu Stok Datang Barang</a>
+                            <a href="#" class="dropdown-item" data-key="t-calendar">Penjualan Harian</a>
+                            <a href="#" class="dropdown-item" data-key="t-calendar">Transaksi Harian (Semua)</a>
+                            <a href="#" class="dropdown-item" data-key="t-calendar">Transaksi Harian (Tunai)</a>
+                            <a href="#" class="dropdown-item" data-key="t-calendar">Transaksi Harian (Debit)</a>
+                            <a href="#" class="dropdown-item" data-key="t-calendar">Transaksi Harian (Transfer)</a>
+                            <a href="#" class="dropdown-item" data-key="t-calendar">Penjualan Per Tahun</a>
+                            <a href="#" class="dropdown-item" data-key="t-calendar">Stok Barang Dagang</a>
                         </div>
                     </li>
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-pages" role="button">
-                            <i data-feather="grid"></i><span data-key="t-apps">Grafik Penjualan</span>
+                            <i  class="dripicons-graph-bar" data-feather="grid"></i><span data-key="t-apps"> Grafik Penjualan</span>
                             <div class="arrow-down"></div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-pages">
 
-                            <a href="apps-calendar.php" class="dropdown-item" data-key="t-calendar">Retur</a>
-                            <a href="apps-chat.php" class="dropdown-item" data-key="t-chat">Daftar Retur</a>
+                            <a href="apps-calendar.php" class="dropdown-item" data-key="t-calendar">Grafik Penjualan Per Bulan</a>
+                            <a href="apps-chat.php" class="dropdown-item" data-key="t-chat">Grafik Penjualan Per Tahun</a>
                         </div>
                     </li>
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-pages" role="button">
-                            <i data-feather="grid"></i><span data-key="t-apps">Data Master</span>
+                            <i class="dripicons-user" data-feather="grid"></i><span data-key="t-apps"> Data Master</span>
                             <div class="arrow-down"></div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-pages">
-
-                            <a href="apps-calendar.php" class="dropdown-item" data-key="t-calendar">Data Pelanggan</a>
-                            <a href="apps-chat.php" class="dropdown-item" data-key="t-chat">Data Pengguna</a>
+                            <a href="<?= base_url() ?>Admin/pelanggan" class="dropdown-item" data-key="t-calendar">Data Pelanggan</a>
+                            <a href="<?= base_url() ?>Admin/pengguna" class="dropdown-item" data-key="t-calendar">Data Pengguna</a>
                         </div>
                     </li>
 
