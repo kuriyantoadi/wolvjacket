@@ -63,12 +63,6 @@
             <div class="collapse navbar-collapse" id="topnav-menu-content">
                 <ul class="navbar-nav">
 
-                    <!-- <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle arrow-none" href="index.php" id="topnav-dashboard" role="button">
-                            <i data-feather="home"></i><span data-key="t-dashboards">Dashboard</span>
-                        </a>
-                    </li> -->
-
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-pages" role="button">
                             <i data-feather="grid" class="dripicons-cart"></i><span data-key="t-apps"> Transaksi</span>
@@ -102,8 +96,8 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-pages">
 
-                            <a href="apps-calendar.php" class="dropdown-item" data-key="t-calendar">Refund</a>
-                            <a href="apps-chat.php" class="dropdown-item" data-key="t-chat">Daftar Refund</a>
+                            <a href="<?= base_url() ?>Refund/refund_tambah" class="dropdown-item" data-key="t-calendar">Refund</a>
+                            <a href="<?= base_url() ?>Refund/index" class="dropdown-item" data-key="t-chat">Daftar Refund</a>
                         </div>
                     </li>
 

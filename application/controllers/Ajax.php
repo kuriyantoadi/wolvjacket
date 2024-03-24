@@ -15,6 +15,7 @@ class Ajax extends CI_Controller
         $this->load->model('M_ajax_tambah_stok');
         $this->load->model('M_ajax_atur_stok');
         $this->load->model('M_ajax_retur');
+        $this->load->model('M_ajax_refund');
 
 
         // $this->load->library('upload');
@@ -272,6 +273,43 @@ class Ajax extends CI_Controller
         // output to json format
         echo json_encode($output);
     }
+
+    function ajax_refund() {
+        $list = $this->M_ajax_refund->get_datatables();
+        $data = array();
+        $no = @$_POST['start'];
+        foreach ($list as $item) {
+
+            $no++;
+            $row = array();
+            $row[] = $no;
+            $row[] = $item->no_faktur_refund;
+            $row[] = $item->tanggal;
+            // $row[] = 'Rp '. number_format($item->total_stok_masuk * $item->harga_pokok);
+            $row[] = 'Rp '. number_format($item->total_harga);
+            $row[] = $item->total_jumlah;
+            $row[] = $item->id_user;
+            $row[] = $item->keterangan;
+
+            // add html for action
+            $row[] = '
+                    <a class="btn btn-success btn-sm" ><i class="bx bxs-printer"></i>Print</a>
+                    <a href="'.site_url('Refund/refund_edit/'.$item->id_refund).'" class="btn btn-info btn-sm" ><i class="bx bxs-pencil"></i>Edit</a>
+                    <a href="'.site_url('Refund/refund_hapus/'.$item->id_refund).'" onclick="return confirm(\'Yakin hapus data barang'. $item->no_faktur_refund .' ?\')"  class="btn btn-danger btn-sm"><i class="bx bxs-trash"></i>Hapus</a>
+                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editModal'.$item->no_faktur_refund.'"><i class="bx bxs-detail"></i>Detail</button>
+                ';
+            $data[] = $row;
+        }
+        $output = array(
+                    "draw" => @$_POST['draw'],
+                    "recordsTotal" => $this->M_ajax_refund->count_all(),
+                    "recordsFiltered" => $this->M_ajax_refund->count_filtered(),
+                    "data" => $data,
+                );
+        // output to json format
+        echo json_encode($output);
+    }
+
 
     
 

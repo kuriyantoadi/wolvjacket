@@ -96,7 +96,7 @@
                     <!-- card -->
                     <div class="card card-h-100">
                         <!-- card body -->
-                        <a href="">
+                        <a href="<?= base_url() ?>retur/index">
                         <div class="card-body">
                             <div class="row align-items-center">
 
@@ -115,7 +115,7 @@
                     <!-- card -->
                     <div class="card card-h-100">
                         <!-- card body -->
-                        <a href="">
+                        <a href="<?= base_url() ?>Refund/index">
                         <div class="card-body">
                             <div class="row align-items-center">
 
