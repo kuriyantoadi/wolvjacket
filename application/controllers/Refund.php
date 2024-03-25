@@ -322,7 +322,7 @@ class Refund extends CI_Controller
         $stok = $this->M_refund->get_stok_barang($id_barang);
 
         // jika jumlah stok lebih sedikit dari jumlah_edit
-        if($stok > $jumlah_edit){
+        if($stok < $jumlah_edit){
             // jika stok kurang dari refund
             $this->session->set_flashdata('msg', '
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">

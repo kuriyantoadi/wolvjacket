@@ -85,7 +85,7 @@ class M_refund extends CI_Model{
         // update data stok barang
         $query = "UPDATE tb_barang 
         INNER JOIN tb_refund_keranjang ON tb_barang.id_barang = tb_refund_keranjang.id_barang 
-        SET tb_barang.stok = tb_barang.stok - tb_refund_keranjang.jumlah";
+        SET tb_barang.stok = tb_barang.stok + tb_refund_keranjang.jumlah";
         $this->db->query($query);
 
         // Memindahkan data dari tb_keranjang_masuk ke tb_stok untuk id_user tertentu
@@ -224,7 +224,7 @@ class M_refund extends CI_Model{
     {
         // Update data stok barang
         $query = "UPDATE tb_barang 
-                SET stok = stok + $jumlah_edit
+                SET stok = stok - $jumlah_edit
                 WHERE id_barang = $id_barang";
         $this->db->query($query);
     }
