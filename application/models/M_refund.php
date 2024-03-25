@@ -80,7 +80,7 @@ class M_refund extends CI_Model{
 
     }
 
-    public function transfer_keranjang_ke_refund($id_user, $no_faktur_refund, $keterangan, $tgl_tambah_stok)
+    public function transfer_keranjang_ke_refund($id_user, $no_faktur_refund, $keterangan)
     {
         // update data stok barang
         $query = "UPDATE tb_barang 

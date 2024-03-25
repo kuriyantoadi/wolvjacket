@@ -111,7 +111,7 @@ class Refund extends CI_Controller
         $data['tampil_keranjang'] = $this->M_admin->tampil_keranjang_pengguna($id_user);
 
         $this->load->view('template/header-admin', $header);
-        $this->load->view('admin/refund_tambah', $data);
+        $this->load->view('refund/refund_tambah', $data);
         $this->load->view('template/footer-admin');
     }
 
