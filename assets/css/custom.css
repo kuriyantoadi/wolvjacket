@@ -10,3 +10,12 @@
     box-sizing: border-box;
     /* Menyertakan padding dan border dalam perhitungan lebar */
 }
+
+.full-width-table {
+    width: 100%;
+}
+
+.full-width-table tr {
+    width: 100%;
+    /* Setiap kolom akan mengambil 50% lebar dari tabel */
+}

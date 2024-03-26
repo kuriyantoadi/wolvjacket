@@ -5,7 +5,7 @@
 
             <div class="row">
 
-            <h4 class="mb-sm-4 font-size-18 ">Retur Barang</h4>
+            <h4 class="mb-sm-4 font-size-18 ">Transaksi Barang</h4>
             <div class="col-xl-6">
                 <?= $this->session->flashdata('msg') ?>    
                 <div id="message-container"></div>
@@ -48,11 +48,11 @@
 
                         <h4 class="mb-sm-4 font-size-16 ">Kategori Barang</h4>
 
-                        <a class="btn btn-success  btn-sm" href="<?= site_url('Retur/retur_tambah') ?>">Semua</a>
+                        <a class="btn btn-success  btn-sm" href="<?= site_url('Transaksi/transaksi_tambah') ?>">Semua</a>
 
                         <?php foreach ($tampil_kategori as $row): ?>
 
-                                <a class="btn btn-info  btn-sm" style="margin: 3px" href="<?= site_url('Retur/retur_kategori/'. $row->id_kategori_barang) ?>">
+                                <a class="btn btn-info  btn-sm" style="margin: 3px" href="<?= site_url('Transaksi/transaksi_kategori/'. $row->id_kategori_barang) ?>">
                                     <?= $row->nama_kategori_barang?>
                                 </a>
 
@@ -101,7 +101,7 @@
                 <div class="card">  
                     <div class="card-body">
 
-                    <h4 class="mb-sm-4 font-size-16 ">Daftar Retur Barang</h4>
+                    <h4 class="mb-sm-4 font-size-16 ">Daftar Transaksi Barang</h4>
 
                     <table id="tabelKeranjang" class="table table-bordered dt-responsive table-hover table-striped  nowrap w-100">
                         <thead>
@@ -120,13 +120,49 @@
                         </tbody>
                     
                     </table>
-                        
-                        <strong>Keterangan</strong>
-                        <?= form_open('Retur/retur_tambah_up') ?>
-                        <input type="text" class="form-control" name="keterangan">
-                        <input style="float: right;" type="submit" name="submit" value="Proses" onclick="return confirm('Data Sudah Sesuai?')" class="btn mt-2 btn-md btn-success">
-                        <?= form_close() ?>
 
+                    <table class="">
+                        <?= form_open('Transaksi/transaksi_tambah_up') ?>
+                        <tr>
+                            <td><strong>Pelanggan</strong></td>
+                            <td><input type="text" class="form-control" name="keterangan"></td>
+
+                            <td style="padding: 10px"></td>
+
+                            <td><strong>Tanggal</strong></td>
+                            <td><input type="text" class="form-control" name="keterangan"></td>
+                           
+                        </tr>
+                        <tr>
+
+                            <td><strong>Tunai</strong></td>
+                            <td><input type="text" class="form-control" name="keterangan"></td>
+
+                            <td style="padding: 10px"></td>
+
+                            <td><strong>Debit</strong></td>
+                            <td><input type="text" class="form-control" name="keterangan"></td>
+                           
+                        </tr>
+                        <tr>
+                             <td><strong>Transfer</strong></td>
+                            <td><input type="text" class="form-control" name="keterangan"></td>
+                        </tr>
+                       
+                        <tr>
+                            <td><strong>Keterangan</strong></td>
+                            <td><input type="text" class="form-control" name="keterangan"></td>
+
+                            <td style="padding: 10px"></td>
+
+                            <td>
+                                <input style="float: right;" type="submit" name="submit" value="Proses" onclick="return confirm('Data Sudah Sesuai?')" class="btn btn-md btn-success">
+                            </td>
+                        </tr>
+                        
+                         <?= form_close() ?>
+                    </table>
+                        
                     </div>
                 </div>
             </div> <!-- end col -->
@@ -145,7 +181,7 @@
 
         // Kirim data ke server PHP untuk disimpan di database
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', '<?= base_url('retur/tambah_ke_keranjang'); ?>', true);
+        xhr.open('POST', '<?= base_url('transaksi/tambah_ke_keranjang'); ?>', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4) {
@@ -177,7 +213,7 @@
 
     // Fungsi untuk mendapatkan data barang dari server
     async function fetchData() {
-        const response = await fetch('<?= base_url('retur/tampil_keranjang'); ?>');
+        const response = await fetch('<?= base_url('transaksi/tampil_keranjang'); ?>');
         const data = await response.json();
 
         const tabelKeranjang = document.getElementById('tabelKeranjang').getElementsByTagName('tbody')[0];
@@ -215,9 +251,9 @@
             totalSemua += totalHarga;
 
             // awal mode hapus 
-            var id_retur_keranjang = tampil_kolom.id_retur_keranjang;
+            var id_transaksi_keranjang = tampil_kolom.id_transaksi_keranjang;
             var base_url = '<?= base_url(); ?>';
-            var deleteLink = base_url + 'Retur/retur_keranjang_hapus/' + id_retur_keranjang;
+            var deleteLink = base_url + 'Transaksi/transaksi_keranjang_hapus/' + id_transaksi_keranjang;
 
             var deleteButton = document.createElement('button');
             deleteButton.className = 'btn btn-sm btn-danger';

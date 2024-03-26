@@ -80,7 +80,7 @@ class M_transaksi extends CI_Model{
 
     }
 
-    public function transfer_keranjang_ke_retur($id_user, $no_faktur_transaksi, $keterangan, $tgl_tambah_stok)
+    public function transfer_keranjang_ke_transaksi($id_user, $no_faktur_transaksi, $keterangan, $tgl_tambah_stok)
     {
         // update data stok barang
         $query = "UPDATE tb_barang 
@@ -116,7 +116,7 @@ class M_transaksi extends CI_Model{
         return $this->db->insert('tb_transaksi', $data);
     }
 
-    public function get_data_retur($no_faktur_transaksi) 
+    public function get_data_transaksi($no_faktur_transaksi) 
     {
         $this->db->select('SUM(tb_transaksi_barang.jumlah) AS jumlah_total, SUM(tb_transaksi_barang.harga_pokok) AS total_harga');
         $this->db->from('tb_transaksi');

@@ -40,7 +40,7 @@ class Transaksi extends CI_Controller
         $data['tampil_keranjang'] = $this->M_admin->tampil_keranjang_pengguna($id_user);
 
         $this->load->view('template/header-admin', $header);
-        $this->load->view('admin/transaksi_tambah', $data);
+        $this->load->view('transaksi/transaksi_tambah', $data);
         $this->load->view('template/footer-admin');
     }
 
@@ -66,10 +66,10 @@ class Transaksi extends CI_Controller
         $tgl_skrg = date('dmy');
 
         if($no_faktur_awal == NULL){
-            $no_faktur_transaksi = 'RT'.$tgl_skrg.'000001';
+            $no_faktur_transaksi = 'TR'.$tgl_skrg.'000001';
         }else{
             $akhir_faktur = $cek_seri_no_faktur+1;
-            $no_faktur_transaksi = 'RT'.$tgl_skrg.sprintf("%06d", $akhir_faktur);
+            $no_faktur_transaksi = 'TR'.$tgl_skrg.sprintf("%06d", $akhir_faktur);
         }
 
         $keterangan = $this->input->post('keterangan');
